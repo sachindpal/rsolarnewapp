@@ -9,11 +9,8 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import i18next from './src/app/Service/i18next/i18next';
 import {getUnAuthReqest, setLocalStorage} from './src/app/Service/APIServices/axoisService';
 import uuid from 'react-native-uuid';
-import {CommonProvider} from './src/app/commonResources/Context/CommonContext';
-import {UICProvider} from './src/app/UIC/Context/UICContext';
 import Toast from 'react-native-toast-message';
 import toastConfig from './src/app/commonResources/commanSnackbar/toastConfig';
-import messaging from '@react-native-firebase/messaging';
 import {
   getFcmToken,
   getFcmTokenFromLocalStorage,
@@ -72,13 +69,13 @@ const App = () => {
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <UICProvider>
+      {/* <UICProvider> */}
        
         <View style={{flex:1}}>
             <Routes />
           </View>
    
-      </UICProvider>
+      {/* </UICProvider> */}
 
       <Toast config={toastConfig} />
     </GestureHandlerRootView>

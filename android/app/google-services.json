@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "845737400148",
+    "project_id": "farmkart-push-notification",
+    "storage_bucket": "farmkart-push-notification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845737400148:android:5faf11620930fe8bbb1ac1",
+        "android_client_info": {
+          "package_name": "com.farmkart.mobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "845737400148-fqjcl51gsih51p8753qmsekack3b20v3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7tE3aI-7lX6_jkqo1muxv0Valy1xLqYY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "845737400148-fqjcl51gsih51p8753qmsekack3b20v3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

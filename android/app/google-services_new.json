@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "795456978593",
+    "project_id": "migration-farmkart-app",
+    "storage_bucket": "migration-farmkart-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795456978593:android:443ce0443b89704cfafae0",
+        "android_client_info": {
+          "package_name": "com.farmkart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_8IfqGh6oeLAYdSdXryuMwQ3ErqsWbo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

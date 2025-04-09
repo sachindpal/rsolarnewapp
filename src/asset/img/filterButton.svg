@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18.82" height="12.547" viewBox="0 0 18.82 12.547">
+    <defs>
+        <style>
+            .cls-1{fill:#fff}
+        </style>
+    </defs>
+    <g id="filter-results-button" transform="translate(0 -76.5)">
+        <g id="filter" transform="translate(0 76.5)">
+            <path id="Path_256" d="M7.319 89.047H11.5v-2.091H7.319zM0 76.5v2.091h18.82V76.5zm3.137 7.319h12.547v-2.091H3.137z" class="cls-1" data-name="Path 256" transform="translate(0 -76.5)"/>
+        </g>
+    </g>
+</svg>

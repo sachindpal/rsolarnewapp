@@ -1,0 +1,2196 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#f8f8f8",
+        "flex": 1,
+      },
+    ]
+  }
+>
+  <View>
+    <View
+      style={
+        [
+          {
+            "backgroundColor": "#242734",
+            "marginTop": -24,
+          },
+          {
+            "paddingLeft": 8,
+            "paddingRight": 8,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+            },
+          ]
+        }
+      >
+        <View>
+          <SvgMock
+            height={100}
+            width={122}
+          />
+        </View>
+        <View
+          style={
+            {
+              "marginRight": 14,
+            }
+          }
+        >
+          <SvgMock
+            height={30}
+            width={24}
+          />
+        </View>
+      </View>
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+            },
+            {
+              "backgroundColor": "white",
+              "borderRadius": 2,
+              "height": 42,
+              "marginBottom": 23,
+              "marginTop": -23,
+              "paddingLeft": 16,
+            },
+          ]
+        }
+      >
+        <SvgMock
+          height={21}
+          width={21}
+        />
+        <View
+          style={
+            {
+              "paddingLeft": 18,
+            }
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "color": "#141414",
+                  "fontFamily": "Avenir Medium",
+                  "fontSize": 13,
+                },
+              ]
+            }
+          >
+            Search for products and brands
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+  <RCTScrollView
+    collapsable={false}
+    handlerTag={1}
+    handlerType="NativeViewGestureHandler"
+    onGestureHandlerEvent={[Function]}
+    onGestureHandlerStateChange={[Function]}
+    waitFor={
+      [
+        {
+          "current": null,
+        },
+      ]
+    }
+  >
+    <View>
+      <View
+        style={
+          [
+            {
+              "backgroundColor": "white",
+              "borderRadius": 6,
+              "elevation": 2,
+              "marginLeft": 9,
+              "marginRight": 9,
+              "marginTop": 6.6,
+              "paddingBottom": 12,
+              "paddingLeft": 10,
+              "paddingRight": 10,
+              "paddingTop": 12,
+            },
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "alignItems": "center",
+                "flexDirection": "row",
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              {
+                "backgroundColor": "red",
+                "borderRadius": 15,
+                "height": 25,
+                "marginRight": 10,
+                "width": 25,
+              }
+            }
+          />
+          <Text
+            style={
+              {
+                "color": "#242734",
+                "fontFamily": "Avenir Medium",
+                "fontSize": 32,
+              }
+            }
+          >
+            34
+          </Text>
+        </View>
+        <View
+          style={
+            {
+              "backgroundColor": "#c7c7c7",
+              "height": 37,
+              "marginLeft": 10,
+              "marginRight": 5,
+              "width": 1,
+            }
+          }
+        />
+        <View
+          style={
+            [
+              {
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+              },
+              {
+                "flex": 1,
+                "paddingLeft": 8,
+              },
+            ]
+          }
+        >
+          <Text
+            style={
+              {
+                "color": "#242734",
+                "fontFamily": "Avenir Medium",
+                "fontSize": 16,
+                "fontWeight": "500",
+              }
+            }
+          >
+            Indore
+          </Text>
+          <View
+            style={
+              {
+                "flexDirection": "row",
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "marginRight": 30,
+                }
+              }
+            >
+              <Text
+                style={
+                  [
+                    {
+                      "marginBottom": 10,
+                      "textAlign": "right",
+                    },
+                    {
+                      "color": "#242734",
+                      "fontFamily": "Avenir Medium",
+                      "fontSize": 12,
+                      "fontWeight": "500",
+                    },
+                  ]
+                }
+              >
+                Wind
+              </Text>
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#242734",
+                      "fontFamily": "Avenir Medium",
+                      "fontSize": 12,
+                      "fontWeight": "500",
+                    },
+                  ]
+                }
+              >
+                Humidity
+              </Text>
+            </View>
+            <View>
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#242734",
+                      "fontFamily": "Avenir Medium",
+                      "fontSize": 12,
+                      "fontWeight": "500",
+                    },
+                    {
+                      "marginBottom": 10,
+                      "textAlign": "right",
+                    },
+                  ]
+                }
+              >
+                0 km / hr
+              </Text>
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#242734",
+                      "fontFamily": "Avenir Medium",
+                      "fontSize": 12,
+                      "fontWeight": "500",
+                    },
+                  ]
+                }
+              >
+                25 %
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          {
+            "marginTop": 21.5,
+          }
+        }
+      >
+        <View
+          style={{}}
+        >
+          <View>
+            <View
+              collapsable={false}
+              handlerTag={2}
+              handlerType="PanGestureHandler"
+              onGestureHandlerEvent={[Function]}
+              onGestureHandlerStateChange={[Function]}
+              onTouchEnd={[Function]}
+              onTouchStart={[Function]}
+              style={
+                [
+                  {
+                    "overflow": "hidden",
+                  },
+                  {
+                    "height": "100%",
+                    "width": 173,
+                  },
+                  {
+                    "height": 173.42000000000002,
+                    "width": "100%",
+                  },
+                  {
+                    "flexDirection": "row",
+                  },
+                ]
+              }
+            >
+              <View
+                style={
+                  [
+                    {
+                      "height": "100%",
+                      "position": "absolute",
+                      "width": 173,
+                    },
+                    {
+                      "transform": [
+                        {
+                          "translateX": undefined,
+                        },
+                      ],
+                    },
+                  ]
+                }
+                testID="__CAROUSEL_ITEM_0_NOT_READY__"
+              />
+              <View
+                style={
+                  [
+                    {
+                      "height": "100%",
+                      "position": "absolute",
+                      "width": 173,
+                    },
+                    {
+                      "transform": [
+                        {
+                          "translateX": undefined,
+                        },
+                      ],
+                    },
+                  ]
+                }
+                testID="__CAROUSEL_ITEM_1_NOT_READY__"
+              />
+              <View
+                style={
+                  [
+                    {
+                      "height": "100%",
+                      "position": "absolute",
+                      "width": 173,
+                    },
+                    {
+                      "transform": [
+                        {
+                          "translateX": undefined,
+                        },
+                      ],
+                    },
+                  ]
+                }
+                testID="__CAROUSEL_ITEM_2_NOT_READY__"
+              />
+              <View
+                style={
+                  [
+                    {
+                      "height": "100%",
+                      "position": "absolute",
+                      "width": 173,
+                    },
+                    {
+                      "transform": [
+                        {
+                          "translateX": undefined,
+                        },
+                      ],
+                    },
+                  ]
+                }
+                testID="__CAROUSEL_ITEM_3_NOT_READY__"
+              />
+              <View
+                style={
+                  [
+                    {
+                      "height": "100%",
+                      "position": "absolute",
+                      "width": 173,
+                    },
+                    {
+                      "transform": [
+                        {
+                          "translateX": undefined,
+                        },
+                      ],
+                    },
+                  ]
+                }
+                testID="__CAROUSEL_ITEM_4_NOT_READY__"
+              />
+              <View
+                style={
+                  [
+                    {
+                      "height": "100%",
+                      "position": "absolute",
+                      "width": 173,
+                    },
+                    {
+                      "transform": [
+                        {
+                          "translateX": undefined,
+                        },
+                      ],
+                    },
+                  ]
+                }
+                testID="__CAROUSEL_ITEM_5_NOT_READY__"
+              />
+              <View
+                style={
+                  [
+                    {
+                      "height": "100%",
+                      "position": "absolute",
+                      "width": 173,
+                    },
+                    {
+                      "transform": [
+                        {
+                          "translateX": undefined,
+                        },
+                      ],
+                    },
+                  ]
+                }
+                testID="__CAROUSEL_ITEM_6_NOT_READY__"
+              />
+            </View>
+          </View>
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "backgroundColor": "white",
+                "borderRadius": 3,
+                "elevation": 5,
+                "height": 52,
+                "justifyContent": "center",
+                "paddingLeft": 9.15,
+                "position": "absolute",
+                "right": 0,
+                "top": 22,
+                "width": 29,
+              }
+            }
+          >
+            <SvgMock
+              height={20.9}
+              width={11.2}
+            />
+          </View>
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "backgroundColor": "white",
+                "borderRadius": 3,
+                "height": 52,
+                "justifyContent": "center",
+                "left": 0,
+                "paddingLeft": 9.15,
+                "position": "absolute",
+                "top": 22,
+                "width": 29,
+              }
+            }
+          >
+            <SvgMock
+              height={20.9}
+              width={11.2}
+            />
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          {
+            "marginTop": 35,
+          }
+        }
+      >
+        <View>
+          <View
+            collapsable={false}
+            handlerTag={3}
+            handlerType="PanGestureHandler"
+            onGestureHandlerEvent={[Function]}
+            onGestureHandlerStateChange={[Function]}
+            onTouchEnd={[Function]}
+            onTouchStart={[Function]}
+            style={
+              [
+                {
+                  "overflow": "hidden",
+                },
+                {
+                  "height": "100%",
+                  "width": 488,
+                },
+                {
+                  "height": 333.5,
+                  "width": "100%",
+                },
+                {
+                  "flexDirection": "row",
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                [
+                  {
+                    "height": "100%",
+                    "position": "absolute",
+                    "width": 488,
+                  },
+                  {
+                    "transform": [
+                      {
+                        "translateX": undefined,
+                      },
+                    ],
+                  },
+                ]
+              }
+              testID="__CAROUSEL_ITEM_0_NOT_READY__"
+            />
+            <View
+              style={
+                [
+                  {
+                    "height": "100%",
+                    "position": "absolute",
+                    "width": 488,
+                  },
+                  {
+                    "transform": [
+                      {
+                        "translateX": undefined,
+                      },
+                    ],
+                  },
+                ]
+              }
+              testID="__CAROUSEL_ITEM_1_NOT_READY__"
+            />
+            <View
+              style={
+                [
+                  {
+                    "height": "100%",
+                    "position": "absolute",
+                    "width": 488,
+                  },
+                  {
+                    "transform": [
+                      {
+                        "translateX": undefined,
+                      },
+                    ],
+                  },
+                ]
+              }
+              testID="__CAROUSEL_ITEM_2_NOT_READY__"
+            />
+            <View
+              style={
+                [
+                  {
+                    "height": "100%",
+                    "position": "absolute",
+                    "width": 488,
+                  },
+                  {
+                    "transform": [
+                      {
+                        "translateX": undefined,
+                      },
+                    ],
+                  },
+                ]
+              }
+              testID="__CAROUSEL_ITEM_3_NOT_READY__"
+            />
+          </View>
+        </View>
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "backgroundColor": "white",
+              "borderRadius": 3,
+              "elevation": 5,
+              "height": 52,
+              "justifyContent": "center",
+              "paddingLeft": 9.15,
+              "position": "absolute",
+              "right": 0,
+              "top": 70,
+              "width": 29,
+            }
+          }
+        >
+          <SvgMock
+            height={20.9}
+            width={11.2}
+          />
+        </View>
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "marginTop": 15,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "flexDirection": "row",
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "backgroundColor": "#242734",
+                  "borderRadius": 4,
+                  "height": 8,
+                  "margin": 9,
+                  "width": 8,
+                }
+              }
+            />
+            <View
+              collapsable={false}
+              style={
+                {
+                  "backgroundColor": "aqua",
+                  "borderRadius": 4,
+                  "height": 8,
+                  "margin": 9,
+                  "width": 8,
+                }
+              }
+            />
+            <View
+              collapsable={false}
+              style={
+                {
+                  "backgroundColor": "aqua",
+                  "borderRadius": 4,
+                  "height": 8,
+                  "margin": 9,
+                  "width": 8,
+                }
+              }
+            />
+            <View
+              collapsable={false}
+              style={
+                {
+                  "backgroundColor": "aqua",
+                  "borderRadius": 4,
+                  "height": 8,
+                  "margin": 9,
+                  "width": 8,
+                }
+              }
+            />
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          [
+            {
+              "backgroundColor": "#ff4646",
+              "marginTop": 12,
+              "paddingBottom": 22.7,
+              "paddingLeft": 17.4,
+              "paddingTop": 22.7,
+            },
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+            },
+          ]
+        }
+      >
+        <SvgMock
+          height={32}
+          width={32}
+        />
+        <View
+          style={
+            {
+              "marginLeft": 24,
+            }
+          }
+        >
+          <Text
+            style={
+              {
+                "color": "#242734",
+                "fontFamily": "Avenir Medium ",
+                "fontSize": 18,
+                "fontWeight": "500",
+              }
+            }
+          >
+            Trending products in your area
+          </Text>
+        </View>
+      </View>
+      <View>
+        <View
+          style={
+            {
+              "marginTop": 33,
+              "paddingLeft": 10,
+              "paddingRight": 10,
+            }
+          }
+        >
+          <View>
+            <Text
+              style={
+                [
+                  {
+                    "color": "#ffff",
+                    "fontFamily": "Avenir Heavy",
+                    "fontSize": 18,
+                    "fontWeight": "900",
+                  },
+                  {
+                    "color": "#242734",
+                  },
+                ]
+              }
+            >
+              Most Purchased Products
+            </Text>
+          </View>
+          <View
+            style={
+              {
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "justifyContent": "space-between",
+                "marginBottom": 33,
+                "marginTop": 33,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "backgroundColor": "white",
+                  "elevation": 5,
+                  "margin": 3,
+                  "paddingBottom": 5,
+                  "paddingTop": 5,
+                  "width": "21%",
+                }
+              }
+            >
+              <View>
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "height": 66.7,
+                      "justifyContent": "center",
+                      "width": 15,
+                    }
+                  }
+                >
+                  <ActivityIndicator
+                    color="#0000ff"
+                    size="small"
+                  />
+                </View>
+                <Image
+                  onLoad={[Function]}
+                  onLoadEnd={[Function]}
+                  source={
+                    {
+                      "testUri": "../../../src/asset/img/confidor.png",
+                    }
+                  }
+                  style={
+                    {
+                      "height": 133.4,
+                      "width": 150,
+                    }
+                  }
+                />
+              </View>
+              <View
+                style={
+                  {
+                    "width": "100%",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#1d1d1d",
+                        "fontFamily": "Avenir Regular",
+                        "fontSize": 14,
+                        "fontWeight": "500",
+                      },
+                      {
+                        "textAlign": "center",
+                      },
+                    ]
+                  }
+                >
+                  Blue Copperac...
+                </Text>
+              </View>
+            </View>
+            <View
+              style={
+                {
+                  "backgroundColor": "white",
+                  "elevation": 5,
+                  "margin": 3,
+                  "paddingBottom": 5,
+                  "paddingTop": 5,
+                  "width": "21%",
+                }
+              }
+            >
+              <View>
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "height": 66.7,
+                      "justifyContent": "center",
+                      "width": 15,
+                    }
+                  }
+                >
+                  <ActivityIndicator
+                    color="#0000ff"
+                    size="small"
+                  />
+                </View>
+                <Image
+                  onLoad={[Function]}
+                  onLoadEnd={[Function]}
+                  source={
+                    {
+                      "testUri": "../../../src/asset/img/confidor.png",
+                    }
+                  }
+                  style={
+                    {
+                      "height": 133.4,
+                      "width": 150,
+                    }
+                  }
+                />
+              </View>
+              <View
+                style={
+                  {
+                    "width": "100%",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#1d1d1d",
+                        "fontFamily": "Avenir Regular",
+                        "fontSize": 14,
+                        "fontWeight": "500",
+                      },
+                      {
+                        "textAlign": "center",
+                      },
+                    ]
+                  }
+                >
+                  Blue Copperac...
+                </Text>
+              </View>
+            </View>
+            <View
+              style={
+                {
+                  "backgroundColor": "white",
+                  "elevation": 5,
+                  "margin": 3,
+                  "paddingBottom": 5,
+                  "paddingTop": 5,
+                  "width": "21%",
+                }
+              }
+            >
+              <View>
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "height": 66.7,
+                      "justifyContent": "center",
+                      "width": 15,
+                    }
+                  }
+                >
+                  <ActivityIndicator
+                    color="#0000ff"
+                    size="small"
+                  />
+                </View>
+                <Image
+                  onLoad={[Function]}
+                  onLoadEnd={[Function]}
+                  source={
+                    {
+                      "testUri": "../../../src/asset/img/confidor.png",
+                    }
+                  }
+                  style={
+                    {
+                      "height": 133.4,
+                      "width": 150,
+                    }
+                  }
+                />
+              </View>
+              <View
+                style={
+                  {
+                    "width": "100%",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#1d1d1d",
+                        "fontFamily": "Avenir Regular",
+                        "fontSize": 14,
+                        "fontWeight": "500",
+                      },
+                      {
+                        "textAlign": "center",
+                      },
+                    ]
+                  }
+                >
+                  Blank Copper
+                </Text>
+              </View>
+            </View>
+            <View
+              style={
+                {
+                  "backgroundColor": "white",
+                  "elevation": 5,
+                  "margin": 3,
+                  "paddingBottom": 5,
+                  "paddingTop": 5,
+                  "width": "21%",
+                }
+              }
+            >
+              <View>
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "height": 66.7,
+                      "justifyContent": "center",
+                      "width": 15,
+                    }
+                  }
+                >
+                  <ActivityIndicator
+                    color="#0000ff"
+                    size="small"
+                  />
+                </View>
+                <Image
+                  onLoad={[Function]}
+                  onLoadEnd={[Function]}
+                  source={
+                    {
+                      "testUri": "../../../src/asset/img/confidor.png",
+                    }
+                  }
+                  style={
+                    {
+                      "height": 133.4,
+                      "width": 150,
+                    }
+                  }
+                />
+              </View>
+              <View
+                style={
+                  {
+                    "width": "100%",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#1d1d1d",
+                        "fontFamily": "Avenir Regular",
+                        "fontSize": 14,
+                        "fontWeight": "500",
+                      },
+                      {
+                        "textAlign": "center",
+                      },
+                    ]
+                  }
+                >
+                  Blue Copperac...
+                </Text>
+              </View>
+            </View>
+            <View
+              style={
+                {
+                  "backgroundColor": "white",
+                  "elevation": 5,
+                  "margin": 3,
+                  "paddingBottom": 5,
+                  "paddingTop": 5,
+                  "width": "21%",
+                }
+              }
+            >
+              <View>
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "height": 66.7,
+                      "justifyContent": "center",
+                      "width": 15,
+                    }
+                  }
+                >
+                  <ActivityIndicator
+                    color="#0000ff"
+                    size="small"
+                  />
+                </View>
+                <Image
+                  onLoad={[Function]}
+                  onLoadEnd={[Function]}
+                  source={
+                    {
+                      "testUri": "../../../src/asset/img/confidor.png",
+                    }
+                  }
+                  style={
+                    {
+                      "height": 133.4,
+                      "width": 150,
+                    }
+                  }
+                />
+              </View>
+              <View
+                style={
+                  {
+                    "width": "100%",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#1d1d1d",
+                        "fontFamily": "Avenir Regular",
+                        "fontSize": 14,
+                        "fontWeight": "500",
+                      },
+                      {
+                        "textAlign": "center",
+                      },
+                    ]
+                  }
+                >
+                  Sulphure Acti...
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          {
+            "marginTop": 35,
+          }
+        }
+      >
+        <View>
+          <View
+            collapsable={false}
+            handlerTag={4}
+            handlerType="PanGestureHandler"
+            onGestureHandlerEvent={[Function]}
+            onGestureHandlerStateChange={[Function]}
+            onTouchEnd={[Function]}
+            onTouchStart={[Function]}
+            style={
+              [
+                {
+                  "overflow": "hidden",
+                },
+                {
+                  "height": "100%",
+                  "width": 488,
+                },
+                {
+                  "height": 333.5,
+                  "width": "100%",
+                },
+                {
+                  "flexDirection": "row",
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                [
+                  {
+                    "height": "100%",
+                    "position": "absolute",
+                    "width": 488,
+                  },
+                  {
+                    "transform": [
+                      {
+                        "translateX": undefined,
+                      },
+                    ],
+                  },
+                ]
+              }
+              testID="__CAROUSEL_ITEM_0_NOT_READY__"
+            />
+            <View
+              style={
+                [
+                  {
+                    "height": "100%",
+                    "position": "absolute",
+                    "width": 488,
+                  },
+                  {
+                    "transform": [
+                      {
+                        "translateX": undefined,
+                      },
+                    ],
+                  },
+                ]
+              }
+              testID="__CAROUSEL_ITEM_1_NOT_READY__"
+            />
+            <View
+              style={
+                [
+                  {
+                    "height": "100%",
+                    "position": "absolute",
+                    "width": 488,
+                  },
+                  {
+                    "transform": [
+                      {
+                        "translateX": undefined,
+                      },
+                    ],
+                  },
+                ]
+              }
+              testID="__CAROUSEL_ITEM_2_NOT_READY__"
+            />
+            <View
+              style={
+                [
+                  {
+                    "height": "100%",
+                    "position": "absolute",
+                    "width": 488,
+                  },
+                  {
+                    "transform": [
+                      {
+                        "translateX": undefined,
+                      },
+                    ],
+                  },
+                ]
+              }
+              testID="__CAROUSEL_ITEM_3_NOT_READY__"
+            />
+          </View>
+        </View>
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "backgroundColor": "white",
+              "borderRadius": 3,
+              "elevation": 5,
+              "height": 52,
+              "justifyContent": "center",
+              "paddingLeft": 9.15,
+              "position": "absolute",
+              "right": 0,
+              "top": 70,
+              "width": 29,
+            }
+          }
+        >
+          <SvgMock
+            height={20.9}
+            width={11.2}
+          />
+        </View>
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "marginTop": 15,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "flexDirection": "row",
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              style={
+                {
+                  "backgroundColor": "#242734",
+                  "borderRadius": 4,
+                  "height": 8,
+                  "margin": 9,
+                  "width": 8,
+                }
+              }
+            />
+            <View
+              collapsable={false}
+              style={
+                {
+                  "backgroundColor": "aqua",
+                  "borderRadius": 4,
+                  "height": 8,
+                  "margin": 9,
+                  "width": 8,
+                }
+              }
+            />
+            <View
+              collapsable={false}
+              style={
+                {
+                  "backgroundColor": "aqua",
+                  "borderRadius": 4,
+                  "height": 8,
+                  "margin": 9,
+                  "width": 8,
+                }
+              }
+            />
+            <View
+              collapsable={false}
+              style={
+                {
+                  "backgroundColor": "aqua",
+                  "borderRadius": 4,
+                  "height": 8,
+                  "margin": 9,
+                  "width": 8,
+                }
+              }
+            />
+          </View>
+        </View>
+      </View>
+      <View>
+        <View
+          style={
+            {
+              "paddingTop": 16,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "paddingLeft": 14,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "color": "#242734",
+                  "fontFamily": "Avenir Medium ",
+                  "fontSize": 18,
+                  "fontWeight": "500",
+                }
+              }
+            >
+              Shop by Brand
+            </Text>
+          </View>
+          <View
+            style={
+              {
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "paddingLeft": 6,
+                "paddingRight": 2,
+                "paddingTop": 9,
+              }
+            }
+          >
+            <View>
+              <View
+                style={
+                  {
+                    "paddingBottom": 6.5,
+                    "paddingLeft": 5,
+                    "paddingRight": 5,
+                    "paddingTop": 6.5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "backgroundColor": "white",
+                      "elevation": 5,
+                    }
+                  }
+                >
+                  <Image
+                    source={
+                      {
+                        "testUri": "../../../src/asset/img/cloudy.png",
+                      }
+                    }
+                    style={
+                      {
+                        "height": 160.07999999999998,
+                        "width": 225,
+                      }
+                    }
+                  />
+                </View>
+              </View>
+            </View>
+            <View>
+              <View
+                style={
+                  {
+                    "paddingBottom": 6.5,
+                    "paddingLeft": 5,
+                    "paddingRight": 5,
+                    "paddingTop": 6.5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "backgroundColor": "white",
+                      "elevation": 5,
+                    }
+                  }
+                >
+                  <Image
+                    source={
+                      {
+                        "testUri": "../../../src/asset/img/cloudy.png",
+                      }
+                    }
+                    style={
+                      {
+                        "height": 160.07999999999998,
+                        "width": 225,
+                      }
+                    }
+                  />
+                </View>
+              </View>
+            </View>
+            <View>
+              <View
+                style={
+                  {
+                    "paddingBottom": 6.5,
+                    "paddingLeft": 5,
+                    "paddingRight": 5,
+                    "paddingTop": 6.5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "backgroundColor": "white",
+                      "elevation": 5,
+                    }
+                  }
+                >
+                  <Image
+                    source={
+                      {
+                        "testUri": "../../../src/asset/img/cloudy.png",
+                      }
+                    }
+                    style={
+                      {
+                        "height": 160.07999999999998,
+                        "width": 225,
+                      }
+                    }
+                  />
+                </View>
+              </View>
+            </View>
+            <View>
+              <View
+                style={
+                  {
+                    "paddingBottom": 6.5,
+                    "paddingLeft": 5,
+                    "paddingRight": 5,
+                    "paddingTop": 6.5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "backgroundColor": "white",
+                      "elevation": 5,
+                    }
+                  }
+                >
+                  <Image
+                    source={
+                      {
+                        "testUri": "../../../src/asset/img/cloudy.png",
+                      }
+                    }
+                    style={
+                      {
+                        "height": 160.07999999999998,
+                        "width": 225,
+                      }
+                    }
+                  />
+                </View>
+              </View>
+            </View>
+            <View>
+              <View
+                style={
+                  {
+                    "paddingBottom": 6.5,
+                    "paddingLeft": 5,
+                    "paddingRight": 5,
+                    "paddingTop": 6.5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "backgroundColor": "white",
+                      "elevation": 5,
+                    }
+                  }
+                >
+                  <Image
+                    source={
+                      {
+                        "testUri": "../../../src/asset/img/cloudy.png",
+                      }
+                    }
+                    style={
+                      {
+                        "height": 160.07999999999998,
+                        "width": 225,
+                      }
+                    }
+                  />
+                </View>
+              </View>
+            </View>
+            <View>
+              <View
+                style={
+                  {
+                    "paddingBottom": 6.5,
+                    "paddingLeft": 5,
+                    "paddingRight": 5,
+                    "paddingTop": 6.5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "backgroundColor": "white",
+                      "elevation": 5,
+                    }
+                  }
+                >
+                  <Image
+                    source={
+                      {
+                        "testUri": "../../../src/asset/img/cloudy.png",
+                      }
+                    }
+                    style={
+                      {
+                        "height": 160.07999999999998,
+                        "width": 225,
+                      }
+                    }
+                  />
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "paddingTop": 17,
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "backgroundColor": "#242734",
+                  "borderRadius": 4,
+                  "height": 36,
+                  "justifyContent": "center",
+                  "paddingLeft": 36,
+                  "paddingRight": 36,
+                }
+              }
+            >
+              <Text
+                style={
+                  {
+                    "color": "#ffff",
+                    "fontFamily": "Avenir Heavy",
+                    "fontSize": 13,
+                    "fontWeight": "900",
+                  }
+                }
+              >
+                View All Brands
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View>
+        <View
+          style={
+            {
+              "paddingTop": 16,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "paddingLeft": 14,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "color": "#242734",
+                  "fontFamily": "Avenir Medium ",
+                  "fontSize": 18,
+                  "fontWeight": "500",
+                }
+              }
+            >
+              Shop by Crop
+            </Text>
+          </View>
+          <View
+            style={
+              {
+                "flexDirection": "row",
+                "flexWrap": "wrap",
+                "paddingLeft": 6,
+                "paddingRight": 2,
+                "paddingTop": 9,
+              }
+            }
+          >
+            <View>
+              <View
+                style={
+                  {
+                    "paddingBottom": 6.5,
+                    "paddingLeft": 5,
+                    "paddingRight": 5,
+                    "paddingTop": 6.5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "backgroundColor": "white",
+                      "elevation": 5,
+                    }
+                  }
+                >
+                  <Image
+                    source={
+                      {
+                        "testUri": "../../../src/asset/img/cloudy.png",
+                      }
+                    }
+                    style={
+                      {
+                        "height": 160.07999999999998,
+                        "width": 225,
+                      }
+                    }
+                  />
+                </View>
+              </View>
+            </View>
+            <View>
+              <View
+                style={
+                  {
+                    "paddingBottom": 6.5,
+                    "paddingLeft": 5,
+                    "paddingRight": 5,
+                    "paddingTop": 6.5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "backgroundColor": "white",
+                      "elevation": 5,
+                    }
+                  }
+                >
+                  <Image
+                    source={
+                      {
+                        "testUri": "../../../src/asset/img/cloudy.png",
+                      }
+                    }
+                    style={
+                      {
+                        "height": 160.07999999999998,
+                        "width": 225,
+                      }
+                    }
+                  />
+                </View>
+              </View>
+            </View>
+            <View>
+              <View
+                style={
+                  {
+                    "paddingBottom": 6.5,
+                    "paddingLeft": 5,
+                    "paddingRight": 5,
+                    "paddingTop": 6.5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "backgroundColor": "white",
+                      "elevation": 5,
+                    }
+                  }
+                >
+                  <Image
+                    source={
+                      {
+                        "testUri": "../../../src/asset/img/cloudy.png",
+                      }
+                    }
+                    style={
+                      {
+                        "height": 160.07999999999998,
+                        "width": 225,
+                      }
+                    }
+                  />
+                </View>
+              </View>
+            </View>
+            <View>
+              <View
+                style={
+                  {
+                    "paddingBottom": 6.5,
+                    "paddingLeft": 5,
+                    "paddingRight": 5,
+                    "paddingTop": 6.5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "backgroundColor": "white",
+                      "elevation": 5,
+                    }
+                  }
+                >
+                  <Image
+                    source={
+                      {
+                        "testUri": "../../../src/asset/img/cloudy.png",
+                      }
+                    }
+                    style={
+                      {
+                        "height": 160.07999999999998,
+                        "width": 225,
+                      }
+                    }
+                  />
+                </View>
+              </View>
+            </View>
+            <View>
+              <View
+                style={
+                  {
+                    "paddingBottom": 6.5,
+                    "paddingLeft": 5,
+                    "paddingRight": 5,
+                    "paddingTop": 6.5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "backgroundColor": "white",
+                      "elevation": 5,
+                    }
+                  }
+                >
+                  <Image
+                    source={
+                      {
+                        "testUri": "../../../src/asset/img/cloudy.png",
+                      }
+                    }
+                    style={
+                      {
+                        "height": 160.07999999999998,
+                        "width": 225,
+                      }
+                    }
+                  />
+                </View>
+              </View>
+            </View>
+            <View>
+              <View
+                style={
+                  {
+                    "paddingBottom": 6.5,
+                    "paddingLeft": 5,
+                    "paddingRight": 5,
+                    "paddingTop": 6.5,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "backgroundColor": "white",
+                      "elevation": 5,
+                    }
+                  }
+                >
+                  <Image
+                    source={
+                      {
+                        "testUri": "../../../src/asset/img/cloudy.png",
+                      }
+                    }
+                    style={
+                      {
+                        "height": 160.07999999999998,
+                        "width": 225,
+                      }
+                    }
+                  />
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "paddingTop": 17,
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "backgroundColor": "#242734",
+                  "borderRadius": 4,
+                  "height": 36,
+                  "justifyContent": "center",
+                  "paddingLeft": 36,
+                  "paddingRight": 36,
+                }
+              }
+            >
+              <Text
+                style={
+                  {
+                    "color": "#ffff",
+                    "fontFamily": "Avenir Heavy",
+                    "fontSize": 13,
+                    "fontWeight": "900",
+                  }
+                }
+              >
+                View All Brands
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          {
+            "marginBottom": 16,
+            "marginTop": 26.7,
+            "paddingLeft": 6,
+            "paddingRight": 6,
+          }
+        }
+      >
+        <Image
+          source={
+            {
+              "testUri": "../../../src/asset/img/call-us.png",
+            }
+          }
+          style={
+            {
+              "height": 306.82,
+              "width": 727.5,
+            }
+          }
+        />
+        <View
+          style={
+            {
+              "left": 24,
+              "position": "absolute",
+              "top": 25,
+            }
+          }
+        >
+          <Text
+            style={
+              {
+                "color": "#ffff",
+                "fontFamily": "Avenir Heavy",
+                "fontSize": 15,
+                "fontWeight": "500",
+              }
+            }
+          >
+            Have Questions?
+          </Text>
+          <Text
+            style={
+              {
+                "color": "#ffff",
+                "fontFamily": "Avenir Heavy",
+                "fontSize": 15,
+                "fontWeight": "500",
+              }
+            }
+          >
+            We are happy to help.
+          </Text>
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "backgroundColor": "#ffff",
+                "borderRadius": 4,
+                "flexDirection": "row",
+                "marginTop": 4,
+                "paddingBottom": 5,
+                "paddingLeft": 17,
+                "paddingRight": 17,
+                "paddingTop": 8,
+                "width": "70%",
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "marginRight": 5,
+                  "marginTop": 5,
+                }
+              }
+            >
+              <SvgMock
+                height={17.2}
+                width={17.2}
+              />
+            </View>
+            <Text
+              style={
+                {
+                  "color": "#242734",
+                  "fontFamily": "Avenir Black",
+                  "fontSize": 15,
+                  "fontWeight": "500",
+                }
+              }
+            >
+              CALL US
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;

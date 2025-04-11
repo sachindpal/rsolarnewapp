@@ -36,12 +36,10 @@ import {
     setLocalStorage,
   } from '../Service/APIServices/axoisService';
   import {useTranslation} from 'react-i18next';
-  import ModelPopUp from '../commonResources/component/ModelPopUp/ModelPopUp';
   import i18next from 'i18next';
   import AsyncStorage from '@react-native-async-storage/async-storage';
   import TextTranslation from '../commonResources/component/CommonInput/TextTranslation';
   import {ScrollView} from 'react-native-gesture-handler';
-  import LangaugeModel from '../commonResources/component/ModelPopUp/LangaugeModel';
   import {getFcmTokenFromLocalStorage} from '../Service/notification';
   
   const MoreDrawerRsolar = () => {
@@ -137,7 +135,9 @@ import {
           getFcmTokenFromLocalStorage();
           checkLoginStatus();
           
-          navigation.navigate('appSelectionScreen')
+          navigation.navigate('AuthStack', {
+            screen: 'Login',
+          })
         // })
         // .catch(err => {
         //   console.log('err from logout', err);
@@ -264,13 +264,13 @@ import {
                   text={'Privacy Policy'}
                 />
               </Pressable>
-              <Pressable
+              {/* <Pressable
                 onPress={() => navigation.navigate('appSelectionScreen')}>
                 <CommanView
                   Icon={<SwichStore width={34} height={34} />}
                   text={'Switch store'}
                 />
-              </Pressable>
+              </Pressable> */}
   
               {/* only when authenticate */}
               {isLoggedInStatus ? (
@@ -285,15 +285,7 @@ import {
           </View>
         </View>
   
-        <LangaugeModel
-          modalVisible={modalVisible}
-          selectedOption={selectedLang}
-          onSelect={onSelect}
-          onSubmit={onSubmit}
-          modelClose={modelClose}
-          DataArray={langOptions}
-          title={'Language'}
-        />
+        
       </View>
     );
   };

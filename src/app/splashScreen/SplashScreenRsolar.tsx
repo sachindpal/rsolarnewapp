@@ -1,7 +1,6 @@
 import {Image, StatusBar, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import LottieView from 'lottie-react-native';
 import DeviceInfo from 'react-native-device-info';
 import {getUnAuthReqest, isLoggedIn, isSolarLoggedIn} from '../Service/APIServices/axoisService';
 import { FontStyle } from '../../asset/style/FontsStyle';

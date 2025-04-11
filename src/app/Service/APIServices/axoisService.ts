@@ -6,8 +6,8 @@ import {showToast} from '../../commonResources/commanSnackbar/toastMessage';
 // import {err} from 'react-native-svg';
 
   // const baseUrl ='http://ec2-43-204-145-202.ap-south-1.compute.amazonaws.com:4000/api';
-// const baseUrl = 'https://mobileapinew.farmkart.com/api';
-const baseUrl = 'http://192.168.1.5:4000/api';
+const baseUrl = 'https://mobileapinew.farmkart.com/api';
+// const baseUrl = 'http://192.168.1.5:4000/api';
 const defaultOptions = {
   baseURL: baseUrl,
   headers: {
@@ -112,28 +112,7 @@ export const removeItemLocalStorage = (key: string) => {
   AsyncStorage.removeItem(key);
 };
 
-// Function to get permission for location
-export const requestLocationPermission = async () => {
-  try {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      {
-        title: 'Geolocation Permission',
-        message: 'Can we access your location?',
-        buttonNeutral: 'Ask Me Later',
-        buttonNegative: 'Cancel',
-        buttonPositive: 'OK',
-      },
-    );
-    if (granted === 'granted') {
-      return true;
-    } else {
-      return false;
-    }
-  } catch (err) {
-    return false;
-  }
-};
+
 
 export const errorFormate = async (error: any) => {
   let lang: any = 'en';

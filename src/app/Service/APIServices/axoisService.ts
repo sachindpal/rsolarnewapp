@@ -6,8 +6,8 @@ import {showToast} from '../../commonResources/commanSnackbar/toastMessage';
 // import {err} from 'react-native-svg';
 
   // const baseUrl ='http://ec2-43-204-145-202.ap-south-1.compute.amazonaws.com:4000/api';
-const baseUrl = 'https://mobileapinew.farmkart.com/api';
-// const baseUrl = 'http://192.168.1.5:4000/api';
+// const baseUrl = 'https://mobileapinew.farmkart.com/api';
+const baseUrl = 'http://192.168.1.15:4000/api';
 const defaultOptions = {
   baseURL: baseUrl,
   headers: {

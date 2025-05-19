@@ -77,7 +77,7 @@ const RsolarHome = () => {
     getUnAuthReqest(`/rsolar/solar-home?customerid=${customerData.customerid}`)
       .then((res: any) => {
         // console.log('my profile ', res.data.data.deliveryData);
-        console.log('my profile ', res.data.data);
+        console.log('my profile ', JSON.stringify(res.data.data));
         console.log('my profile ', res.data.data);
         setStepsData(res.data.data.salesData)
         setDeliveryData(res?.data?.data?.deliveryData[0])
@@ -123,25 +123,33 @@ const RsolarHome = () => {
             <View key={index} style={styles.stepWrapper}>
               {/* Vertical Progress Line */}
               {/* {index !== 0 && ( */}
-              <View style={[styles.progressLine, step.completed ? styles.activeLine : {}]} />
+              <View style={[styles.progressLine, step.subTasks.length > 0 ? styles.activeLine : {}]} />
               {/* )} */}
               {/* <View style={[ styles.activeLine]} /> */}
 
 
               {/* Step Indicator (Big Circle) */}
               <View>
-                {step.completed ? <CheckCircle style={{ zIndex: 1, marginTop: 14, marginRight: 10 }} /> : <View style={[styles.stepIndicator, { marginTop: 15 }]}>
+                {step.subTasks.length > 0 ? <CheckCircle style={{ zIndex: 1, marginTop: 14, marginRight: 10 }} /> : <View style={[styles.stepIndicator, { marginTop: 15 }]}>
                 </View>}
 
               </View>
               {/* Step Content */}
               <View style={styles.stepContent}>
+              {step.subTasks.length > 0 ?
                 <TouchableOpacity
                   style={[styles.stepBox]}
                   onPress={() => toggleStep(index)}
                 >
-                  <Text style={[styles.stepTitle]}>{step.title}</Text>
-                </TouchableOpacity>
+                  {/* <Text style={[styles.stepTitle]}>{step.title}</Text> */}
+                  {step.title=='Payment & Planing' ? <Text style={[styles.stepTitle]}>Payment & Planning</Text> : <Text style={[styles.stepTitle]}>{step.title}</Text>}
+                </TouchableOpacity>:<View
+                  style={[styles.stepBox]}
+                >
+                  {step.title=='Payment & Planing' ? <Text style={[styles.stepTitle,{color:'#888'}]}>Payment & Planning</Text> : <Text style={[styles.stepTitle,{color:'#888'}]}>{step.title}</Text>}
+                  {/* <Text style={[styles.stepTitle,{color:'#888'}]}>{step.title}</Text> */}
+                  
+                </View>}
 
                 {/* Animated Expanding Subtasks */}
                 {visibleItems[index] && (
@@ -165,7 +173,7 @@ const RsolarHome = () => {
                             <View style={[{ position: 'absolute', right: '115%', top: '6%' }]}>
                               {step.completed ? <Dot /> : null}
                             </View>
-                              <View style={{ flexDirection: 'column',maxWidth:'50%' }}>
+                              <View style={{ flexDirection: 'column',maxWidth:'45%' }}>
                                 <Text style={{ color: '#242734', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '500' }}>{task.name}</Text>
                               </View>
 
@@ -252,7 +260,7 @@ const RsolarHome = () => {
                               {step.completed ? <Dot /> : null}
                             </View>
 
-                              <View style={{ flexDirection: 'column', padding: 5}}>
+                              <View style={{ flexDirection: 'column', padding: 5,maxWidth:'50%'}}>
                                 <Text style={{ color: '#000' }}>{task.name}</Text>
                               </View>
 

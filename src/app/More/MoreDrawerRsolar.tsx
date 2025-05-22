@@ -136,7 +136,7 @@ import {
           checkLoginStatus();
           
           navigation.navigate('AuthStack', {
-            screen: 'Login',
+            screen: 'RsolarLogin',
           })
         // })
         // .catch(err => {

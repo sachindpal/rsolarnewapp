@@ -51,6 +51,7 @@ const RsolarHome = () => {
   const [showDate, setShowDate] = useState<any>(false);
   const [visibleItems, setVisibleItems] = useState<boolean[]>(stepsDatas.map(() => false));
   const [refreshing, setRefreshing] = useState(false);
+  const [isPaymentCompleteLater, setIsPaymentCompleteLater] = useState(false);
 
   const [userInfo, setUserInfo] = useState<any>({})
   useEffect(() => {
@@ -67,7 +68,7 @@ const RsolarHome = () => {
 
   const getUserInfo = async () => {
     const getInfo: any = await AsyncStorage.getItem('solar_customer_data');
-    console.log('sachin', getInfo)
+    // console.log('sachin', getInfo)
     setUserInfo(JSON.parse(getInfo))
 
     getHomeData(JSON.parse(getInfo))
@@ -78,8 +79,11 @@ const RsolarHome = () => {
       .then((res: any) => {
         // console.log('my profile ', res.data.data.deliveryData);
         console.log('my profile ', JSON.stringify(res.data.data));
-        console.log('my profile ', res.data.data);
+        // console.log('my profile ', res.data.data);
         setStepsData(res.data.data.salesData)
+        if(res.data.data.partialAmountComplete){
+          setIsPaymentCompleteLater(true)
+        }
         setDeliveryData(res?.data?.data?.deliveryData[0])
         if (res.data.data.salesData[0].completed == true) {
           setShowDate(true)
@@ -173,7 +177,7 @@ const RsolarHome = () => {
                             <View style={[{ position: 'absolute', right: '115%', top: '6%' }]}>
                               {step.completed ? <Dot /> : null}
                             </View>
-                              <View style={{ flexDirection: 'column',maxWidth:'45%' }}>
+                              <View style={{ flexDirection: 'column',maxWidth:'40%' }}>
                                 <Text style={{ color: '#242734', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '500' }}>{task.name}</Text>
                               </View>
 
@@ -222,7 +226,7 @@ const RsolarHome = () => {
 
                                       <View style={{ flexDirection: 'column', width: '50%' }}>
                                         <Text style={{ color: '#242734', fontWeight: '800', fontFamily: 'Avenir Medium' }}>{task.getDelData[0].firstname} {task.getDelData[0].lastname}</Text>
-                                        <Text style={{ color: 'rgba(36, 39, 52, 0.50)', fontSize: 8, fontWeight: '500', fontFamily: 'Avenir Medium' }}>R-solar sales</Text>
+                                        {/* <Text style={{ color: 'rgba(36, 39, 52, 0.50)', fontSize: 8, fontWeight: '500', fontFamily: 'Avenir Medium' }}>R-solar sales</Text> */}
                                       </View>
 
 
@@ -265,9 +269,11 @@ const RsolarHome = () => {
                               </View>
 
 
-                              <View style={[(task.status == 'Completed' || task.status == 'Not Required (Cash pay)') ? styles.completeStausView : (task.status == 'Scheduled' || task.status == 'Re-Scheduled') ? styles.scheduleStausView : styles.pendingStausView, { flexDirection: 'column',maxHeight:30 }]}>
+                              <View style={[(task.status == 'Completed' || task.status == 'Not Required (Cash pay)' || isPaymentCompleteLater==true) ? styles.completeStausView : (task.status == 'Scheduled' || task.status == 'Re-Scheduled') ? styles.scheduleStausView : styles.pendingStausView, { flexDirection: 'column',maxHeight:30 }]}>
 
-                                {task.status != 'Not Required (Cash pay)' ?
+                                {task.status != 'Not Required (Cash pay)' ? (task.status=='Partial Amount Received' && isPaymentCompleteLater==true) ?
+                                  <Text style={[{ color: '#242734', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '500' }, styles.completeStaus]}>Completed</Text>
+                                  :
                                   <Text style={[{ color: '#242734', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '500' }, (task.status == 'Completed' || task.status == 'Not Required (Cash pay)') ? styles.completeStaus : (task.status == 'Scheduled' || task.status == 'Re-Scheduled') ? styles.scheduleStaus : styles.pendingStatus,]}>{task.status}</Text>
                                   :
                                   <Text style={[{ color: '#242734', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '500' }, (task.status == 'Completed' || task.status == 'Not Required (Cash pay)') ? styles.completeStaus : (task.status == 'Schedule' || task.status == 'Re-Scheduled') ? styles.scheduleStaus : styles.pendingStatus,]}>Cash Payment</Text>}
@@ -299,7 +305,7 @@ const RsolarHome = () => {
                   </View>)}
 
                 {/* Estimated Completion Date (Always Visible) */}
-                {step.completed == false ?
+                {step.completed == false && step.estimatedDate ?
                   <Text style={styles.estimatedDate}>Estimated completion date: {step.estimatedDate}</Text> : null
                 }
               </View>

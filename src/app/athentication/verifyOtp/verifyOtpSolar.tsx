@@ -105,6 +105,7 @@ const VerifyOtpSolar = (props: any) => {
             setLocalStorage('solar_auth_Token', result.data.token);
             setLocalStorage('solar_customer_data', JSON.stringify(result.data.customerData));
             // navigation.replace('RsolarHome');
+            setisloading(false)
             props.navigation.navigate('RsolarHome')
             }
 
@@ -162,10 +163,12 @@ const VerifyOtpSolar = (props: any) => {
             await postAuthReq('/auth/send-otp', formData).then((res: any) => {
                 let result = res.data
                 console.log("resend otp", result)
+                setisloading(false)
             }).catch((error) => {
                 if(error.response.data.error_type){
                     errorFormate(error.response.data.error_type)
                   }
+                  setisloading(false)
             })
         }
         

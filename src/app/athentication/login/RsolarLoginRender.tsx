@@ -36,10 +36,9 @@ const RsolarLoginRender = (props: dataType) => {
       <View style={{ backgroundColor: "white", elevation: 5, }}>
         <Image
           source={require("../../../asset/img/rsolarloginbanner.png")} style={{ width: width, height: 0.45 * height }} />
-        <Pressable style={{ position: "absolute", left: 11, top: 20}} onPress={() => navigation.navigate('appSelectionScreen')}>
-          {/* <Image source={require("../../../asset/img/close.png")} style={{width:24,height:24}}/> */}
+        {/* <Pressable style={{ position: "absolute", left: 11, top: 20}} onPress={() => navigation.navigate('appSelectionScreen')}>
           <CloseIcon/>
-        </Pressable>
+        </Pressable> */}
       </View>
       <View style={[styles.mainFormView,]}>
         <View style={styles.formView}>

@@ -88,10 +88,18 @@ import SwichStore from './switchStore.svg'
 import Dot from './dot.svg'
 import Vector from './Vector.svg'
 import Tele from './Telephone.svg'
+import Thunder from './thunderstorm.svg'
+import Cottage from './cottage.svg'
+import CellTower from './celltower.svg'
+import CurrencyRupee from './currencyRupee.svg'
 
 
 
 export {
+  CurrencyRupee,
+  CellTower,
+  Cottage,
+  Thunder,
   Vector,
   Tele,
   Dot,

@@ -121,7 +121,7 @@ import {
   
     const rateApp = () => {
       Linking.openURL(
-        `https://play.google.com/store/apps/details?id=com.farmkart.mobileapp&hl=${currentLang}_IN`,
+        `https://play.google.com/store/apps/details?id=com.rsolar.app&hl=${currentLang}_IN`,
       );
     };
   
@@ -144,16 +144,16 @@ import {
         // });
     };
   
-    const hindiContent = `भारत का नम्बर 1 खाद, बीज, दवाई खरीदी एप डाउनलोड करे और 2 लाख से अधिक फार्मकार्ट परिवार से जुड़े। डाउनलोड करने के लिए लिंक पर क्लिक करें https://play.google.com/store/apps/details?id=com.farmkart.mobileapp&hl=${currentLang}_IN `;
+    const hindiContent = `भारत का नम्बर 1 खाद, बीज, दवाई खरीदी एप डाउनलोड करे और 2 लाख से अधिक फार्मकार्ट परिवार से जुड़े। डाउनलोड करने के लिए लिंक पर क्लिक करें https://play.google.com/store/apps/details?id=com.rsolar.app&hl=${currentLang}_IN `;
   
-    const EnglishContent = `Download India's No. 1 Fertilizer, Seed, Pesticides purchasing app and join the Farmkart family of over 2  lakhs. Click on the link to download https://play.google.com/store/apps/details?id=com.farmkart.mobileapp&hl=${currentLang}_IN`;
+    const EnglishContent = `Download India's No. 1 Fertilizer, Seed, Pesticides purchasing app and join the Farmkart family of over 2  lakhs. Click on the link to download https://play.google.com/store/apps/details?id=com.rsolar.app&hl=${currentLang}_IN`;
   
     const onShare = async () => {
       try {
         const result = await Share.share({
           title: 'App link',
           message: currentLang == 'hi' ? hindiContent : EnglishContent,
-          url: `https://play.google.com/store/apps/details?id=com.farmkart.mobileapp&hl=${currentLang}_IN`,
+          url: `https://play.google.com/store/apps/details?id=com.rsolar.app&hl=${currentLang}_IN`,
         });
         if (result.action === Share.sharedAction) {
           if (result.activityType) {

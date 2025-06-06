@@ -1,4 +1,4 @@
-package com.farmkart.mobileapp
+package com.rsolar.app
 import android.os.Bundle
 import com.facebook.react.ReactActivity
 import org.devio.rn.splashscreen.SplashScreen; // here

@@ -1,4 +1,4 @@
-package com.farmkart.mobileapp
+package com.rsolar.app
 
 import android.app.Application
 import com.facebook.react.PackageList

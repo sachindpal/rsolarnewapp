@@ -98,10 +98,18 @@ import CurrencyRupeeDark from './currencyRupeeDark.svg'
 import CottageDark from './cottageDark.svg'
 import TotalSaving from './totalSaving.svg'
 import TotalSavingDark from './totalSavingDark.svg'
+import UpDown from './upanddown.svg'
+import UpDownDark from './updowndark.svg'
+import Watch from './watch.svg'
+import WatchDark from './watchDark.svg'
 
 
 
 export {
+  WatchDark,
+  Watch,
+  UpDownDark,
+  UpDown,
   TotalSaving,
   TotalSavingDark,
   CurrencyRupeeDark,

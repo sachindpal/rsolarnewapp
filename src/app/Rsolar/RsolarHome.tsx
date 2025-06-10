@@ -22,6 +22,10 @@ import {
     ThunderDark,
     TotalSaving,
     TotalSavingDark,
+    UpDown,
+    UpDownDark,
+    Watch,
+    WatchDark,
 } from '../../asset/img';
 import EnergyGeneration from './EnergyGeneration';
 import Financial from './FInancial';
@@ -31,11 +35,12 @@ const screenWidth = Dimensions.get('window').width;
 const HomeScreen = () => {
     const [activeTab, setActiveTab] = useState('Today');
     const [selectedValue, setSelectedValue] = useState('2025');
+    const [radioValue, setRadioValue] = useState('kilowatts');
     const [isDarkMode, setIsDarkMode] = useState(false);
     const riveRef = React.useRef<RiveRef>(null);
     const colors = {
         background: isDarkMode ? '#121212' : '#fff',
-        text: isDarkMode ? '#fff' : '#000',
+        text: isDarkMode ? '#fff' : '#242734',
         subText: isDarkMode ? '#bbb' : 'rgba(36, 39, 52, 0.50)',
         card: isDarkMode ? '#1E1E1E' : '#F9F9F9',
         tabBg: isDarkMode ? '#222' : 'rgba(231, 230, 236, 0.50)',
@@ -70,8 +75,21 @@ const HomeScreen = () => {
                         console.log("Intro finished");
                         riveRef.current?.play('Loop'); // Play the loop animation after intro ends
                     }} style={{ width: screenWidth, height: 400 }} />
-                <Text style={{ fontSize: 12, color: colors.subText, marginTop: 8 }}>Power unit</Text>
-                <Text style={{ fontSize: 16, color: 'red' }}>0 kWh</Text>
+                <View style={{ flexDirection: 'row', gap: -15 }}>
+                    {isDarkMode?<UpDownDark style={{ marginTop: 18 }} />:<UpDown style={{ marginTop: 18 }} />}
+                    <Picker
+                        selectedValue={radioValue}
+                        onValueChange={(itemValue) => setRadioValue(itemValue)}
+                        style={{ color: colors.text, width: 150 }}
+                    >
+                        <Picker.Item label="kilowatts" value="kilowatts" />
+                        <Picker.Item label="watt" value="watt" />
+                    </Picker>
+                    <View style={{flexDirection:'row',marginLeft:'20%'}}>
+                    {isDarkMode?<WatchDark style={{ marginTop: 18,marginRight:4 }} />:<Watch style={{ marginTop: 18,marginRight:4 }} />}
+                    <Text style={{fontSize: 12, color: colors.label, fontWeight: '400',marginTop:18}}>Update: 1min ago</Text>
+                    </View>
+                </View>
             </View>
 
             {/* Energy Generation Section */}
@@ -129,7 +147,7 @@ const HomeScreen = () => {
                 </View>
             </View>
             {/* Saving Report */}
-            <View style={{borderWidth:1,borderStyle:'solid',borderColor:'rgba(177, 177, 177, 0.20)',borderRadius:8,marginTop:16,padding:8,marginBottom:'7%'}}>
+            <View style={{ borderWidth: 1, borderStyle: 'solid', borderColor: 'rgba(177, 177, 177, 0.20)', borderRadius: 8, marginTop: 16, padding: 8, marginBottom: '7%' }}>
                 <View style={{ marginTop: 24, flexDirection: 'row', gap: 70 }}>
                     <View style={{ flexDirection: 'row' }}>
                         {isDarkMode ? <TotalSavingDark style={{ marginRight: 10, marginTop: 4 }} /> : <TotalSaving style={{ marginRight: 10, marginTop: 4 }} />}

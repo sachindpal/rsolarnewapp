@@ -19,15 +19,15 @@ const screenWidth = Dimensions.get('window').width;
 
 // Example data
 const data = [
-  { hour: '7', home: 0.8, grid: 0.2 },
-  { hour: '8', home: 1.5, grid: 0.5 },
-  { hour: '9', home: 0.9, grid: 2.1 },
-  { hour: '10', home: 1.2, grid: 1.8 },
-  { hour: '11', home: 1.1, grid: 0.9 },
-  { hour: '12', home: 0.5, grid: 2.5 },
-  { hour: '1', home: 1.8, grid: 1.2 },
-  { hour: '2', home: 0.6, grid: 2.4 },
-  { hour: '3', home: 2.0, grid: 1.0 },
+  { hour: "May'25", home: 0.8, grid: 0.2 },
+  { hour: "Jun'25", home: 1.5, grid: 0.5 },
+  { hour: "July'25", home: 0.9, grid: 2.1 },
+  { hour: "Aug'25", home: 1.2, grid: 1.8 },
+  { hour: "Sep'25", home: 1.1, grid: 0.9 },
+  { hour: "Oct'25", home: 0.5, grid: 2.5 },
+  { hour: "Nov'25", home: 1.8, grid: 1.2 },
+  { hour: "Dec'25", home: 0.6, grid: 2.4 },
+  { hour: "Jan'25", home: 2.0, grid: 1.0 },
 ];
 
 // Config
@@ -35,7 +35,7 @@ const barsPerPage = 5;
 const barWidth = 60;
 const chartWidth = data.length * barWidth;
 
-const Financial = () => {
+const Financial = (color:any) => {
   const homeData = data.map(d => ({
     x: d.hour,
     y: d.home,
@@ -74,7 +74,9 @@ const Financial = () => {
           padding={{ left: 10, top: 20, bottom: 50, right: 20 }}
           domainPadding={{ x: 20 }}
         >
-          <VictoryAxis />
+          <VictoryAxis style={{
+      tickLabels: { fill: color.color.labelgrey, fontSize: 10 }, // X-axis label color
+    }} />
           <VictoryStack>
             <VictoryBar
               data={homeData}

@@ -35,7 +35,8 @@ const barsPerPage = 5;
 const barWidth = 60;
 const chartWidth = data.length * barWidth;
 
-const EnergyGeneration = () => {
+const EnergyGeneration = (color:any) => {
+  console.log('color',color.color.labelgrey)
   const homeData = data.map(d => ({
     x: d.hour,
     y: d.home,
@@ -47,6 +48,10 @@ const EnergyGeneration = () => {
     y: d.grid,
     label: `Grid: ${Math.round((d.grid / (d.home + d.grid)) * 100)}%`,
   }));
+  // Calculate dynamic values
+const yValues = data.map((d:any) => d.y);
+const maxY = Math.max(...yValues);
+const avgY = yValues.reduce((sum, y) => sum + y, 0) / yValues.length;
 
   return (
     <View style={styles.container}>
@@ -58,7 +63,32 @@ const EnergyGeneration = () => {
           padding={{ left: 60, top: 20, bottom: 50, right: 0 }}
           domainPadding={{ y: 10 }}
         >
-          <VictoryAxis dependentAxis />
+          <VictoryAxis dependentAxis style={{ axis: { stroke: 'transparent' },
+      tickLabels: { fill: color.color.labelgrey, fontSize: 10 }, // X-axis label color
+    }} />
+    {/* ======================================================================== */}
+    {/* Max Value Line */}
+    {/* <VictoryNative.VictoryLine
+        data={[{ x: 0, y: maxY }, { x: 10, y: maxY }]}
+        style={{
+          data: { stroke: 'red', strokeWidth: 1, strokeDasharray: '4,4' },
+        }}
+        labels={['Max']}
+        labelComponent={<VictoryNative.VictoryLabel dy={-5} />}
+      /> */}
+
+      {/* Average Line */}
+      {/* <VictoryNative.VictoryLine
+        data={[{ x: 0, y: avgY }, { x: 10, y: avgY }]}
+        style={{
+          data: { stroke: 'blue', strokeWidth: 1, strokeDasharray: '4,4' },
+        }}
+        labels={['Avg']}
+        labelComponent={<VictoryNative.VictoryLabel dy={-5} />}
+      /> */}
+{/* ====================================================================================== */}
+
+
         </VictoryChart>
       </View>
 
@@ -74,7 +104,9 @@ const EnergyGeneration = () => {
           padding={{ left: 10, top: 20, bottom: 50, right: 20 }}
           domainPadding={{ x: 20 }}
         >
-          <VictoryAxis />
+          <VictoryAxis style={{
+      tickLabels: { fill: color.color.labelgrey, fontSize: 10 }, // X-axis label color
+    }}/>
           <VictoryStack>
             <VictoryBar
               data={homeData}

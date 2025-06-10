@@ -89,13 +89,25 @@ import Dot from './dot.svg'
 import Vector from './Vector.svg'
 import Tele from './Telephone.svg'
 import Thunder from './thunderstorm.svg'
+import ThunderDark from './ThunderDark.svg'
 import Cottage from './cottage.svg'
 import CellTower from './celltower.svg'
+import CellTowerDark from './cellTowerDark.svg'
 import CurrencyRupee from './currencyRupee.svg'
+import CurrencyRupeeDark from './currencyRupeeDark.svg'
+import CottageDark from './cottageDark.svg'
+import TotalSaving from './totalSaving.svg'
+import TotalSavingDark from './totalSavingDark.svg'
 
 
 
 export {
+  TotalSaving,
+  TotalSavingDark,
+  CurrencyRupeeDark,
+  CellTowerDark,
+  CottageDark,
+  ThunderDark,
   CurrencyRupee,
   CellTower,
   Cottage,

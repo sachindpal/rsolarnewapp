@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     View,
     Text,
@@ -48,6 +48,10 @@ const HomeScreen = () => {
         label: isDarkMode ? '#ddd' : '#000',
         labelgrey: isDarkMode ? '#ddd' : '#848484',
     };
+    const setActiveTabFunction = (tab:any)=>{
+        console.log(tab)
+        setActiveTab(tab)
+    }
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: colors.background, padding: 16 }}>
@@ -99,7 +103,7 @@ const HomeScreen = () => {
                     <Text style={{ color: '#F48C06' }}>Home 30%</Text>
                     <Text style={{ marginLeft: 16, color: '#F9D57E' }}>Grid 70%</Text>
                 </View>
-                <EnergyGeneration color={colors} />
+                <EnergyGeneration color={colors} activeTab={activeTab} />
 
 
                 {/* Tabs */}
@@ -114,7 +118,7 @@ const HomeScreen = () => {
                     {['Today', '1W', '1M', '6M', '1Y'].map((tab) => (
                         <TouchableOpacity
                             key={tab}
-                            onPress={() => setActiveTab(tab)}
+                            onPress={() => setActiveTabFunction(tab)}
                             style={{
                                 paddingVertical: 6,
                                 paddingHorizontal: 16,

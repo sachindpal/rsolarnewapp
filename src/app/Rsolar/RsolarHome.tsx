@@ -31,10 +31,27 @@ import EnergyGeneration from './EnergyGeneration';
 import Financial from './FInancial';
 
 const screenWidth = Dimensions.get('window').width;
+const fullYear = new Date().getFullYear();
+const getYearsDropdown = ()=>{
+    const yearDropDowns = []
+    let initialYear = 2021;
+    let tempFullYear = fullYear
+    let difference = fullYear-initialYear
+    console.log('difference',difference)
+    for (let index = 0; index <= difference; index++) {
+        yearDropDowns.push(tempFullYear.toString())
+        tempFullYear--;
+
+    }
+
+    return yearDropDowns
+}
 
 const HomeScreen = () => {
+    const [yearDropDown, setYearDropDown] = useState<any>(getYearsDropdown());
+
     const [activeTab, setActiveTab] = useState('Today');
-    const [selectedValue, setSelectedValue] = useState('2025');
+    const [selectedValue, setSelectedValue] = useState(fullYear);
     const [radioValue, setRadioValue] = useState('kilowatts');
     const [isDarkMode, setIsDarkMode] = useState(false);
     const riveRef = React.useRef<RiveRef>(null);
@@ -49,9 +66,15 @@ const HomeScreen = () => {
         labelgrey: isDarkMode ? '#ddd' : '#848484',
     };
     const setActiveTabFunction = (tab:any)=>{
-        console.log(tab)
+       
         setActiveTab(tab)
     }
+
+    useEffect(()=>{
+    
+    },[])
+
+    
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: colors.background, padding: 16 }}>
@@ -169,15 +192,18 @@ const HomeScreen = () => {
                             onValueChange={(itemValue) => setSelectedValue(itemValue)}
                             style={{ color: colors.text, width: 120 }}
                         >
-                            <Picker.Item label="2025" value="2025" />
-                            <Picker.Item label="2024" value="2024" />
-                            <Picker.Item label="2023" value="2023" />
+                            {yearDropDown.map((value:any,ind:any)=>{
+                                return <Picker.Item key={ind} label={value} value={value} />
+                            })}
+                            {/* <Picker.Item label="2025" value="2025" />
+                            <Picker.Item label="2024" value="2024" /> */}
+                            
                         </Picker>
                         {/* <DropdownUpArrow style={{ position: 'absolute', top: 18 }} /> */}
                     </View>
                 </View>
 
-                <Financial color={colors} />
+                <Financial color={colors}  selectedValue={selectedValue}/>
             </View>
         </ScrollView>
     );

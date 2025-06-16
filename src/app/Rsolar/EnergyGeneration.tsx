@@ -34,6 +34,16 @@ const months = [
   'Dec',
 ]
 
+const daysOfWeek = [
+  'Mon',
+  'Tue',
+  'Wed',
+  'Thu',
+  'Fri',
+  'Sat',
+  'Sun'
+]
+
 
 
 
@@ -71,6 +81,7 @@ const EnergyGeneration = ({ color, activeTab }: any) => {
   useEffect(() => {
     // console.log('activeTab', activeTab)
     getUserInfo()
+    // console.log('getWeekRange',getWeekRange())
   }, [activeTab])
 
   const getUserInfo = async () => {
@@ -81,16 +92,40 @@ const EnergyGeneration = ({ color, activeTab }: any) => {
     getData(JSON.parse(getInfo))
   }
 
+  function getWeekRange(date = new Date()) {
+    const day = date.getDay(); // 0 (Sun) - 6 (Sat)
+    const diffToMonday = (day === 0 ? -6 : 1) - day; // Adjust Sunday to be end of week
+    const monday = new Date(date);
+    monday.setDate(date.getDate() + diffToMonday);
+  
+    const sunday = new Date(monday);
+    sunday.setDate(monday.getDate() + 6);
+
+    const startDateForGetDate = monday.toISOString().split('T')[0]
+    const endDateForGetDate = sunday.toISOString().split('T')[0]
+  
+    const firstDate = new Date(startDateForGetDate).getDate();
+    const lastDate = new Date(endDateForGetDate).getDate();
+    console.log('firstDate',firstDate)
+    console.log('endDate',lastDate)
+    return {
+      startDate: monday.toISOString().split('T')[0],  // YYYY-MM-DD
+      endDate: sunday.toISOString().split('T')[0],
+      firstDate:firstDate,
+      lastDate:lastDate
+    };
+  }
+
   const getData = (customerData: any) => {
     params.deviceid = customerData.solar_device_id
     params.activeTab = activeTab
     postUnAuthReq(`/rsolar/solar-data`, params)
-      .then((res: any) => {
+      .then(async(res: any) => {
 
         const firstSixMonth = ['1', '2', '3', '4', '5', '6']
         const secondSixMonth = ['7', '8', '9', '10', '11', '12']
 
-        // console.log('res:------------', res.data.data)
+        console.log('res:------------', res.data.data)
         if (res.data.data) {
           var array: any = []
           // setEnergyData(res.data.data)
@@ -103,15 +138,36 @@ const EnergyGeneration = ({ color, activeTab }: any) => {
           // }
 
           if (activeTab == "1W") {
-            array = []
+           const range = await getWeekRange()
+            array = [
+              { hour: `Mon`, home: 0, grid: 0 },
+              { hour: `Tue`, home: 0, grid: 0 },
+              { hour: `Wed`, home: 0, grid: 0 },
+              { hour: `Thu`, home: 0, grid: 0 },
+              { hour: `Fri`, home: 0, grid: 0 },
+              { hour: `Sat`, home: 0, grid: 0 },
+              { hour: `Sun`, home: 0, grid: 0 },
+
+            ]
+            let temp =0;
+            
             for (let index = 0; index < res.data.data[0].values.length; index++) {
+              
               const element = res.data.data[0].values[index];
-              var obj = { hour: `${index}`, home: 0, grid: element };
-              array.push(obj)
+              if(range.firstDate >=index+1 && range.firstDate <= index+1){
+                
+                // var obj = { hour: `${index+1}`, home: 0, grid: element };
+                console.log('-------=============0000000000',array[0])
+                array[0].grid = element;
+                temp++;
+              }
+              
             }
           }
 
 
+
+          //for 6 months calculation
           if (activeTab == "6M") {
             var array: any = []
             if (firstSixMonth.includes(params.month.toString())) {
@@ -149,7 +205,6 @@ const EnergyGeneration = ({ color, activeTab }: any) => {
               }
 
           }
-console.log('array',array)
 
           setEnergyData(array)
 

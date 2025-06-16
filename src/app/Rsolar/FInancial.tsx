@@ -51,7 +51,7 @@ const barsPerPage = 5;
 const barWidth = 60;
 const chartWidth = data.length * barWidth;
 
-const Financial = (color:any) => {
+const Financial = ({color,selectedValue}:any) => {
 
     
   const today = new Date();
@@ -80,8 +80,10 @@ const Financial = (color:any) => {
 
 
   useEffect(() => {
+    console.log('selectedValue',selectedValue)
+    
     getUserInfo()
-  }, [])
+  }, [selectedValue])
 
   const getUserInfo = async () => {
     const getInfo: any = await AsyncStorage.getItem('solar_customer_data');
@@ -93,6 +95,8 @@ const Financial = (color:any) => {
 
   const getData = (customerData: any) => {
     params.deviceid = customerData.solar_device_id
+    params.year = selectedValue
+    console.log('params',params)
     postUnAuthReq(`/rsolar/solar-data`, params)
       .then((res: any) => {
 
@@ -158,7 +162,7 @@ const Financial = (color:any) => {
           domainPadding={{ x: 20 }}
         >
           <VictoryAxis style={{
-      tickLabels: { fill: color.color.labelgrey, fontSize: 10 }, // X-axis label color
+      tickLabels: { fill: color.labelgrey, fontSize: 10 }, // X-axis label color
     }} />
           <VictoryStack>
             <VictoryBar

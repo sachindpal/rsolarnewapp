@@ -54,6 +54,8 @@ const HomeScreen = () => {
     const [selectedValue, setSelectedValue] = useState(fullYear);
     const [radioValue, setRadioValue] = useState('kilowatts');
     const [isDarkMode, setIsDarkMode] = useState(false);
+    const [totalPower, setTotalPower] = useState<any>(0);
+    const [totalPowerSavings, setTotalPowerSavings] = useState<any>(0);
     const riveRef = React.useRef<RiveRef>(null);
     const colors = {
         background: isDarkMode ? '#121212' : '#fff',
@@ -73,6 +75,25 @@ const HomeScreen = () => {
     useEffect(()=>{
     
     },[])
+      
+    const getTotalEnergy = (energy:any)=>{
+
+        if(energy.length > 0){
+            let totalPowers = 0
+            for (let index = 0; index < energy.length; index++) {
+                const element = energy[index];
+                console.log('element.grid',element.grid)
+                totalPowers += element.grid
+                
+            }
+            setTotalPower(totalPowers.toFixed(2))
+            let totalSaving = (totalPowers*10).toFixed(2)
+            setTotalPowerSavings(totalSaving)
+        console.log('energy',totalPowers)
+
+        }
+        
+    }
 
     
 
@@ -126,7 +147,7 @@ const HomeScreen = () => {
                     <Text style={{ color: '#F48C06' }}>Home 30%</Text>
                     <Text style={{ marginLeft: 16, color: '#F9D57E' }}>Grid 70%</Text>
                 </View>
-                <EnergyGeneration color={colors} activeTab={activeTab} />
+                <EnergyGeneration color={colors} activeTab={activeTab} getTotalEnergy={getTotalEnergy} />
 
 
                 {/* Tabs */}
@@ -160,10 +181,10 @@ const HomeScreen = () => {
                 {/* Stats Section */}
                 <View style={{ paddingBottom: 16, paddingTop: 16, width: '90%' }}>
                     {[
-                        { icon: isDarkMode ? <ThunderDark style={{ marginRight: 12 }} /> : <Thunder color={colors.text} style={{ marginRight: 12 }} />, label: 'Power', value: '11.5 kWh' },
+                        { icon: isDarkMode ? <ThunderDark style={{ marginRight: 12 }} /> : <Thunder color={colors.text} style={{ marginRight: 12 }} />, label: 'Power', value: `${totalPower} kWh` },
                         { icon: isDarkMode ? <CottageDark style={{ marginRight: 12 }} /> : <Cottage color={colors.text} style={{ marginRight: 12 }} />, label: 'Home consumption', value: '0 kWh' },
                         { icon: isDarkMode ? <CellTowerDark style={{ marginRight: 12 }} /> : <CellTower color={colors.text} style={{ marginRight: 12 }} />, label: 'Grid export', value: '0 kWh' },
-                        { icon: isDarkMode ? <CurrencyRupeeDark style={{ marginRight: 12 }} /> : <CurrencyRupee color={colors.text} style={{ marginRight: 12 }} />, label: 'Savings', value: '₹34' },
+                        { icon: isDarkMode ? <CurrencyRupeeDark style={{ marginRight: 12 }} /> : <CurrencyRupee color={colors.text} style={{ marginRight: 12 }} />, label: 'Savings', value: `₹${totalPowerSavings}` },
                     ].map((item, index) => (
                         <View key={index} style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 12 }}>
                             {item.icon}

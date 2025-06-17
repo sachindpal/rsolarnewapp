@@ -48,7 +48,7 @@ const daysOfWeek = [
 
 
 
-const EnergyGeneration = ({ color, activeTab }: any) => {
+const EnergyGeneration = ({ color, activeTab,getTotalEnergy }: any) => {
 
   const today = new Date();
 
@@ -205,6 +205,7 @@ const EnergyGeneration = ({ color, activeTab }: any) => {
               }
 
           }
+          getTotalEnergy(array)
 
           setEnergyData(array)
 
@@ -231,14 +232,38 @@ const EnergyGeneration = ({ color, activeTab }: any) => {
   const gridData = data.map((d: any) => ({
     x: d.hour,
     y: d.grid,
-    label: `Grid: ${Math.round((d.grid / (d.home + d.grid)) * 100)}%`,
+    // label: `Grid: ${Math.round((d.grid / (d.home + d.grid)) * 100)}%`,
+    label: parseFloat(d.grid).toFixed(1),
   }));
   // Calculate dynamic values
   const yValues = data.map((d: any) => d.grid);
 
-  const maxY = Math.max(...yValues);
+  // const maxY = Math.max(...yValues);
   const avgY = yValues.reduce((sum: any, y: any) => sum + y, 0) / yValues.length;
-  console.log('avgY', avgY)
+  
+
+  const allYValues = data.map((d:any, i:any) => d.grid + gridData[i].y);
+const maxY = Math.ceil(Math.max(...allYValues));
+// const tickStep = 0.5;
+
+
+const desiredTicks = 5;
+const roughStep = maxY / desiredTicks;
+const magnitude = Math.pow(10, Math.floor(Math.log10(roughStep)));
+const normalized = roughStep / magnitude;
+
+let tickStep;
+if (normalized < 1.5) tickStep = 1 * magnitude;
+else if (normalized < 3) tickStep = 2 * magnitude;
+else if (normalized < 7) tickStep = 5 * magnitude;
+else tickStep = 10 * magnitude;
+
+
+const tickValues = [];
+for (let i = 0; i <= maxY; i += tickStep) {
+  tickValues.push(parseFloat(i.toFixed(1)));
+}
+
   return (
     <View style={styles.container}>
       {/* Sticky Y-axis */}
@@ -249,10 +274,22 @@ const EnergyGeneration = ({ color, activeTab }: any) => {
           padding={{ left: 60, top: 20, bottom: 50, right: 0 }}
           domainPadding={{ y: 10 }}
         >
-          <VictoryAxis dependentAxis style={{
+          {/* <VictoryAxis dependentAxis style={{
             axis: { stroke: 'transparent' },
             tickLabels: { fill: color.labelgrey, fontSize: 10 }, // X-axis label color
-          }} />
+          }} /> */}
+
+
+<VictoryAxis
+              dependentAxis
+              tickValues={tickValues}
+              style={{
+                axis: { stroke: 'transparent' },
+                tickLabels: { fill: '#B5B5B5', fontSize: 10 },
+                ticks: { stroke: 'transparent' },
+                grid: { stroke: '#E6E6E6', strokeWidth: 1 },
+              }}
+            />
           {/* ======================================================================== */}
           {/* Max Value Line */}
           {/* <VictoryNative.VictoryLine
@@ -327,3 +364,149 @@ const styles = StyleSheet.create({
 });
 
 export default EnergyGeneration;
+
+
+
+
+// import React from 'react';
+// import { View, ScrollView, Text, StyleSheet } from 'react-native';
+// import { VictoryChart, VictoryBar, VictoryAxis, VictoryStack } from 'victory-native';
+
+// const homeData = [
+//   { x: '7', y: 0.5 },
+//   { x: '8', y: 1.2 },
+//   { x: '9', y: 0.9 },
+//   { x: '10', y: 1.5 },
+//   { x: '11', y: 1.3 },
+//   { x: '12', y: 0.8 },
+//   { x: '1pm', y: 0.4 },
+// ];
+
+// const gridData = [
+//   { x: '7', y: 0.5 },
+//   { x: '8', y: 0.9 },
+//   { x: '9', y: 2.1 },
+//   { x: '10', y: 1.0 },
+//   { x: '11', y: 1.2 },
+//   { x: '12', y: 0.7 },
+//   { x: '1pm', y: 0.3 },
+// ];
+
+// const barWidth = 20;
+// const chartWidth = homeData.length * 60;
+
+// const ChartComponent = () => {
+//   return (
+//     <View style={styles.container}>
+      
+//       {/* 🟡 Legend */}
+//       <View style={styles.legendContainer}>
+//         <View style={styles.legendItem}>
+//           <View style={[styles.dot, { backgroundColor: '#FFE9A0' }]} />
+//           <Text style={styles.legendText}>Home 30%</Text>
+//         </View>
+//         <View style={styles.legendItem}>
+//           <View style={[styles.dot, { backgroundColor: '#FFA534' }]} />
+//           <Text style={styles.legendText}>Grid 70%</Text>
+//         </View>
+//       </View>
+
+//       <View style={styles.chartContainer}>
+        
+//         {/* 📍 Y-Axis */}
+//         <View style={styles.yAxisContainer}>
+//           <VictoryChart
+//             height={300}
+//             width={70}
+//             padding={{ left: 60, top: 20, bottom: 50, right: 0 }}
+//             domainPadding={{ y: 10 }}
+//           >
+//             <VictoryAxis
+//               dependentAxis
+//               style={{
+//                 axis: { stroke: 'transparent' },
+//                 tickLabels: { fill: '#B5B5B5', fontSize: 10 },
+//                 ticks: { stroke: 'transparent' },
+//                 grid: { stroke: '#E6E6E6', strokeWidth: 1 },
+//               }}
+//             />
+//           </VictoryChart>
+//         </View>
+
+//         {/* 📊 Scrollable Chart */}
+//         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+//           <VictoryChart
+//             height={300}
+//             width={chartWidth}
+//             padding={{ left: 10, top: 20, bottom: 50, right: 20 }}
+//             domainPadding={{ x: 25 }}
+//           >
+//             <VictoryAxis
+//               style={{
+//                 tickLabels: { fill: '#B5B5B5', fontSize: 10 },
+//                 axis: { stroke: 'transparent' },
+//               }}
+//             />
+
+//             <VictoryStack>
+//               {/* 🟡 Home Segment (Bottom) */}
+//               <VictoryBar
+//                 data={homeData}
+//                 style={{
+//                   data: { fill: '#FFE9A0' },
+//                 }}
+//                 barWidth={barWidth}
+//               />
+
+//               {/* 🟠 Grid Segment (Top) */}
+//               <VictoryBar
+//                 data={gridData}
+//                 style={{
+//                   data: { fill: '#FFA534' },
+//                 }}
+//                 barWidth={barWidth}
+//                 cornerRadius={{ top: 8, bottom: 0 }}
+//               />
+//             </VictoryStack>
+//           </VictoryChart>
+//         </ScrollView>
+//       </View>
+//     </View>
+//   );
+// };
+
+// export default ChartComponent;
+
+// const styles = StyleSheet.create({
+//   container: {
+//     paddingTop: 16,
+//     paddingHorizontal: 8,
+//   },
+//   legendContainer: {
+//     flexDirection: 'row',
+//     justifyContent: 'center',
+//     marginBottom: 8,
+//   },
+//   legendItem: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     marginHorizontal: 10,
+//   },
+//   dot: {
+//     width: 8,
+//     height: 8,
+//     borderRadius: 4,
+//     marginRight: 4,
+//   },
+//   legendText: {
+//     fontSize: 12,
+//     color: '#333',
+//   },
+//   chartContainer: {
+//     flexDirection: 'row',
+//   },
+//   yAxisContainer: {
+//     width: 60,
+//     alignItems: 'flex-end',
+//   },
+// });

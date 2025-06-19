@@ -32,12 +32,12 @@ import Financial from './FInancial';
 
 const screenWidth = Dimensions.get('window').width;
 const fullYear = new Date().getFullYear();
-const getYearsDropdown = ()=>{
+const getYearsDropdown = () => {
     const yearDropDowns = []
     let initialYear = 2021;
     let tempFullYear = fullYear
-    let difference = fullYear-initialYear
-    console.log('difference',difference)
+    let difference = fullYear - initialYear
+    console.log('difference', difference)
     for (let index = 0; index <= difference; index++) {
         yearDropDowns.push(tempFullYear.toString())
         tempFullYear--;
@@ -67,35 +67,35 @@ const HomeScreen = () => {
         label: isDarkMode ? '#ddd' : '#000',
         labelgrey: isDarkMode ? '#ddd' : '#848484',
     };
-    const setActiveTabFunction = (tab:any)=>{
-       
+    const setActiveTabFunction = (tab: any) => {
+
         setActiveTab(tab)
     }
 
-    useEffect(()=>{
-    
-    },[])
-      
-    const getTotalEnergy = (energy:any)=>{
+    useEffect(() => {
 
-        if(energy.length > 0){
+    }, [])
+
+    const getTotalEnergy = (energy: any) => {
+
+        if (energy.length > 0) {
             let totalPowers = 0
             for (let index = 0; index < energy.length; index++) {
                 const element = energy[index];
-                console.log('element.grid',element.grid)
+                console.log('element.grid', element.grid)
                 totalPowers += element.grid
-                
+
             }
             setTotalPower(totalPowers.toFixed(2))
-            let totalSaving = (totalPowers*10).toFixed(2)
+            let totalSaving = (totalPowers * 10).toFixed(2)
             setTotalPowerSavings(totalSaving)
-        console.log('energy',totalPowers)
+            console.log('energy', totalPowers)
 
         }
-        
+
     }
 
-    
+
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: colors.background, padding: 16 }}>
@@ -118,13 +118,19 @@ const HomeScreen = () => {
 
             {/* Rive Animation */}
             <View>
-                <Rive ref={riveRef} resourceName="inverter" animationName='Intro' stateMachineName='Slate Machine 1' autoplay={true} onPlay={() => console.log("Intro started")}
+                {isDarkMode ? <Rive ref={riveRef} resourceName="housedark" animationName='Intro' stateMachineName='Slate Machine 1' autoplay={true} onPlay={() => console.log("Intro started")}
                     onStop={() => {
                         console.log("Intro finished");
                         riveRef.current?.play('Loop'); // Play the loop animation after intro ends
-                    }} style={{ width: screenWidth, height: 400 }} />
+                    }} style={{ width: screenWidth, height: 400 }} /> 
+                    : <Rive ref={riveRef} resourceName="houselight" animationName='Intro' stateMachineName='Slate Machine 1' autoplay={true} onPlay={() => console.log("Intro started")}
+                        onStop={() => {
+                            console.log("Intro finished");
+                            riveRef.current?.play('Loop'); // Play the loop animation after intro ends
+                        }} style={{ width: screenWidth, height: 400 }} />
+                        }
                 <View style={{ flexDirection: 'row', gap: -15 }}>
-                    {isDarkMode?<UpDownDark style={{ marginTop: 18 }} />:<UpDown style={{ marginTop: 18 }} />}
+                    {isDarkMode ? <UpDownDark style={{ marginTop: 18 }} /> : <UpDown style={{ marginTop: 18 }} />}
                     <Picker
                         selectedValue={radioValue}
                         onValueChange={(itemValue) => setRadioValue(itemValue)}
@@ -133,9 +139,9 @@ const HomeScreen = () => {
                         <Picker.Item label="kilowatts" value="kilowatts" />
                         <Picker.Item label="watt" value="watt" />
                     </Picker>
-                    <View style={{flexDirection:'row',marginLeft:'20%'}}>
-                    {isDarkMode?<WatchDark style={{ marginTop: 18,marginRight:4 }} />:<Watch style={{ marginTop: 18,marginRight:4 }} />}
-                    <Text style={{fontSize: 12, color: colors.label, fontWeight: '400',marginTop:18}}>Update: 1min ago</Text>
+                    <View style={{ flexDirection: 'row', marginLeft: '20%' }}>
+                        {isDarkMode ? <WatchDark style={{ marginTop: 18, marginRight: 4 }} /> : <Watch style={{ marginTop: 18, marginRight: 4 }} />}
+                        <Text style={{ fontSize: 12, color: colors.label, fontWeight: '400', marginTop: 18 }}>Update: 1min ago</Text>
                     </View>
                 </View>
             </View>
@@ -213,18 +219,18 @@ const HomeScreen = () => {
                             onValueChange={(itemValue) => setSelectedValue(itemValue)}
                             style={{ color: colors.text, width: 120 }}
                         >
-                            {yearDropDown.map((value:any,ind:any)=>{
+                            {yearDropDown.map((value: any, ind: any) => {
                                 return <Picker.Item key={ind} label={value} value={value} />
                             })}
                             {/* <Picker.Item label="2025" value="2025" />
                             <Picker.Item label="2024" value="2024" /> */}
-                            
+
                         </Picker>
                         {/* <DropdownUpArrow style={{ position: 'absolute', top: 18 }} /> */}
                     </View>
                 </View>
 
-                <Financial color={colors}  selectedValue={selectedValue}/>
+                <Financial color={colors} selectedValue={selectedValue} />
             </View>
         </ScrollView>
     );

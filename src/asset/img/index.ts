@@ -63,7 +63,7 @@ import Percentile from './percentile.svg'
 import Back_round from './back_round.svg'
 import FarmkartGPT from './farmkartGPT.svg'
 import Robot from './robot.svg'
-import ChatSend from './chatSend.svg'
+import DarkIcon from './Dark.svg'
 import RobotIcon from './robotIcon.svg'
 import BlackCloud from './blackCloud.svg'
 import ThreeDot from './threeDot.svg'
@@ -144,7 +144,7 @@ export {
   ThreeDot,
   BlackCloud,
   RobotIcon,
-  ChatSend,
+  DarkIcon,
   Robot,
   FarmkartGPT,
   ChatBoatActive,

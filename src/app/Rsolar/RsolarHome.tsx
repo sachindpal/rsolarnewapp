@@ -29,9 +29,26 @@ import {
 } from '../../asset/img';
 import EnergyGeneration from './EnergyGeneration';
 import Financial from './FInancial';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useData } from '../Service/DataContext';
 
 const screenWidth = Dimensions.get('window').width;
 const fullYear = new Date().getFullYear();
+
+const monthsArray = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'July',
+    'Aug',
+    'Sept',
+    'Oct',
+    'Nov',
+    'Dec',
+]
 const getYearsDropdown = () => {
     const yearDropDowns = []
     let initialYear = 2021;
@@ -53,19 +70,19 @@ const HomeScreen = () => {
     const [activeTab, setActiveTab] = useState('Today');
     const [selectedValue, setSelectedValue] = useState(fullYear);
     const [radioValue, setRadioValue] = useState('kilowatts');
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const { isDark, setIsDark } = useData();
     const [totalPower, setTotalPower] = useState<any>(0);
     const [totalPowerSavings, setTotalPowerSavings] = useState<any>(0);
     const riveRef = React.useRef<RiveRef>(null);
     const colors = {
-        background: isDarkMode ? '#121212' : '#fff',
-        text: isDarkMode ? '#fff' : '#242734',
-        subText: isDarkMode ? '#bbb' : 'rgba(36, 39, 52, 0.50)',
-        card: isDarkMode ? '#1E1E1E' : '#F9F9F9',
-        tabBg: isDarkMode ? '#222' : 'rgba(231, 230, 236, 0.50)',
-        activeTab: isDarkMode ? '#333' : '#FFF',
-        label: isDarkMode ? '#ddd' : '#000',
-        labelgrey: isDarkMode ? '#ddd' : '#848484',
+        background: isDark ? '#121212' : '#fff',
+        text: isDark ? '#fff' : '#242734',
+        subText: isDark ? '#bbb' : 'rgba(36, 39, 52, 0.50)',
+        card: isDark ? '#1E1E1E' : '#F9F9F9',
+        tabBg: isDark ? '#222' : 'rgba(231, 230, 236, 0.50)',
+        activeTab: isDark ? '#333' : '#FFF',
+        label: isDark ? '#ddd' : '#000',
+        labelgrey: isDark ? '#ddd' : '#848484',
     };
     const setActiveTabFunction = (tab: any) => {
 
@@ -73,8 +90,8 @@ const HomeScreen = () => {
     }
 
     useEffect(() => {
-
     }, [])
+    
 
     const getTotalEnergy = (energy: any) => {
 
@@ -100,15 +117,7 @@ const HomeScreen = () => {
     return (
         <ScrollView style={{ flex: 1, backgroundColor: colors.background, padding: 16 }}>
             {/* Dark Mode Switch */}
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', marginBottom: 12 }}>
-                <Text style={{ color: colors.text, marginRight: 8 }}>Dark Mode</Text>
-                <Switch
-                    value={isDarkMode}
-                    onValueChange={(val) => setIsDarkMode(val)}
-                    thumbColor={isDarkMode ? '#F48C06' : '#ccc'}
-                    trackColor={{ false: '#ccc', true: '#F9D57E' }}
-                />
-            </View>
+            
 
             {/* Header */}
             <View>
@@ -118,7 +127,7 @@ const HomeScreen = () => {
 
             {/* Rive Animation */}
             <View>
-                {isDarkMode ? <Rive ref={riveRef} resourceName="housedark" animationName='Intro' stateMachineName='Slate Machine 1' autoplay={true} onPlay={() => console.log("Intro started")}
+                {isDark ? <Rive ref={riveRef} resourceName="housedark" animationName='Intro' stateMachineName='Slate Machine 1' autoplay={true} onPlay={() => console.log("Intro started")}
                     onStop={() => {
                         console.log("Intro finished");
                         riveRef.current?.play('Loop'); // Play the loop animation after intro ends
@@ -130,29 +139,29 @@ const HomeScreen = () => {
                         }} style={{ width: screenWidth, height: 400 }} />
                         }
                 <View style={{ flexDirection: 'row', gap: -15 }}>
-                    {isDarkMode ? <UpDownDark style={{ marginTop: 18 }} /> : <UpDown style={{ marginTop: 18 }} />}
+                    {isDark ? <UpDownDark style={{ marginTop: 18 }} /> : <UpDown style={{ marginTop: 18 }} />}
                     <Picker
                         selectedValue={radioValue}
                         onValueChange={(itemValue) => setRadioValue(itemValue)}
                         style={{ color: colors.text, width: 150 }}
                     >
                         <Picker.Item label="kilowatts" value="kilowatts" />
-                        <Picker.Item label="watt" value="watt" />
+                        {/* <Picker.Item label="watt" value="watt" /> */}
                     </Picker>
-                    <View style={{ flexDirection: 'row', marginLeft: '20%' }}>
-                        {isDarkMode ? <WatchDark style={{ marginTop: 18, marginRight: 4 }} /> : <Watch style={{ marginTop: 18, marginRight: 4 }} />}
+                    {/* <View style={{ flexDirection: 'row', marginLeft: '20%' }}>
+                        {isDark ? <WatchDark style={{ marginTop: 18, marginRight: 4 }} /> : <Watch style={{ marginTop: 18, marginRight: 4 }} />}
                         <Text style={{ fontSize: 12, color: colors.label, fontWeight: '400', marginTop: 18 }}>Update: 1min ago</Text>
-                    </View>
+                    </View> */}
                 </View>
             </View>
 
             {/* Energy Generation Section */}
             <View style={{ borderWidth: 1, borderColor: 'rgba(177, 177, 177, 0.20)', borderStyle: 'solid', borderRadius: 8, paddingTop: 24, alignItems: 'center', paddingRight: '2%', paddingLeft: '2%' }}>
-                <Text style={{ fontSize: 12, marginBottom: 50, color: colors.labelgrey, fontWeight: '400', left: '30%' }}>Today: 21 May</Text>
-                <View style={{ flexDirection: 'row', marginBottom: 8, justifyContent: 'center', borderColor: '#F2F2F5', borderWidth: 1, borderRadius: 8, borderStyle: 'solid', width: '50%', alignItems: 'center', paddingVertical: 4, paddingHorizontal: 8 }}>
+                <Text style={{ fontSize: 12, marginBottom: 50, color: colors.labelgrey, fontWeight: '400', left: '30%' }}>Today: {new Date().getDate()+' '+ monthsArray[new Date().getMonth()]}</Text>
+                {/* <View style={{ flexDirection: 'row', marginBottom: 8, justifyContent: 'center', borderColor: '#F2F2F5', borderWidth: 1, borderRadius: 8, borderStyle: 'solid', width: '50%', alignItems: 'center', paddingVertical: 4, paddingHorizontal: 8 }}>
                     <Text style={{ color: '#F48C06' }}>Home 30%</Text>
                     <Text style={{ marginLeft: 16, color: '#F9D57E' }}>Grid 70%</Text>
-                </View>
+                </View> */}
                 <EnergyGeneration color={colors} activeTab={activeTab} getTotalEnergy={getTotalEnergy} />
 
 
@@ -187,10 +196,10 @@ const HomeScreen = () => {
                 {/* Stats Section */}
                 <View style={{ paddingBottom: 16, paddingTop: 16, width: '90%' }}>
                     {[
-                        { icon: isDarkMode ? <ThunderDark style={{ marginRight: 12 }} /> : <Thunder color={colors.text} style={{ marginRight: 12 }} />, label: 'Power', value: `${totalPower} kWh` },
-                        { icon: isDarkMode ? <CottageDark style={{ marginRight: 12 }} /> : <Cottage color={colors.text} style={{ marginRight: 12 }} />, label: 'Home consumption', value: '0 kWh' },
-                        { icon: isDarkMode ? <CellTowerDark style={{ marginRight: 12 }} /> : <CellTower color={colors.text} style={{ marginRight: 12 }} />, label: 'Grid export', value: '0 kWh' },
-                        { icon: isDarkMode ? <CurrencyRupeeDark style={{ marginRight: 12 }} /> : <CurrencyRupee color={colors.text} style={{ marginRight: 12 }} />, label: 'Savings', value: `₹${totalPowerSavings}` },
+                        { icon: isDark ? <ThunderDark style={{ marginRight: 12 }} /> : <Thunder color={colors.text} style={{ marginRight: 12 }} />, label: 'Power', value: `${totalPower} kWh` },
+                        { icon: isDark ? <CottageDark style={{ marginRight: 12 }} /> : <Cottage color={colors.text} style={{ marginRight: 12 }} />, label: 'Home consumption', value: '0 kWh' },
+                        { icon: isDark ? <CellTowerDark style={{ marginRight: 12 }} /> : <CellTower color={colors.text} style={{ marginRight: 12 }} />, label: 'Grid export', value: '0 kWh' },
+                        { icon: isDark ? <CurrencyRupeeDark style={{ marginRight: 12 }} /> : <CurrencyRupee color={colors.text} style={{ marginRight: 12 }} />, label: 'Savings', value: `₹${totalPowerSavings}` },
                     ].map((item, index) => (
                         <View key={index} style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 12 }}>
                             {item.icon}
@@ -204,7 +213,7 @@ const HomeScreen = () => {
             <View style={{ borderWidth: 1, borderStyle: 'solid', borderColor: 'rgba(177, 177, 177, 0.20)', borderRadius: 8, marginTop: 16, padding: 8, marginBottom: '7%' }}>
                 <View style={{ marginTop: 24, flexDirection: 'row', gap: 70 }}>
                     <View style={{ flexDirection: 'row' }}>
-                        {isDarkMode ? <TotalSavingDark style={{ marginRight: 10, marginTop: 4 }} /> : <TotalSaving style={{ marginRight: 10, marginTop: 4 }} />}
+                        {isDark ? <TotalSavingDark style={{ marginRight: 10, marginTop: 4 }} /> : <TotalSaving style={{ marginRight: 10, marginTop: 4 }} />}
                         <Text style={{ fontSize: 16, marginBottom: 8, color: colors.label, fontWeight: '400' }}>Saving report</Text>
                     </View>
                     <View style={{

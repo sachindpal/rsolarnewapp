@@ -7,7 +7,7 @@ import {showToast} from '../../commonResources/commanSnackbar/toastMessage';
 
   // const baseUrl ='http://ec2-43-204-145-202.ap-south-1.compute.amazonaws.com:4000/api';
 // const baseUrl = 'https://mobileapinew.farmkart.com/api';
-const baseUrl = 'http://192.168.1.17:4000/api';
+const baseUrl = 'http://192.168.1.9:4000/api';
 const defaultOptions = {
   baseURL: baseUrl,
   headers: {

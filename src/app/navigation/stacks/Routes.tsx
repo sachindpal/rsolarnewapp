@@ -10,6 +10,7 @@ import MoreDrawerRsolar from '../../More/MoreDrawerRsolar';
 import CallModel from '../../CallModel/CallModel';
 import PrivacyPolicyRsolar from '../../PrivacyPolicy/PrivacyPolicyRsolar';
 import ProfileSolar from '../../Profile/ProfileSolar';
+import BottomTabbar from '../bottomTabNavigation/BottomTabbar';
 
 
 const Routes = () => {
@@ -38,10 +39,11 @@ const Routes = () => {
         ) : ( */}
         <Stack.Group>
           <Stack.Screen name="AuthStack" component={AuthenticationStack} />
-          <Stack.Screen name="RsolarHome" component={RsolarHome} />
-          <Stack.Screen name="MoreContent" component={MoreDrawerRsolar} />
-          <Stack.Screen name="CallPopUp" component={CallModel} />
-          <Stack.Screen name="PrivacyPolicyRsolar" component={PrivacyPolicyRsolar} />
+          {/* <Stack.Screen name="RsolarHome" component={RsolarHome} /> */}
+          {/* <Stack.Screen name="MoreContent" component={MoreDrawerRsolar} /> */}
+          <Stack.Screen name="Main" component={BottomTabbar} />
+          {/* <Stack.Screen name="CallPopUp" component={CallModel} /> */}
+          {/* <Stack.Screen name="PrivacyPolicyRsolar" component={PrivacyPolicyRsolar} /> */}
           <Stack.Screen name="RsolarProfile" component={ProfileSolar} />
         </Stack.Group>
         {/* )} */}

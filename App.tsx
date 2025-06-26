@@ -21,6 +21,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeviceInfo from 'react-native-device-info';
 import SplashScreen from 'react-native-splash-screen';
+import { DataProvider } from './src/app/Service/DataContext';
 
 const initI18n = i18next;
 
@@ -72,7 +73,9 @@ const App = () => {
       {/* <UICProvider> */}
        
         <View style={{flex:1}}>
+          <DataProvider>
             <Routes />
+            </DataProvider>
           </View>
    
       {/* </UICProvider> */}

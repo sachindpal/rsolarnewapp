@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import UICScreen from '../../UIC/UICScreen';
 import CallModel from '../../CallModel/CallModel';
 
 import {DrawerActions, useNavigation} from '@react-navigation/native';
@@ -31,12 +31,12 @@ import {
   MyAccount
 } from '../../../asset/img';
 import {FontStyle} from '../../../asset/style/FontsStyle';
-import HomeScreenRender from '../../Home/HomeScreenRender';
-import MoreDrawerRender from '../../More/MoreDrawerRender';
 import {useTranslation} from 'react-i18next';
-import HomeScreenLogic from '../../Home/HomeScreenLogic';
-import UICLogic from '../../UIC/UICLogic';
-import LottieView from 'lottie-react-native';
+import RsolarHome from '../../Rsolar/RsolarHome';
+import RsolarHomeOld from '../../Rsolar/RsolarHomeOld';
+import Profile from '../../Profile/ProfileSolar';
+import MoreDrawerRsolar from '../../More/MoreDrawerRsolar';
+const Stack = createNativeStackNavigator();
 
 const CommonTab = ({focused, IconActive, IconInActive, title, route}: any) => {
   const navigation = useNavigation<any>();
@@ -78,99 +78,45 @@ const BottomTabbar = () => {
         },
       }}>
       <Tab.Screen
-        name="HomeScreen"
-        component={HomeScreenLogic}
+        name="Status"
+        component={RsolarHomeOld}
         options={{
           lazy: false,
           tabBarIcon: ({focused}) => (
             <CommonTab
               focused={focused}
-              IconActive={<MyShopActive />}
-              IconInActive={<MyShop />}
-              title={'__SHOP__'}
-              route={'HomeScreen'}
+              IconActive={<MoreActive />}
+              IconInActive={<MoreInactive />}
+              title={'Status'}
+              route={'Status'}
+
             />
           ),
         }}
       />
       {/* <Tab.Screen name="HomeScreen" component={HomeScreen} /> */}
       <Tab.Screen
-        name="UIC"
-        component={UICLogic}
+        name="Home"
+        component={RsolarHome}
         options={{
           lazy: false,
           tabBarIcon: ({focused}) => (
             <CommonTab
               focused={focused}
-              IconActive={<MyFarmActive />}
-              IconInActive={<MyFarm />}
-              title={'__MY_FARM__'}
-              route={'UIC'}
+              IconActive={<HomeActive />}
+              IconInActive={<HomeInactive />}
+              title={'Home'}
+              route={'Home'}
             />
           ),
         }}
       />
-      {/* <Tab.Screen name="UICScreen" component={UICScreen} /> */}
-      {/* <Tab.Screen
-        name="CallModel"
-        component={HomeScreenLogic}
-        listeners={({navigation}) => ({
-          tabPress: event => {
-            event.preventDefault();
-            navigation.navigate('CallPopUp');
-          },
-        })}
-        options={{
-          lazy: false,
-          tabBarIcon: ({focused}) => (
-            <CommonTab
-              focused={focused}
-              IconActive={<CallActive />}
-              IconInActive={<CallInactive />}
-              title={'__CALL__'}
-              route={'CallPopUp'}
-            />
-          ),
-        }}
-      /> */}
+     
 
-<Tab.Screen
-        name="ChatBoat"
-        component={HomeScreenLogic}
-        listeners={({navigation}) => ({
-          tabPress: event => {
-            event.preventDefault();
-            navigation.navigate('FarmGpt');
-          },
-        })}
-        options={{
-          lazy: false,
-          tabBarIcon: ({focused}) => (
-            <CommonTab
-              focused={focused}
-              IconActive={<ChatBoatActive  />}
-              IconInActive={<LottieView
-                source={require('../../../asset/img/raichandjson.json')}
-                autoPlay
-                loop
-                style={{ width: 100, height: 40 }}
-              />}
-              title={'__DR_RAICHANDRA__'}
-              route={'FarmGpt'}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="MoreDrawer"
-        component={HomeScreenLogic}
-        listeners={({navigation}) => ({
-          tabPress: event => {
-            event.preventDefault();
-            console.log('hello');
-            navigation.navigate('MoreContent');
-          },
-        })}
+     <Tab.Screen
+        name="Account"
+        component={MoreDrawerRsolar}
+        
         options={{
           lazy: false,
           tabBarIcon: ({focused}) => (
@@ -178,12 +124,15 @@ const BottomTabbar = () => {
               focused={focused}
               IconActive={<MyAccountActive />}
               IconInActive={<MyAccount />}
-              title={'__MY_ACCOUNT__'}
-              route={'MoreContent'}
+              title={'Account'}
+              route={'Account'}
             />
+            
           ),
         }}
       />
+          
+      
     </Tab.Navigator>
   );
 };

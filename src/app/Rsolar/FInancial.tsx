@@ -221,14 +221,14 @@ const homeData = data.map((d: any) => ({
               data={homeData}
               style={{ data: { fill: 'orange', fillOpacity: 0.5 } }}
             //   labels={({ datum }) => `₹${parseFloat(datum.y).toFixed(1)}`}
-              labelComponent={<VictoryNative.VictoryLabel dy={-10} />}
+              labelComponent={<VictoryNative.VictoryLabel dy={-10} style={{color:color.labelgrey,fill:color.labelgrey}} />}
               barWidth={barWidth * 0.3}
             />
             <VictoryBar
               data={gridData}
-              style={{ data: { fill: 'orange', fillOpacity: 1 } }}
+              style={{ data: { fill: 'linear-gradient(180deg, rgba(115, 190, 68, 0.80) 0%, rgba(39, 39, 39, 0.80) 100%)', fillOpacity: 0.6 } }}
             //   labels={({ datum }) => `₹${parseFloat(datum.y).toFixed(1)}`}
-              labelComponent={<VictoryNative.VictoryLabel dy={-10} />}
+              labelComponent={<VictoryNative.VictoryLabel dy={-10} style={{color:color.labelgrey,fill:color.labelgrey}} />}
               barWidth={barWidth * 0.3}
               cornerRadius={{ top: 10, bottom: 0 }}
             />

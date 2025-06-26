@@ -49,7 +49,13 @@ console.log(currentYear);
   const redirection = async ()=>{
     const issolarlogged = await isSolarLoggedIn()
           if(issolarlogged){
-            navigation.replace('RsolarHome');
+            // navigation.replace('RsolarHome');
+            // navigation.replace('HomeScreen');
+            // navigation.navigate('RsolarHome')
+            // navigation.navigate('HomeScreen')
+            navigation.navigate('Main', {
+              screen: 'HomeScreen',
+            })
 
           }else{
           console.log('jhdfsjkhf')

@@ -334,14 +334,14 @@ for (let i = 0; i <= maxY; i += tickStep) {
           <VictoryStack>
             <VictoryBar
               data={homeData}
-              style={{ data: { fill: 'orange', fillOpacity: 0.5 } }}
+              style={{ data: { fill: 'linear-gradient(180deg, rgba(115, 190, 68, 0.80) 0%, rgba(39, 39, 39, 0.80) 100%)', fillOpacity: 0.5 } }}
               labelComponent={<VictoryTooltip renderInPortal={false} />}
               barWidth={barWidth * 0.3}
 
             />
             <VictoryBar
               data={gridData}
-              style={{ data: { fill: 'orange', fillOpacity: 1 } }}
+              style={{ data: { fill: 'linear-gradient(180deg, rgba(115, 190, 68, 0.80) 0%, rgba(39, 39, 39, 0.80) 100%)', fillOpacity: 0.6 } }}
               labelComponent={<VictoryTooltip renderInPortal={false} />}
               barWidth={barWidth * 0.3}
               cornerRadius={{ top: 10, bottom: 0 }}

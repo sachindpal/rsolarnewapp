@@ -106,7 +106,10 @@ const VerifyOtpSolar = (props: any) => {
             setLocalStorage('solar_customer_data', JSON.stringify(result.data.customerData));
             // navigation.replace('RsolarHome');
             setisloading(false)
-            props.navigation.navigate('RsolarHome')
+            // props.navigation.navigate('Status')
+            props.navigation.navigate('Main', {
+                screen: 'HomeScreen',
+              })
             }
 
         }).catch((error) => {

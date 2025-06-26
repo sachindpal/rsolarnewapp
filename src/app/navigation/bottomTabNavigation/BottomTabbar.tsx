@@ -28,7 +28,8 @@ import {
   MyShop,
   MyShopActive,
   MyAccountActive,
-  MyAccount
+  MyAccount,
+  ProfileIcon
 } from '../../../asset/img';
 import {FontStyle} from '../../../asset/style/FontsStyle';
 import {useTranslation} from 'react-i18next';
@@ -36,11 +37,25 @@ import RsolarHome from '../../Rsolar/RsolarHome';
 import RsolarHomeOld from '../../Rsolar/RsolarHomeOld';
 import Profile from '../../Profile/ProfileSolar';
 import MoreDrawerRsolar from '../../More/MoreDrawerRsolar';
+import { useData } from '../../Service/DataContext';
 const Stack = createNativeStackNavigator();
 
 const CommonTab = ({focused, IconActive, IconInActive, title, route}: any) => {
   const navigation = useNavigation<any>();
   const {t: translate} = useTranslation();
+  const { isDark, setIsDark } = useData();
+
+  const colors = {
+    background: isDark ? '#272727' : '#fff',
+    text: isDark ? '#fff' : '#242734',
+    subText: isDark ? '#bbb' : 'rgba(36, 39, 52, 0.50)',
+    card: isDark ? '#1E1E1E' : '#F9F9F9',
+    tabBg: isDark ? '#222' : 'rgba(231, 230, 236, 0.50)',
+    activeTab: isDark ? '#333' : '#FFF',
+    label: isDark ? '#ddd' : '#000',
+    labelgrey: isDark ? '#ddd' : '#848484',
+};
+  
   return (
     <View style={{}}>
       <Pressable
@@ -54,7 +69,8 @@ const CommonTab = ({focused, IconActive, IconInActive, title, route}: any) => {
           adjustsFontSizeToFit
           style={[
             focused ? FontStyle.fontHeavy12 : FontStyle.fontMedium12Gray,
-            {textAlign: 'center'},
+            {textAlign: 'center',color:colors.text},
+
           ]}>
           {translate(title)}
         </Text>
@@ -65,7 +81,20 @@ const CommonTab = ({focused, IconActive, IconInActive, title, route}: any) => {
 
 const BottomTabbar = () => {
   const Tab = createBottomTabNavigator();
+  const { isDark, setIsDark } = useData();
 
+  const colors = {
+    background: isDark ? '#272727' : '#fff',
+    text: isDark ? '#fff' : '#242734',
+    subText: isDark ? '#bbb' : 'rgba(36, 39, 52, 0.50)',
+    card: isDark ? '#1E1E1E' : '#F9F9F9',
+    tabBg: isDark ? '#222' : 'rgba(231, 230, 236, 0.50)',
+    activeTab: isDark ? '#333' : '#FFF',
+    label: isDark ? '#ddd' : '#000',
+    labelgrey: isDark ? '#ddd' : '#848484',
+    activeIconColr:isDark?'#fff':'#232734',
+    inActiveIconColr:isDark?'#E0E0E0':'#D9D9D9'
+};
   return (
     <Tab.Navigator
       initialRouteName="HomeScreen"
@@ -73,10 +102,11 @@ const BottomTabbar = () => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: '#f8f8f8',
+          backgroundColor: colors.background,
           height: 70,
         },
-      }}>
+      }}
+      >
       <Tab.Screen
         name="Status"
         component={RsolarHomeOld}
@@ -85,8 +115,8 @@ const BottomTabbar = () => {
           tabBarIcon: ({focused}) => (
             <CommonTab
               focused={focused}
-              IconActive={<MoreActive />}
-              IconInActive={<MoreInactive />}
+              IconActive={<MoreActive color={colors.text}/>}
+              IconInActive={<MoreInactive color={colors.text}/>}
               title={'Status'}
               route={'Status'}
 
@@ -103,8 +133,8 @@ const BottomTabbar = () => {
           tabBarIcon: ({focused}) => (
             <CommonTab
               focused={focused}
-              IconActive={<HomeActive />}
-              IconInActive={<HomeInactive />}
+              IconActive={<HomeActive color={colors.text}/>}
+              IconInActive={<HomeInactive color={colors.text} />}
               title={'Home'}
               route={'Home'}
             />
@@ -122,8 +152,8 @@ const BottomTabbar = () => {
           tabBarIcon: ({focused}) => (
             <CommonTab
               focused={focused}
-              IconActive={<MyAccountActive />}
-              IconInActive={<MyAccount />}
+              IconActive={<ProfileIcon  color={colors.text}/>}
+              IconInActive={<ProfileIcon color={colors.text} />}
               title={'Account'}
               route={'Account'}
             />

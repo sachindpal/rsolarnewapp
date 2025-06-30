@@ -5,6 +5,7 @@ import { CheckCircle, Dot, MyAccountActive, Tele, Vector } from "../../asset/img
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getUnAuthReqest } from "../Service/APIServices/axoisService";
+import { useData } from "../Service/DataContext";
 
 const stepsDatas = [
   {
@@ -52,6 +53,24 @@ const RsolarHome = () => {
   const [visibleItems, setVisibleItems] = useState<boolean[]>(stepsDatas.map(() => false));
   const [refreshing, setRefreshing] = useState(false);
   const [isPaymentCompleteLater, setIsPaymentCompleteLater] = useState(false);
+
+  
+  const { isDark, setIsDark } = useData();
+
+  const colors = {
+    background: isDark ? '#121212' : '#F7F6FB',
+    backgroundApposit: isDark ? '#E0E0E0' : '#232734',
+    text: isDark ? '#fff' : '#242734',
+    subText: isDark ? '#bbb' : 'rgba(36, 39, 52, 0.50)',
+    subTextStep: isDark ? '#E0E0E0' : '#242734',
+    card: isDark ? '#1E1E1E' : '#F9F9F9',
+    tabBg: isDark ? '#222' : 'rgba(231, 230, 236, 0.50)',
+    activeTab: isDark ? '#333' : '#FFF',
+    label: isDark ? '#ddd' : '#000',
+    labelgrey: isDark ? '#ddd' : '#848484',
+    backgroungBoxColor: isDark ? '#1A1A1A' : '#FFF',
+    backgroungBoxColorText: isDark ? '#E0E0E0' : '#242734'
+  };
 
   const [userInfo, setUserInfo] = useState<any>({})
   useEffect(() => {
@@ -102,56 +121,52 @@ const RsolarHome = () => {
   };
 
   return (
-    <ScrollView style={styles.container}
+    <ScrollView style={[styles(colors).container,{backgroundColor:colors.background}]}
     refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
     >
       <View style={{ flexDirection: 'row', gap: 35 }}>
         <View style={{ flex: 1 }}>
-          <Text style={[styles.header, { color: '#242734' }]}>Hi, {userInfo.fullname}</Text>
-          <Text style={[styles.subHeader, { color: 'rgba(36, 39, 52, 0.50)' }]}>1,000+ people have joined the R-Solar mission.</Text>
-          <Text style={[styles.sectionTitle, { color: '#242734' }]}>Your R-Solar Updates</Text>
+          <Text style={[styles(colors).header, { color: colors.text }]}>Hi, {userInfo.fullname}</Text>
+          <Text style={[styles(colors).subHeader, { color: colors.subText }]}>1,000+ people have joined the R-Solar mission.</Text>
+          <Text style={[styles(colors).sectionTitle, { color: colors.text }]}>Your R-Solar Updates</Text>
         </View>
-        <View>
+        {/* <View>
           <TouchableOpacity onPress={() => navigation.navigate('MoreContent')}>
             <MyAccountActive />
 
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
 
-      <View style={styles.stepsContainer}>
+      <View style={styles(colors).stepsContainer}>
         {stepsData.map((step: any, index: any) => {
           const isExpanded = expandedStep === index;
 
           return (
-            <View key={index} style={styles.stepWrapper}>
-              {/* Vertical Progress Line */}
-              {/* {index !== 0 && ( */}
-              <View style={[styles.progressLine, step.subTasks.length > 0 ? styles.activeLine : {}]} />
-              {/* )} */}
-              {/* <View style={[ styles.activeLine]} /> */}
-
-
-              {/* Step Indicator (Big Circle) */}
+            <View key={index} style={styles(colors).stepWrapper}>
+              
+              <View style={[styles(colors).progressLine, step.subTasks.length > 0 ? styles(colors).activeLine : {}]} />
+              
               <View>
-                {step.subTasks.length > 0 ? <CheckCircle style={{ zIndex: 1, marginTop: 14, marginRight: 10 }} /> : <View style={[styles.stepIndicator, { marginTop: 15 }]}>
+                {step.subTasks.length > 0 ? <CheckCircle style={{ zIndex: 1, marginTop: 14, marginRight: 10 }} /> : <View style={[styles(colors).stepIndicator, { marginTop: 15 }]}>
                 </View>}
 
               </View>
               {/* Step Content */}
-              <View style={styles.stepContent}>
+              <View style={styles(colors).stepContent}>
               {step.subTasks.length > 0 ?
                 <TouchableOpacity
-                  style={[styles.stepBox]}
+                  style={[styles(colors).stepBox]}
                   onPress={() => toggleStep(index)}
                 >
-                  {/* <Text style={[styles.stepTitle]}>{step.title}</Text> */}
-                  {step.title=='Payment & Planing' ? <Text style={[styles.stepTitle]}>Payment & Planning</Text> : <Text style={[styles.stepTitle]}>{step.title}</Text>}
-                </TouchableOpacity>:<View
-                  style={[styles.stepBox]}
+                  {/* <Text style={[styles(colors).stepTitle]}>{step.title}</Text> */}
+                  {step.title=='Payment & Planing' ? <Text style={[styles(colors).stepTitle]}>Payment & Planning</Text> : <Text style={[styles(colors).stepTitle]}>{step.title}</Text>}
+                </TouchableOpacity>
+                :<View
+                  style={[styles(colors).stepBox]}
                 >
-                  {step.title=='Payment & Planing' ? <Text style={[styles.stepTitle,{color:'#888'}]}>Payment & Planning</Text> : <Text style={[styles.stepTitle,{color:'#888'}]}>{step.title}</Text>}
-                  {/* <Text style={[styles.stepTitle,{color:'#888'}]}>{step.title}</Text> */}
+                  {step.title=='Payment & Planing' ? <Text style={[styles(colors).stepTitle,{color:colors.backgroungBoxColorText}]}>Payment & Planning</Text> : <Text style={[styles(colors).stepTitle,{color:colors.backgroungBoxColorText}]}>{step.title}</Text>}
+                  {/* <Text style={[styles(colors).stepTitle,{color:'#888'}]}>{step.title}</Text> */}
                   
                 </View>}
 
@@ -167,7 +182,7 @@ const RsolarHome = () => {
                       <View>
 
                         {task.name == 'Initial Site Visit' || task.name == 'Contract Signing' || task.name == 'Installation Planning Visit' || task.name == 'Hardware Delivery' || task.name == 'System Installation' || task.name == 'Civil Work' || task.name == 'System Inspection' || task.name == 'MPEB Connection' || task.name == 'System Handover' ?
-                          <View style={[styles.internalStep, { flexDirection: 'column', marginTop: 8, gap: 20 }]}>
+                          <View style={[styles(colors).internalStep, { flexDirection: 'column', marginTop: 8, gap: 20 }]}>
 
 
                             {/* dot progress bar */}
@@ -178,12 +193,12 @@ const RsolarHome = () => {
                               {step.completed ? <Dot /> : null}
                             </View>
                               <View style={{ flexDirection: 'column',maxWidth:'40%' }}>
-                                <Text style={{ color: '#242734', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '500' }}>{task.name}</Text>
+                                <Text style={{ color: colors.subTextStep, fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '500' }}>{task.name}</Text>
                               </View>
 
 
-                              <View style={[task.status == 'Completed' ? styles.completeStausView : (task.status == 'Scheduled' || task.status == 'Re-Scheduled') ? styles.scheduleStausView : styles.pendingStausView, { flexDirection: 'column',maxHeight:30 }]}>
-                                <Text style={[{ color: '#242734', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '500' }, task.status == 'Completed' ? styles.completeStaus : (task.status == 'Scheduled' || task.status == 'Re-Scheduled') ? styles.scheduleStaus : styles.pendingStatus]}>{task.status}</Text>
+                              <View style={[task.status == 'Completed' ? styles(colors).completeStausView : (task.status == 'Scheduled' || task.status == 'Re-Scheduled') ? styles(colors).scheduleStausView : styles(colors).pendingStausView, { flexDirection: 'column',maxHeight:30 }]}>
+                                <Text style={[{  fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '500' }, task.status == 'Completed' ? styles(colors).completeStaus : (task.status == 'Scheduled' || task.status == 'Re-Scheduled') ? styles(colors).scheduleStaus : styles(colors).pendingStatus]}>{task.status}</Text>
 
                               </View>
 
@@ -191,17 +206,17 @@ const RsolarHome = () => {
                             </View>
                             {task.getDelData && task.getDelData.length > 0 ?
                               <>
-                                <View style={{ borderWidth: 1, borderColor: '#F3F5F7', width: '100%' }}></View>
+                                <View style={{ borderWidth: 1, borderColor: colors.labelgrey, width: '100%' }}></View>
 
                                 <View style={{ flexDirection: 'row', gap: 30,width:'100%' }}>
                                   <View >
-                                    <Text style={[{ color: '#000' }, styles.greyText]}>Visit Date</Text>
-                                    <Text style={{ color: '#242734', fontSize: 12, fontFamily: 'Avenir Medium', fontWeight: '500' }}>{task.visitdate}
+                                    <Text style={[{ color: colors.subTextStep,opacity:0.5}]}>Visit Date</Text>
+                                    <Text style={{ color: colors.subText, fontSize: 12, fontFamily: 'Avenir Medium', fontWeight: '500' }}>{task.visitdate}
                                     </Text>
 
                                   </View>
                                   <View >
-                                    <Text style={[{ color: '#000' }, styles.greyText]}>Visit Time</Text>
+                                    <Text style={[{ color: colors.subTextStep,opacity:0.5 }]}>Visit Time</Text>
                                     <Text style={{ color: '#242734', fontSize: 12, fontFamily: 'Avenir Medium', fontWeight: '500' }}>{task.visitTime}</Text>
 
                                   </View>
@@ -211,8 +226,8 @@ const RsolarHome = () => {
 
                                 <View style={{ flexDirection: 'row',width:'100%' }}>
                                   <View >
-                                    <Text style={[{}, styles.greyText]}>Site Address</Text>
-                                    <Text style={{ color: '#242734', fontSize: 12, fontFamily: 'Avenir Medium', fontWeight: '500' }}>{userInfo.address}, {userInfo.village_name}, {userInfo.district_name}, {userInfo.tehsil_name}, {userInfo.state_name}, {userInfo.pincode}</Text>
+                                    <Text style={[{color: colors.subTextStep,opacity:0.5}]}>Site Address</Text>
+                                    <Text style={{ color: colors.subTextStep, fontSize: 12, fontFamily: 'Avenir Medium', fontWeight: '500' }}>{userInfo.address}, {userInfo.village_name}, {userInfo.district_name}, {userInfo.tehsil_name}, {userInfo.state_name}, {userInfo.pincode}</Text>
 
                                   </View>
                                 </View>
@@ -225,16 +240,16 @@ const RsolarHome = () => {
                                       </View>
 
                                       <View style={{ flexDirection: 'column', width: '50%' }}>
-                                        <Text style={{ color: '#242734', fontWeight: '800', fontFamily: 'Avenir Medium' }}>{task.getDelData[0].firstname} {task.getDelData[0].lastname}</Text>
+                                        <Text style={{ color: colors.text, fontWeight: '800', fontFamily: 'Avenir Medium' }}>{task.getDelData[0].firstname} {task.getDelData[0].lastname}</Text>
                                         {/* <Text style={{ color: 'rgba(36, 39, 52, 0.50)', fontSize: 8, fontWeight: '500', fontFamily: 'Avenir Medium' }}>R-solar sales</Text> */}
                                       </View>
 
 
                                     </View>
 
-                                    <Pressable onPress={() => navigation.navigate('CallPopUp', { mobile: task.getDelData[0].mobile })} style={{ padding: 5, flexDirection: 'row', backgroundColor: '#000', gap: 8, justifyContent: 'center', alignItems: 'center', paddingLeft: 16, paddingRight: 16, borderRadius: 50, marginRight: '5%',maxHeight:40 }}>
-                                      <Tele />
-                                      <Text style={{ color: '#fff' }}>Call</Text>
+                                    <Pressable onPress={() => navigation.navigate('CallPopUp', { mobile: task.getDelData[0].mobile })} style={{ padding: 5, flexDirection: 'row', backgroundColor: colors.backgroundApposit, gap: 8, justifyContent: 'center', alignItems: 'center', paddingLeft: 16, paddingRight: 16, borderRadius: 50, marginRight: '5%',maxHeight:40 }}>
+                                      <Tele color={colors.background}/>
+                                      <Text style={{ color: colors.background }}>Call</Text>
                                     </Pressable>
 
                                   </View> : null}
@@ -244,8 +259,8 @@ const RsolarHome = () => {
                               <>
                                 <View style={{ borderWidth: 1, borderColor: '#F3F5F7', width: '100%' }}></View>
                                 <View style={{ right: 80 }}>
-                                  <Text style={[{ color: '#000' }, styles.greyText]}>Completed Date</Text>
-                                  <Text style={{ color: '#242734', fontSize: 12, fontFamily: 'Avenir Medium', fontWeight: '500' }}>{task.completionDate}
+                                  <Text style={[{ color: colors.subTextStep,opacity:0.5 }]}>Completed Date</Text>
+                                  <Text style={{ color: colors.text, fontSize: 12, fontFamily: 'Avenir Medium', fontWeight: '500' }}>{task.completionDate}
                                   </Text>
 
                                 </View>
@@ -256,7 +271,7 @@ const RsolarHome = () => {
 
                           :
 
-                          <View style={[styles.internalStep, { flexDirection: 'column', marginTop: 8, }]}>
+                          <View style={[styles(colors).internalStep, { flexDirection: 'column', marginTop: 8, }]}>
                             
                             <View style={{ flexDirection: 'row',width:'100%',justifyContent:'space-between' }}>
                               {/* dot progress bar */}
@@ -265,18 +280,18 @@ const RsolarHome = () => {
                             </View>
 
                               <View style={{ flexDirection: 'column', padding: 5,maxWidth:'50%'}}>
-                                <Text style={{ color: '#000' }}>{task.name}</Text>
+                                <Text style={{ color: colors.subTextStep }}>{task.name}</Text>
                               </View>
 
 
-                              <View style={[(task.status == 'Completed' || task.status == 'Not Required' || task.status == 'Not Required (Cash pay)' || isPaymentCompleteLater==true) ? styles.completeStausView : (task.status == 'Scheduled' || task.status == 'Re-Scheduled') ? styles.scheduleStausView : styles.pendingStausView, { flexDirection: 'column',maxHeight:30 }]}>
+                              <View style={[(task.status == 'Completed' || task.status == 'Not Required' || task.status == 'Not Required (Cash pay)' || isPaymentCompleteLater==true) ? styles(colors).completeStausView : (task.status == 'Scheduled' || task.status == 'Re-Scheduled') ? styles(colors).scheduleStausView : styles(colors).pendingStausView, { flexDirection: 'column',maxHeight:30 }]}>
 
                                 {task.status != 'Not Required (Cash pay)' ? (task.status=='Partial Amount Received' && isPaymentCompleteLater==true) ?
-                                  <Text style={[{ color: '#242734', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '500' }, styles.completeStaus]}>Completed</Text>
+                                  <Text style={[{ color: '#242734', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '500' }, styles(colors).completeStaus]}>Completed</Text>
                                   :
-                                  <Text style={[{ color: '#242734', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '500' }, (task.status == 'Completed' || task.status == 'Not Required' || task.status == 'Not Required (Cash pay)') ? styles.completeStaus : (task.status == 'Scheduled' || task.status == 'Re-Scheduled') ? styles.scheduleStaus : styles.pendingStatus,]}>{task.status}</Text>
+                                  <Text style={[{ color: '#242734', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '500' }, (task.status == 'Completed' || task.status == 'Not Required' || task.status == 'Not Required (Cash pay)') ? styles(colors).completeStaus : (task.status == 'Scheduled' || task.status == 'Re-Scheduled') ? styles(colors).scheduleStaus : styles(colors).pendingStatus,]}>{task.status}</Text>
                                   :
-                                  <Text style={[{ color: '#242734', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '500' }, (task.status == 'Completed' || task.status == 'Not Required (Cash pay)') ? styles.completeStaus : (task.status == 'Schedule' || task.status == 'Re-Scheduled') ? styles.scheduleStaus : styles.pendingStatus,]}>Cash Payment</Text>}
+                                  <Text style={[{ color: '#242734', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '500' }, (task.status == 'Completed' || task.status == 'Not Required (Cash pay)') ? styles(colors).completeStaus : (task.status == 'Schedule' || task.status == 'Re-Scheduled') ? styles(colors).scheduleStaus : styles(colors).pendingStatus,]}>Cash Payment</Text>}
 
 
                               </View>
@@ -286,8 +301,8 @@ const RsolarHome = () => {
                               <View style={{ width: '100%', marginTop: 20 }}>
                                 <View style={{ borderWidth: 1, borderColor: '#F3F5F7', width: '100%' }}></View>
                                 <View >
-                                  <Text style={[{ color: '#000', marginTop: 10 }, styles.greyText]}>Completed Date</Text>
-                                  <Text style={{ color: '#242734', fontSize: 12, fontFamily: 'Avenir Medium', fontWeight: '500' }}>{task.completionDate}
+                                  <Text style={[{ color: colors.subTextStep,opacity:0.5, marginTop: 10 }]}>Completed Date</Text>
+                                  <Text style={{ color: colors.text, fontSize: 12, fontFamily: 'Avenir Medium', fontWeight: '500' }}>{task.completionDate}
                                   </Text>
 
                                 </View>
@@ -306,7 +321,7 @@ const RsolarHome = () => {
 
                 {/* Estimated Completion Date (Always Visible) */}
                 {step.completed == false && step.estimatedDate ?
-                  <Text style={styles.estimatedDate}>Estimated completion date: {step.estimatedDate}</Text> : null
+                  <Text style={styles(colors).estimatedDate}>Estimated completion date: {step.estimatedDate}</Text> : null
                 }
               </View>
             </View>
@@ -317,7 +332,7 @@ const RsolarHome = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = (colors:any)=> StyleSheet.create({
   completeStaus: {
     color: '#73BE44'
   },
@@ -432,7 +447,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   stepBox: {
-    backgroundColor: "#FFF",
+    backgroundColor: colors.backgroungBoxColor,
     padding: 18,
     borderRadius: 12,
     flexDirection: "row",
@@ -444,7 +459,7 @@ const styles = StyleSheet.create({
   },
 
   internalStep: {
-    backgroundColor: "#FFF",
+    backgroundColor: colors.backgroungBoxColor,
     padding: 18,
     borderRadius: 12,
     flexDirection: "row",
@@ -461,7 +476,7 @@ const styles = StyleSheet.create({
   stepTitle: {
     fontSize: 16,
     fontWeight: "800",
-    color: "#333",
+    color: colors.text,
     fontFamily: 'Avenir Medium'
   },
   estimatedDate: {

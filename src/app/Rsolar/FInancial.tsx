@@ -219,7 +219,7 @@ const homeData = data.map((d: any) => ({
           <VictoryStack>
             <VictoryBar
               data={homeData}
-              style={{ data: { fill: 'orange', fillOpacity: 0.5 } }}
+              // style={{ data: { fill: 'orange', fillOpacity: 0.5 } }}
             //   labels={({ datum }) => `₹${parseFloat(datum.y).toFixed(1)}`}
               labelComponent={<VictoryNative.VictoryLabel dy={-10} style={{color:color.labelgrey,fill:color.labelgrey}} />}
               barWidth={barWidth * 0.3}

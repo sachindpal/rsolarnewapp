@@ -31,6 +31,7 @@ import EnergyGeneration from './EnergyGeneration';
 import Financial from './FInancial';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useData } from '../Service/DataContext';
+import moment from 'moment';
 
 const screenWidth = Dimensions.get('window').width;
 const fullYear = new Date().getFullYear();
@@ -74,6 +75,18 @@ const HomeScreen = () => {
     const [totalPower, setTotalPower] = useState<any>(0);
     const [totalPowerSavings, setTotalPowerSavings] = useState<any>(0);
     const riveRef = React.useRef<RiveRef>(null);
+    const [startTime] = useState(new Date()); // capture time when screen is loaded
+  const [diffMinutes, setDiffMinutes] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      const diff = Math.floor((now.getTime() - startTime.getTime()) / 60000); // minutes
+      setDiffMinutes(diff);
+    }, 30000); // update every 30s
+
+    return () => clearInterval(interval);
+  }, [startTime]);
     const colors = {
         background: isDark ? '#121212' : '#fff',
         text: isDark ? '#fff' : '#242734',
@@ -112,6 +125,8 @@ const HomeScreen = () => {
 
     }
 
+   
+
 
 
     return (
@@ -122,7 +137,7 @@ const HomeScreen = () => {
             {/* Header */}
             <View>
                 <Text style={{ fontSize: 24, fontFamily: 'Avenir-Medium', color: colors.text, fontWeight: '800' }}>Home</Text>
-                <Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir-Medium' }}>● R-Solar is up and running.</Text>
+                <Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir-Medium' }}><Text  style={{color:'#74C043'}}>●</Text> R-Solar is up and running.</Text>
             </View>
 
             {/* Rive Animation */}
@@ -148,10 +163,10 @@ const HomeScreen = () => {
                         <Picker.Item label="kilowatts" value="kilowatts" />
                         {/* <Picker.Item label="watt" value="watt" /> */}
                     </Picker>
-                    {/* <View style={{ flexDirection: 'row', marginLeft: '20%' }}>
+                    <View style={{ flexDirection: 'row', marginLeft: '20%' }}>
                         {isDark ? <WatchDark style={{ marginTop: 18, marginRight: 4 }} /> : <Watch style={{ marginTop: 18, marginRight: 4 }} />}
-                        <Text style={{ fontSize: 12, color: colors.label, fontWeight: '400', marginTop: 18 }}>Update: 1min ago</Text>
-                    </View> */}
+                        <Text style={{ fontSize: 12, color: colors.label, fontWeight: '400', marginTop: 18 }}>Update: {diffMinutes} min ago</Text>
+                    </View>
                 </View>
             </View>
 

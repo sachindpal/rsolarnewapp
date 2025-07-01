@@ -97,7 +97,7 @@ const RsolarHome = () => {
     getUnAuthReqest(`/rsolar/solar-home?customerid=${customerData.customerid}`)
       .then((res: any) => {
         // console.log('my profile ', res.data.data.deliveryData);
-        console.log('my profile ', JSON.stringify(res.data.data));
+        // console.log('my profile ', JSON.stringify(res.data.data));
         // console.log('my profile ', res.data.data);
         setStepsData(res.data.data.salesData)
         if(res.data.data.partialAmountComplete){

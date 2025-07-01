@@ -8,6 +8,7 @@ import {
 import * as VictoryNative from 'victory-native';
 import { postAuthReq, postUnAuthReq } from '../Service/APIServices/axoisService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useIsFocused } from '@react-navigation/native';
 
 const {
   VictoryChart,
@@ -69,6 +70,7 @@ const EnergyGeneration = ({ color, activeTab,getTotalEnergy }: any) => {
     // { hour: '3', home: 2.0, grid: 1.0 },
   ])
   const [userInfo, setUserInfo] = useState<any>({})
+  const isFocused = useIsFocused()
   const [params, setParams] = useState({
     day: day,
     month: month,
@@ -82,7 +84,7 @@ const EnergyGeneration = ({ color, activeTab,getTotalEnergy }: any) => {
     // console.log('activeTab', activeTab)
     getUserInfo()
     // console.log('getWeekRange',getWeekRange())
-  }, [activeTab])
+  }, [activeTab,isFocused])
 
   const getUserInfo = async () => {
     const getInfo: any = await AsyncStorage.getItem('solar_customer_data');

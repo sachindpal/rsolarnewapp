@@ -9,6 +9,7 @@ import * as VictoryNative from 'victory-native';
 import { postAuthReq, postUnAuthReq } from '../Service/APIServices/axoisService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
+import moment from 'moment';
 
 const {
   VictoryChart,
@@ -50,7 +51,7 @@ const daysOfWeek = [
 
 
 const EnergyGeneration = ({ color, activeTab,getTotalEnergy }: any) => {
-
+// console.log('activeTab',activeTab)
   const today = new Date();
 
   const day = today.getDate();           // 1 - 31
@@ -59,15 +60,15 @@ const EnergyGeneration = ({ color, activeTab,getTotalEnergy }: any) => {
 
   // console.log(`Date: ${day}-${month}-${year}`);
   const [data, setEnergyData] = useState<any>([
-    // { hour: '7', home: 0.8, grid: 0.2 },
-    // { hour: '8', home: 1.5, grid: 0.5 },
-    // { hour: '9', home: 0.9, grid: 2.1 },
-    // { hour: '10', home: 1.2, grid: 1.8 },
-    // { hour: '11', home: 1.1, grid: 0.9 },
-    // { hour: '12', home: 0.5, grid: 2.5 },
-    // { hour: '1', home: 1.8, grid: 1.2 },
-    // { hour: '2', home: 0.6, grid: 2.4 },
-    // { hour: '3', home: 2.0, grid: 1.0 },
+    { hour: '7', home: 0.8, grid: 0.2 },
+    { hour: '8', home: 1.5, grid: 0.5 },
+    { hour: '9', home: 0.9, grid: 2.1 },
+    { hour: '10', home: 1.2, grid: 1.8 },
+    { hour: '11', home: 1.1, grid: 0.9 },
+    { hour: '12', home: 0.5, grid: 2.5 },
+    { hour: '1', home: 1.8, grid: 1.2 },
+    { hour: '2', home: 0.6, grid: 2.4 },
+    { hour: '3', home: 2.0, grid: 1.0 },
   ])
   const [userInfo, setUserInfo] = useState<any>({})
   const isFocused = useIsFocused()
@@ -91,7 +92,7 @@ const EnergyGeneration = ({ color, activeTab,getTotalEnergy }: any) => {
     console.log('sachin', getInfo)
     setUserInfo(JSON.parse(getInfo))
 
-    getData(JSON.parse(getInfo))
+    await getData(JSON.parse(getInfo))
   }
 
   function getWeekRange(date = new Date()) {
@@ -140,10 +141,14 @@ const EnergyGeneration = ({ color, activeTab,getTotalEnergy }: any) => {
           // }
 
           if (activeTab == "1W") {
+            var array: any = []
+            const previousmonthdays = moment({ year: year, month: params.month-2 }).daysInMonth()
+
            const range = await getWeekRange()
-            array = [
-              { hour: `Mon`, home: 0, grid: 0 },
-              { hour: `Tue`, home: 0, grid: 0 },
+          //  console.log('range',range)
+           var arrays:any =  [
+              { hour: `Mon`, home: 0, grid: 0.00001 },
+              { hour: `Tue`, home: 0, grid: 2 },
               { hour: `Wed`, home: 0, grid: 0 },
               { hour: `Thu`, home: 0, grid: 0 },
               { hour: `Fri`, home: 0, grid: 0 },
@@ -155,14 +160,33 @@ const EnergyGeneration = ({ color, activeTab,getTotalEnergy }: any) => {
             
             for (let index = 0; index < res.data.data[0].values.length; index++) {
               
-              const element = res.data.data[0].values[index];
-              if(range.firstDate >=index+1 && range.firstDate <= index+1){
-                
-                // var obj = { hour: `${index+1}`, home: 0, grid: element };
-                console.log('-------=============0000000000',array[0])
-                array[0].grid = element;
-                temp++;
+              if(range.firstDate < range.lastDate){
+
+                const element = res.data.data[0].values[index-1];
+                // console.log('-------=============0000000000',element)
+
+                if(range.firstDate <= index && range.lastDate > index){
+                  
+                  arrays[temp].grid = element;
+                  array.push(arrays[temp])
+                temp = temp+1
+
+                }
+
+               
+              }else{
+                if(previousmonthdays == range.firstDate){
+                  range.firstDate = 1;
+                  
+                }else{
+                  range.firstDate = range.firstDate + 1;
+                  
+  
+                }
+                temp = temp+1
               }
+              
+              
               
             }
           }
@@ -207,6 +231,7 @@ const EnergyGeneration = ({ color, activeTab,getTotalEnergy }: any) => {
               }
 
           }
+          console.log('array',array)
           getTotalEnergy(array)
 
           setEnergyData(array)
@@ -244,7 +269,8 @@ const EnergyGeneration = ({ color, activeTab,getTotalEnergy }: any) => {
   const avgY = yValues.reduce((sum: any, y: any) => sum + y, 0) / yValues.length;
   
 
-  const allYValues = data.map((d:any, i:any) => d.grid + gridData[i].y);
+  const allYValues = data.map((d:any, i:any) => + gridData[i].y);
+  // console.log('allYValues',gridData)
 const maxY = Math.ceil(Math.max(...allYValues));
 // const tickStep = 0.5;
 
@@ -275,6 +301,7 @@ for (let i = 0; i <= maxY; i += tickStep) {
           width={70} // Narrow chart just for Y-axis
           padding={{ left: 60, top: 20, bottom: 50, right: 0 }}
           domainPadding={{ y: 10 }}
+          key={activeTab}
         >
           {/* <VictoryAxis dependentAxis style={{
             axis: { stroke: 'transparent' },
@@ -291,6 +318,7 @@ for (let i = 0; i <= maxY; i += tickStep) {
                 ticks: { stroke: 'transparent' },
                 grid: { stroke: '#E6E6E6', strokeWidth: 1 },
               }}
+              // domain={[0, 1]}
             />
           {/* ======================================================================== */}
           {/* Max Value Line */}
@@ -329,6 +357,7 @@ for (let i = 0; i <= maxY; i += tickStep) {
           width={chartWidth}
           padding={{ left: 10, top: 20, bottom: 50, right: 20 }}
           domainPadding={{ x: 20 }}
+          domain={{ y: [0, maxY]}}
         >
           <VictoryAxis style={{
             tickLabels: { fill: color.labelgrey, fontSize: 10 }, // X-axis label color

@@ -76,19 +76,19 @@ const HomeScreen = () => {
     const [totalPowerSavings, setTotalPowerSavings] = useState<any>(0);
     const riveRef = React.useRef<RiveRef>(null);
     const [startTime] = useState(new Date()); // capture time when screen is loaded
-  const [diffMinutes, setDiffMinutes] = useState(0);
+    const [diffMinutes, setDiffMinutes] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const now = new Date();
-      const diff = Math.floor((now.getTime() - startTime.getTime()) / 60000); // minutes
-      setDiffMinutes(diff);
-    }, 30000); // update every 30s
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const now = new Date();
+            const diff = Math.floor((now.getTime() - startTime.getTime()) / 60000); // minutes
+            setDiffMinutes(diff);
+        }, 30000); // update every 30s
 
-    return () => clearInterval(interval);
-  }, [startTime]);
+        return () => clearInterval(interval);
+    }, [startTime]);
     const colors = {
-        background: isDark ? '#121212' : '#fff',
+        background: isDark ? '#121212' : '#FBFBFB',
         text: isDark ? '#fff' : '#242734',
         subText: isDark ? '#bbb' : 'rgba(36, 39, 52, 0.50)',
         card: isDark ? '#1E1E1E' : '#F9F9F9',
@@ -96,6 +96,8 @@ const HomeScreen = () => {
         activeTab: isDark ? '#333' : '#FFF',
         label: isDark ? '#ddd' : '#000',
         labelgrey: isDark ? '#ddd' : '#848484',
+        boxBackground: isDark ? '#1A1A1A' : '#FFF',
+
     };
     const setActiveTabFunction = (tab: any) => {
 
@@ -104,40 +106,40 @@ const HomeScreen = () => {
 
     useEffect(() => {
     }, [])
-    
+
 
     const getTotalEnergy = (energy: any) => {
 
         if (energy.length > 0) {
-            let totalPowers = 0
+            let totalPowers: any = 0
             for (let index = 0; index < energy.length; index++) {
                 const element = energy[index];
-                console.log('element.grid', element.grid)
                 totalPowers += element.grid
 
             }
+            totalPowers = parseFloat(totalPowers)
             setTotalPower(totalPowers.toFixed(2))
             let totalSaving = (totalPowers * 10).toFixed(2)
             setTotalPowerSavings(totalSaving)
-            console.log('energy', totalPowers)
+            // console.log('energy', totalPowers)
 
         }
 
     }
 
-   
+
 
 
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: colors.background, padding: 16 }}>
             {/* Dark Mode Switch */}
-            
+
 
             {/* Header */}
             <View>
                 <Text style={{ fontSize: 24, fontFamily: 'Avenir-Medium', color: colors.text, fontWeight: '800' }}>Home</Text>
-                <Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir-Medium' }}><Text  style={{color:'#74C043'}}>●</Text> R-Solar is up and running.</Text>
+                <Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir-Medium' }}><Text style={{ color: '#74C043' }}>●</Text> R-Solar is up and running.</Text>
             </View>
 
             {/* Rive Animation */}
@@ -146,13 +148,13 @@ const HomeScreen = () => {
                     onStop={() => {
                         console.log("Intro finished");
                         riveRef.current?.play('Loop'); // Play the loop animation after intro ends
-                    }} style={{ width: screenWidth, height: 400 }} /> 
+                    }} style={{ width: screenWidth, height: 400 }} />
                     : <Rive ref={riveRef} resourceName="houselight" animationName='Intro' stateMachineName='Slate Machine 1' autoplay={true} onPlay={() => console.log("Intro started")}
                         onStop={() => {
                             console.log("Intro finished");
                             riveRef.current?.play('Loop'); // Play the loop animation after intro ends
                         }} style={{ width: screenWidth, height: 400 }} />
-                        }
+                }
                 <View style={{ flexDirection: 'row', gap: -15 }}>
                     {isDark ? <UpDownDark style={{ marginTop: 18 }} /> : <UpDown style={{ marginTop: 18 }} />}
                     <Picker
@@ -171,8 +173,8 @@ const HomeScreen = () => {
             </View>
 
             {/* Energy Generation Section */}
-            <View style={{ borderWidth: 1, borderColor: 'rgba(177, 177, 177, 0.20)', borderStyle: 'solid', borderRadius: 8, paddingTop: 24, alignItems: 'center', paddingRight: '2%', paddingLeft: '2%' }}>
-                <Text style={{ fontSize: 12, marginBottom: 50, color: colors.labelgrey, fontWeight: '400', left: '30%' }}>Today: {new Date().getDate()+' '+ monthsArray[new Date().getMonth()]}</Text>
+            <View style={{ borderWidth: 1, borderColor: 'rgba(177, 177, 177, 0.20)', borderStyle: 'solid', borderRadius: 8, paddingTop: 24, alignItems: 'center', paddingRight: '2%', paddingLeft: '2%',backgroundColor:colors.boxBackground }}>
+                <Text style={{ fontSize: 12, marginBottom: 50, color: colors.labelgrey, fontWeight: '400', left: '30%' }}>Today: {new Date().getDate() + ' ' + monthsArray[new Date().getMonth()]}</Text>
                 {/* <View style={{ flexDirection: 'row', marginBottom: 8, justifyContent: 'center', borderColor: '#F2F2F5', borderWidth: 1, borderRadius: 8, borderStyle: 'solid', width: '50%', alignItems: 'center', paddingVertical: 4, paddingHorizontal: 8 }}>
                     <Text style={{ color: '#F48C06' }}>Home 30%</Text>
                     <Text style={{ marginLeft: 16, color: '#F9D57E' }}>Grid 70%</Text>
@@ -211,21 +213,26 @@ const HomeScreen = () => {
                 {/* Stats Section */}
                 <View style={{ paddingBottom: 16, paddingTop: 16, width: '90%' }}>
                     {[
-                        { icon: isDark ? <ThunderDark style={{ marginRight: 12 }} /> : <Thunder color={colors.text} style={{ marginRight: 12 }} />, label: 'Power', value: `${totalPower} kWh` },
+                        { icon: isDark ? <ThunderDark style={{ marginRight: 12 }} /> : <Thunder color={colors.text} style={{ marginRight: 12 }} />, label: 'Total Energy', value: `${totalPower} kWh` },
                         { icon: isDark ? <CottageDark style={{ marginRight: 12 }} /> : <Cottage color={colors.text} style={{ marginRight: 12 }} />, label: 'Home consumption', value: '0 kWh' },
                         { icon: isDark ? <CellTowerDark style={{ marginRight: 12 }} /> : <CellTower color={colors.text} style={{ marginRight: 12 }} />, label: 'Grid export', value: '0 kWh' },
                         { icon: isDark ? <CurrencyRupeeDark style={{ marginRight: 12 }} /> : <CurrencyRupee color={colors.text} style={{ marginRight: 12 }} />, label: 'Savings', value: `₹${totalPowerSavings}` },
-                    ].map((item, index) => (
-                        <View key={index} style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 12 }}>
-                            {item.icon}
-                            <Text style={{ flex: 1, fontFamily: 'Avenir-Medium', color: colors.text }}>{item.label}</Text>
-                            <Text style={{ fontFamily: 'Avenir-Medium', color: colors.text }}>{item.value}</Text>
+                    ].map((item, index, array) => (
+                        <View key={index}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 12 }}>
+                                {item.icon}
+                                <Text style={{ flex: 1, fontFamily: 'Avenir-Medium', color: colors.text }}>{item.label}</Text>
+                                <Text style={{ fontFamily: 'Avenir-Medium', color: colors.text }}>{item.value}</Text>
+                            </View>
+                            {index !== array.length - 1 ?
+                                <View style={{ height: 0, alignSelf: 'stretch', borderWidth: 0.5, borderColor: 'rgba(177, 177, 177, 0.30)', marginTop: 12 }}></View> : null
+                            }
                         </View>
                     ))}
                 </View>
             </View>
             {/* Saving Report */}
-            <View style={{ borderWidth: 1, borderStyle: 'solid', borderColor: 'rgba(177, 177, 177, 0.20)', borderRadius: 8, marginTop: 16, padding: 8, marginBottom: '7%' }}>
+            <View style={{ borderWidth: 1, borderStyle: 'solid', borderColor: 'rgba(177, 177, 177, 0.20)', borderRadius: 8, marginTop: 16, padding: 8, marginBottom: '7%',backgroundColor:colors.boxBackground }}>
                 <View style={{ marginTop: 24, flexDirection: 'row', gap: 70 }}>
                     <View style={{ flexDirection: 'row' }}>
                         {isDark ? <TotalSavingDark style={{ marginRight: 10, marginTop: 4 }} /> : <TotalSaving style={{ marginRight: 10, marginTop: 4 }} />}

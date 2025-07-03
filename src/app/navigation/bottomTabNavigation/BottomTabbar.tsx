@@ -54,12 +54,13 @@ const CommonTab = ({focused, IconActive, IconInActive, title, route}: any) => {
     activeTab: isDark ? '#333' : '#FFF',
     label: isDark ? '#ddd' : '#000',
     labelgrey: isDark ? '#ddd' : '#848484',
+    iconInactiveColor:isDark ? '#E0E0E0':'#232734' 
 };
   
   return (
     <View style={{}}>
       <Pressable
-        android_ripple={{color: '#f8f8f8'}}
+        // android_ripple={{color: '#f8f8f8'}}
         onPress={() => {
           navigation.navigate(route);
         }}>
@@ -69,7 +70,7 @@ const CommonTab = ({focused, IconActive, IconInActive, title, route}: any) => {
           adjustsFontSizeToFit
           style={[
             focused ? FontStyle.fontHeavy12 : FontStyle.fontMedium12Gray,
-            {textAlign: 'center',color:colors.text},
+            {color:colors.text},
 
           ]}>
           {translate(title)}
@@ -92,8 +93,8 @@ const BottomTabbar = () => {
     activeTab: isDark ? '#333' : '#FFF',
     label: isDark ? '#ddd' : '#000',
     labelgrey: isDark ? '#ddd' : '#848484',
-    activeIconColr:isDark?'#fff':'#232734',
-    inActiveIconColr:isDark?'#E0E0E0':'#D9D9D9'
+    inActiveIconColr:isDark?'#E0E0E0':'#232734',
+    ActiveIconColr:isDark?'#FFF':'#1C1B1F'
 };
   return (
     <Tab.Navigator
@@ -115,8 +116,8 @@ const BottomTabbar = () => {
           tabBarIcon: ({focused}) => (
             <CommonTab
               focused={focused}
-              IconActive={<MoreActive color={colors.text}/>}
-              IconInActive={<MoreInactive color={colors.text}/>}
+              IconActive={<MoreActive color={colors.ActiveIconColr} style={{marginLeft:5}} />}
+              IconInActive={<MoreInactive color={colors.inActiveIconColr} width={20} height={20} style={{marginLeft:5}}/>}
               title={'Status'}
               route={'Status'}
 
@@ -133,8 +134,8 @@ const BottomTabbar = () => {
           tabBarIcon: ({focused}) => (
             <CommonTab
               focused={focused}
-              IconActive={<HomeActive color={colors.text}/>}
-              IconInActive={<HomeInactive color={colors.text} />}
+              IconActive={<HomeActive color={colors.ActiveIconColr} style={{marginLeft:5}}/>}
+              IconInActive={<HomeInactive color={colors.inActiveIconColr} style={{marginLeft:5}}/>}
               title={'Home'}
               route={'Home'}
             />
@@ -152,8 +153,8 @@ const BottomTabbar = () => {
           tabBarIcon: ({focused}) => (
             <CommonTab
               focused={focused}
-              IconActive={<ProfileIcon  color={colors.text}/>}
-              IconInActive={<ProfileIcon color={colors.text} />}
+              IconActive={<ProfileIcon  color={colors.ActiveIconColr} style={{marginLeft:5}}/>}
+              IconInActive={<ProfileIcon color={colors.inActiveIconColr}  style={{marginLeft:5}}/>}
               title={'Account'}
               route={'Account'}
             />

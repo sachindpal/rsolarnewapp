@@ -77,7 +77,7 @@ const ProfileSolarRender = () => {
           styles.contentView,
           CommonStyle.flex_dirRow_alignCenter_justifySpbtw,{backgroundColor:colors.backgroungBoxColor}
         ]}>
-        <View style={{flexDirection:'row',alignItems:'center',gap:16}}>
+        <View style={{flexDirection:'row',alignItems:'center',gap:16,paddingRight:'10%'}}>
         <BlackCloud color={colors.text} width={24} height={24}  />
           <Text style={[styles.textHeadingProp,{color:colors.text,marginRight:10}]}>
 

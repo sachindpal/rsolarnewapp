@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
     View,
     Text,
@@ -32,6 +32,8 @@ import Financial from './FInancial';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useData } from '../Service/DataContext';
 import moment from 'moment';
+import { useIsFocused } from '@react-navigation/native';
+import { RefreshControl } from 'react-native-gesture-handler';
 
 const screenWidth = Dimensions.get('window').width;
 const fullYear = new Date().getFullYear();
@@ -75,9 +77,12 @@ const HomeScreen = () => {
     const [totalPower, setTotalPower] = useState<any>(0);
     const [totalPowerSavings, setTotalPowerSavings] = useState<any>(0);
     const riveRef = React.useRef<RiveRef>(null);
-    const [startTime] = useState(new Date()); // capture time when screen is loaded
+    const [startTime,setstartTime] = useState(new Date()); // capture time when screen is loaded
     const [diffMinutes, setDiffMinutes] = useState(0);
+  const [refreshing, setRefreshing] = useState(false);
 
+    const isFocused = useIsFocused()
+const [pvPower,sePvPower] = useState<any>(0.0)
     useEffect(() => {
         const interval = setInterval(() => {
             const now = new Date();
@@ -104,12 +109,26 @@ const HomeScreen = () => {
         setActiveTab(tab)
     }
 
-    useEffect(() => {
-    }, [])
+  
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        setstartTime(new Date())
+        const now = new Date();
+            const diff = Math.floor((now.getTime() - now.getTime()) / 60000); // minutes
+            setDiffMinutes(diff);
+        setTimeout(() => {
+          setRefreshing(false);
+        //   getUserInfo();
+        // setstartTime(new Date())
+        }, 1500); // Simulate API call or data fetch
+      }, []);
+    
 
 
-    const getTotalEnergy = (energy: any) => {
-
+    const getTotalEnergy = (energy: any,pvPower:any) => {
+        sePvPower(pvPower)
+        console.log('pvPower',pvPower)
         if (energy.length > 0) {
             let totalPowers: any = 0
             for (let index = 0; index < energy.length; index++) {
@@ -132,7 +151,7 @@ const HomeScreen = () => {
 
 
     return (
-        <ScrollView style={{ flex: 1, backgroundColor: colors.background, padding: 16 }}>
+        <ScrollView style={{ flex: 1, backgroundColor: colors.background, padding: 16 }} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
             {/* Dark Mode Switch */}
 
 
@@ -143,18 +162,28 @@ const HomeScreen = () => {
             </View>
 
             {/* Rive Animation */}
-            <View>
+            <View >
+                <View style={{position:'relative'}}>
+                    <View style={{position:'absolute',backgroundColor:'linear-gradient(0deg, rgba(115, 190, 68, 0.10) 0%, rgba(115, 190, 68, 0.10) 100%), rgba(255, 255, 255, 0.80)',borderRadius:8,borderWidth:0.5,borderColor:'rgba(115, 190, 68, 0.60)',padding:8,alignItems:'flex-start',marginLeft:'80%',marginTop:'20%',zIndex:1}}>
+                        
+                        <Text style={{ color: '#74C043' }}>● Panel</Text>
+                        <View style={{flexDirection:'row',gap:5}}>
+                        <Text style={{color:colors.text,fontWeight:'500',fontSize:12,fontFamily:'Avenir'}}>{parseFloat(pvPower).toFixed(2)}</Text>
+                        <Text style={{color:colors.labelgrey,fontWeight:'500',fontSize:8,fontFamily:'Avenir',marginTop:5}}>kWh</Text>
+                        </View>
+                    </View>
                 {isDark ? <Rive ref={riveRef} resourceName="housedark" animationName='Intro' stateMachineName='Slate Machine 1' autoplay={true} onPlay={() => console.log("Intro started")}
                     onStop={() => {
                         console.log("Intro finished");
                         riveRef.current?.play('Loop'); // Play the loop animation after intro ends
-                    }} style={{ width: screenWidth, height: 400 }} />
+                    }} style={{ width: screenWidth-10, height: 400 }} />
                     : <Rive ref={riveRef} resourceName="houselight" animationName='Intro' stateMachineName='Slate Machine 1' autoplay={true} onPlay={() => console.log("Intro started")}
                         onStop={() => {
                             console.log("Intro finished");
                             riveRef.current?.play('Loop'); // Play the loop animation after intro ends
-                        }} style={{ width: screenWidth, height: 400 }} />
+                        }} style={{ width: screenWidth-10, height: 400 }} />
                 }
+                </View>
                 <View style={{ flexDirection: 'row', gap: -15 }}>
                     {isDark ? <UpDownDark style={{ marginTop: 18 }} /> : <UpDown style={{ marginTop: 18 }} />}
                     <Picker
@@ -174,12 +203,9 @@ const HomeScreen = () => {
 
             {/* Energy Generation Section */}
             <View style={{ borderWidth: 1, borderColor: 'rgba(177, 177, 177, 0.20)', borderStyle: 'solid', borderRadius: 8, paddingTop: 24, alignItems: 'center', paddingRight: '2%', paddingLeft: '2%',backgroundColor:colors.boxBackground }}>
-                <Text style={{ fontSize: 12, marginBottom: 50, color: colors.labelgrey, fontWeight: '400', left: '30%' }}>Today: {new Date().getDate() + ' ' + monthsArray[new Date().getMonth()]}</Text>
-                {/* <View style={{ flexDirection: 'row', marginBottom: 8, justifyContent: 'center', borderColor: '#F2F2F5', borderWidth: 1, borderRadius: 8, borderStyle: 'solid', width: '50%', alignItems: 'center', paddingVertical: 4, paddingHorizontal: 8 }}>
-                    <Text style={{ color: '#F48C06' }}>Home 30%</Text>
-                    <Text style={{ marginLeft: 16, color: '#F9D57E' }}>Grid 70%</Text>
-                </View> */}
-                <EnergyGeneration color={colors} activeTab={activeTab} getTotalEnergy={getTotalEnergy} />
+                <Text style={{ fontSize: 12,  color: colors.labelgrey, fontWeight: '400', left: '30%' }}>Today: {new Date().getDate() + ' ' + monthsArray[new Date().getMonth()]}</Text>
+               
+                <EnergyGeneration color={colors} activeTab={activeTab} getTotalEnergy={getTotalEnergy} refreshing={refreshing} />
 
 
                 {/* Tabs */}
@@ -225,7 +251,7 @@ const HomeScreen = () => {
                                 <Text style={{ fontFamily: 'Avenir-Medium', color: colors.text }}>{item.value}</Text>
                             </View>
                             {index !== array.length - 1 ?
-                                <View style={{ height: 0, alignSelf: 'stretch', borderWidth: 0.5, borderColor: 'rgba(177, 177, 177, 0.30)', marginTop: 12 }}></View> : null
+                                <View style={{ height: 0, alignSelf: 'stretch', borderWidth: 0.5, borderColor: 'rgba(177, 177, 177, 0.30)' }}></View> : null
                             }
                         </View>
                     ))}
@@ -261,7 +287,7 @@ const HomeScreen = () => {
                     </View>
                 </View>
 
-                <Financial color={colors} selectedValue={selectedValue} />
+                <Financial color={colors} selectedValue={selectedValue} refreshing={refreshing} />
             </View>
         </ScrollView>
     );

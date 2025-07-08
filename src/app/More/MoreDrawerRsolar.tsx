@@ -248,7 +248,7 @@ const MoreDrawerRsolar = () => {
         //       alignItems: 'flex-end',
         //       backgroundColor: 'rgba(0, 0, 0, 0.4)',
         //     }}>
-        <View style={[styles.mainView, { backgroundColor: colors.background }]}>
+        <View style={[styles.mainView, { backgroundColor: colors.background,marginLeft:'-4%' }]}>
             <View>
                 <Pressable style={[styles.close, { marginBottom: 35 }]} >
                     {/* <CloseBlack /> */}

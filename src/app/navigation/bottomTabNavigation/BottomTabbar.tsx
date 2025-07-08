@@ -58,12 +58,13 @@ const CommonTab = ({focused, IconActive, IconInActive, title, route}: any) => {
 };
   
   return (
-    <View style={{}}>
+    <View >
       <Pressable
         // android_ripple={{color: '#f8f8f8'}}
         onPress={() => {
           navigation.navigate(route);
         }}>
+          <View style={{alignItems:'center',justifyContent:'center',gap:5}}>
         <View>{focused ? IconActive : IconInActive}</View>
         <Text
           allowFontScaling={false}
@@ -75,6 +76,7 @@ const CommonTab = ({focused, IconActive, IconInActive, title, route}: any) => {
           ]}>
           {translate(title)}
         </Text>
+        </View>
       </Pressable>
     </View>
   );
@@ -116,8 +118,8 @@ const BottomTabbar = () => {
           tabBarIcon: ({focused}) => (
             <CommonTab
               focused={focused}
-              IconActive={<MoreActive color={colors.ActiveIconColr} style={{marginLeft:5}} />}
-              IconInActive={<MoreInactive color={colors.inActiveIconColr} width={20} height={20} style={{marginLeft:5}}/>}
+              IconActive={<MoreActive color={colors.ActiveIconColr}  />}
+              IconInActive={<MoreInactive color={colors.inActiveIconColr} width={20} height={20} />}
               title={'Status'}
               route={'Status'}
 
@@ -134,8 +136,8 @@ const BottomTabbar = () => {
           tabBarIcon: ({focused}) => (
             <CommonTab
               focused={focused}
-              IconActive={<HomeActive color={colors.ActiveIconColr} style={{marginLeft:5}}/>}
-              IconInActive={<HomeInactive color={colors.inActiveIconColr} style={{marginLeft:5}}/>}
+              IconActive={<HomeActive color={colors.ActiveIconColr}/>}
+              IconInActive={<HomeInactive color={colors.inActiveIconColr} />}
               title={'Home'}
               route={'Home'}
             />
@@ -153,8 +155,8 @@ const BottomTabbar = () => {
           tabBarIcon: ({focused}) => (
             <CommonTab
               focused={focused}
-              IconActive={<ProfileIcon  color={colors.ActiveIconColr} style={{marginLeft:5}}/>}
-              IconInActive={<ProfileIcon color={colors.inActiveIconColr}  style={{marginLeft:5}}/>}
+              IconActive={<ProfileIcon  color={colors.ActiveIconColr} />}
+              IconInActive={<ProfileIcon color={colors.inActiveIconColr}  />}
               title={'Account'}
               route={'Account'}
             />

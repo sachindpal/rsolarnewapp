@@ -253,7 +253,7 @@ const [pvPower,sePvPower] = useState<any>(0.0)
                                 <Text style={{ fontFamily: 'Avenir-Medium', color: colors.text }}>{item.value}</Text>
                             </View>
                             {index !== array.length - 1 ?
-                                <View style={{ height: 0, alignSelf: 'stretch', borderWidth: 0.5, borderColor: 'rgba(177, 177, 177, 0.30)' }}></View> : null
+                                <View style={{ height: 0, alignSelf: 'stretch', borderWidth: 0.5, borderColor: 'rgba(177, 177, 177, 0.30)',opacity:0.5 }}></View> : null
                             }
                         </View>
                     ))}

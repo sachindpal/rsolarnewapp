@@ -298,15 +298,18 @@ const EnergyGeneration = ({ color, activeTab, getTotalEnergy, refreshing }: any)
                 <VictoryAxis
                     style={{
                         tickLabels: { fill: '#777', fontSize: 12 },
-                        axis: { stroke: 'transparent' },
+                        // axis: { stroke: 'transparent' },
+                        axis: { stroke:color.grphHorizontalLine,strokeWidth:0.5,opacity:0.5 },
+
                     }}
                 />
                 <VictoryAxis
                     dependentAxis
                     style={{
-                        grid: { stroke: '#ddd', strokeDasharray: '4' },
+                        grid: { stroke: color.grphHorizontalLine,opacity:0.5,strokeWidth:0.5},
                         tickLabels: { fill: '#aaa', fontSize: 10 },
                         axis: { stroke: 'transparent' },
+                        
                     }}
                 />
 

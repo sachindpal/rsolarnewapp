@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { Defs, LinearGradient, Stop } from 'react-native-svg';
+import { VictoryBar, VictoryChart, VictoryAxis } from 'victory-native';
 import {
-  View,
-  ScrollView,
-  Dimensions,
-  StyleSheet,
+    View,
+    ScrollView,
+    Dimensions,
+    StyleSheet,
 } from 'react-native';
 import * as VictoryNative from 'victory-native';
 import { postAuthReq, postUnAuthReq } from '../Service/APIServices/axoisService';
@@ -11,417 +13,330 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
 import moment from 'moment';
 
-const {
-  VictoryChart,
-  VictoryBar,
-  VictoryAxis,
-  VictoryStack,
-  VictoryTooltip,
-  VictoryGroup
-} = VictoryNative;
+const data = [
+    { x: '7', y: 0.8 },
+    { x: '8', y: 1.4 },
+    { x: '9', y: 2.4 }, // example selected
+    { x: '10', y: 1.4 },
+    { x: '11', y: 1.4 },
+    { x: '12', y: 1 },
+    { x: '1pm', y: 0.5 },
+];
 
 const screenWidth = Dimensions.get('window').width;
 
 const months = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
 ]
 
 const daysOfWeek = [
-  'Mon',
-  'Tue',
-  'Wed',
-  'Thu',
-  'Fri',
-  'Sat',
-  'Sun'
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thu',
+    'Fri',
+    'Sat',
+    'Sun'
 ]
-
-
 
 
 
 const EnergyGeneration = ({ color, activeTab, getTotalEnergy, refreshing }: any) => {
-  // console.log('activeTab',activeTab)
-  const today = new Date();
-
-  const day = today.getDate();           // 1 - 31
-  const month = today.getMonth() + 1;    // 0 - 11 (+1 to make it 1 - 12)
-  const year = today.getFullYear();      // e.g., 2025
-
-  // console.log(`Date: ${day}-${month}-${year}`);
-  const [data, setEnergyData] = useState<any>([
-    { hour: '7', home: 0.8, grid: 0.2 },
-    { hour: '8', home: 1.5, grid: 0.5 },
-    { hour: '9', home: 0.9, grid: 2.1 },
-    { hour: '10', home: 1.2, grid: 1.8 },
-    { hour: '11', home: 1.1, grid: 0.9 },
-    { hour: '12', home: 0.5, grid: 2.5 },
-    { hour: '1', home: 1.8, grid: 1.2 },
-    { hour: '2', home: 0.6, grid: 2.4 },
-    { hour: '3', home: 2.0, grid: 1.0 },
-  ])
-  const [userInfo, setUserInfo] = useState<any>({})
-  const isFocused = useIsFocused()
-  const [selectedBarIndex, setSelectedBarIndex] = useState<number | null>(null);
-
-  const [params, setParams] = useState({
-    day: day,
-    month: month,
-    year: year,
-    deviceid: '',
-    activeTab: undefined
-  });
+    const [selectedIndex, setSelectedIndex] = useState(null);
 
 
-  useEffect(() => {
-    // console.log('activeTab', activeTab)
-    getUserInfo()
-    // console.log('getWeekRange',getWeekRange())
-  }, [activeTab, refreshing])
 
-  const getUserInfo = async () => {
-    const getInfo: any = await AsyncStorage.getItem('solar_customer_data');
-    console.log('sachin', getInfo)
-    setUserInfo(JSON.parse(getInfo))
 
-    await getData(JSON.parse(getInfo))
-  }
+    //============================================================
 
-  function getWeekRange(date = new Date()) {
-    const day = date.getDay(); // 0 (Sun) - 6 (Sat)
-    const diffToMonday = (day === 0 ? -6 : 1) - day; // Adjust Sunday to be end of week
-    const monday = new Date(date);
-    monday.setDate(date.getDate() + diffToMonday);
 
-    const sunday = new Date(monday);
-    sunday.setDate(monday.getDate() + 6);
+    // console.log('activeTab',activeTab)
+    const today = new Date();
 
-    const startDateForGetDate = monday.toISOString().split('T')[0]
-    const endDateForGetDate = sunday.toISOString().split('T')[0]
+    const day = today.getDate();           // 1 - 31
+    const month = today.getMonth() + 1;    // 0 - 11 (+1 to make it 1 - 12)
+    const year = today.getFullYear();      // e.g., 2025
 
-    const firstDate = new Date(startDateForGetDate).getDate();
-    const lastDate = new Date(endDateForGetDate).getDate();
-    console.log('firstDate', firstDate)
-    console.log('endDate', lastDate)
-    return {
-      startDate: monday.toISOString().split('T')[0],  // YYYY-MM-DD
-      endDate: sunday.toISOString().split('T')[0],
-      firstDate: firstDate,
-      lastDate: lastDate
-    };
-  }
+    // console.log(`Date: ${day}-${month}-${year}`);
+    const [data, setEnergyData] = useState<any>([
+        { hour: '7', home: 0.8, grid: 0.2 },
+        { hour: '8', home: 1.5, grid: 0.5 },
+        { hour: '9', home: 0.9, grid: 2.1 },
+        { hour: '10', home: 1.2, grid: 1.8 },
+        { hour: '11', home: 1.1, grid: 0.9 },
+        { hour: '12', home: 0.5, grid: 2.5 },
+        { hour: '1', home: 1.8, grid: 1.2 },
+        { hour: '2', home: 0.6, grid: 2.4 },
+        { hour: '3', home: 2.0, grid: 1.0 },
+    ])
+    const [userInfo, setUserInfo] = useState<any>({})
+    const isFocused = useIsFocused()
+    const [selectedBarIndex, setSelectedBarIndex] = useState<number | null>(null);
 
-  const getData = (customerData: any) => {
-    params.deviceid = customerData.solar_device_id
-    params.activeTab = activeTab
-    postUnAuthReq(`/rsolar/solar-data`, params)
-      .then(async (res: any) => {
+    const [params, setParams] = useState({
+        day: day,
+        month: month,
+        year: year,
+        deviceid: '',
+        activeTab: undefined
+    });
 
-        const firstSixMonth = ['1', '2', '3', '4', '5', '6']
-        const secondSixMonth = ['7', '8', '9', '10', '11', '12']
+    useEffect(() => {
+        // console.log('activeTab', activeTab)
+        getUserInfo()
+        // console.log('getWeekRange',getWeekRange())
+    }, [activeTab, refreshing])
 
-        console.log('result:------------', res.data.data.pvPower)
-        if (res?.data?.data?.generationData) {
-          var array: any = []
-          // setEnergyData(res.data.data)
-          // if (activeTab == "Today") {
-          for (let index = 0; index < res.data.data.generationData[0].values.length; index++) {
-            const element = res.data.data.generationData[0].values[index];
-            var obj = { hour: `${index + 1}`, home: 0, grid: element };
-            array.push(obj)
-          }
-          // }
+    const getUserInfo = async () => {
+        const getInfo: any = await AsyncStorage.getItem('solar_customer_data');
+        console.log('sachin', getInfo)
+        setUserInfo(JSON.parse(getInfo))
 
-          if (activeTab == "1W") {
-            var array: any = []
-            const previousmonthdays = moment({ year: year, month: params.month - 2 }).daysInMonth()
+        await getData(JSON.parse(getInfo))
+    }
 
-            const range = await getWeekRange()
-            //  console.log('range',range)
-            var arrays: any = [
-              { hour: `Mon`, home: 0, grid: 0.00001 },
-              { hour: `Tue`, home: 0, grid: 2 },
-              { hour: `Wed`, home: 0, grid: 0 },
-              { hour: `Thu`, home: 0, grid: 0 },
-              { hour: `Fri`, home: 0, grid: 0 },
-              { hour: `Sat`, home: 0, grid: 0 },
-              { hour: `Sun`, home: 0, grid: 0 },
+    function getWeekRange(date = new Date()) {
+        const day = date.getDay(); // 0 (Sun) - 6 (Sat)
+        const diffToMonday = (day === 0 ? -6 : 1) - day; // Adjust Sunday to be end of week
+        const monday = new Date(date);
+        monday.setDate(date.getDate() + diffToMonday);
 
-            ]
-            let temp = 0;
+        const sunday = new Date(monday);
+        sunday.setDate(monday.getDate() + 6);
 
-            for (let index = 0; index < res.data.data.generationData[0].values.length; index++) {
+        const startDateForGetDate = monday.toISOString().split('T')[0]
+        const endDateForGetDate = sunday.toISOString().split('T')[0]
 
-              if (range.firstDate < range.lastDate) {
+        const firstDate = new Date(startDateForGetDate).getDate();
+        const lastDate = new Date(endDateForGetDate).getDate();
+        console.log('firstDate', firstDate)
+        console.log('endDate', lastDate)
+        return {
+            startDate: monday.toISOString().split('T')[0],  // YYYY-MM-DD
+            endDate: sunday.toISOString().split('T')[0],
+            firstDate: firstDate,
+            lastDate: lastDate
+        };
+    }
 
-                const element = res.data.data.generationData[0].values[index - 1];
-                // console.log('-------=============0000000000',element)
 
-                if (range.firstDate <= index && range.lastDate > index) {
+    const getData = (customerData: any) => {
+        params.deviceid = customerData.solar_device_id
+        params.activeTab = activeTab
+        postUnAuthReq(`/rsolar/solar-data`, params)
+            .then(async (res: any) => {
 
-                  arrays[temp].grid = element;
-                  array.push(arrays[temp])
-                  temp = temp + 1
+                const firstSixMonth = ['1', '2', '3', '4', '5', '6']
+                const secondSixMonth = ['7', '8', '9', '10', '11', '12']
+
+                console.log('result:------------', res.data.data.pvPower)
+                if (res?.data?.data?.generationData) {
+                    var array: any = []
+                    // setEnergyData(res.data.data)
+                    // if (activeTab == "Today") {
+                    for (let index = 0; index < res.data.data.generationData[0].values.length; index++) {
+                        const element = res.data.data.generationData[0].values[index];
+                        var obj = { hour: `${index + 1}`, home: 0, grid: element };
+                        array.push(obj)
+                    }
+                    // }
+
+                    if (activeTab == "1W") {
+                        var array: any = []
+                        const previousmonthdays = moment({ year: year, month: params.month - 2 }).daysInMonth()
+
+                        const range = await getWeekRange()
+                        //  console.log('range',range)
+                        var arrays: any = [
+                            { hour: `Mon`, home: 0, grid: 0.00001 },
+                            { hour: `Tue`, home: 0, grid: 2 },
+                            { hour: `Wed`, home: 0, grid: 0 },
+                            { hour: `Thu`, home: 0, grid: 0 },
+                            { hour: `Fri`, home: 0, grid: 0 },
+                            { hour: `Sat`, home: 0, grid: 0 },
+                            { hour: `Sun`, home: 0, grid: 0 },
+
+                        ]
+                        let temp = 0;
+
+                        for (let index = 0; index < res.data.data.generationData[0].values.length; index++) {
+
+                            if (range.firstDate < range.lastDate) {
+
+                                const element = res.data.data.generationData[0].values[index - 1];
+                                // console.log('-------=============0000000000',element)
+
+                                if (range.firstDate <= index && range.lastDate > index) {
+
+                                    arrays[temp].grid = element;
+                                    array.push(arrays[temp])
+                                    temp = temp + 1
+
+                                }
+
+
+                            } else {
+                                if (previousmonthdays == range.firstDate) {
+                                    range.firstDate = 1;
+
+                                } else {
+                                    range.firstDate = range.firstDate + 1;
+
+
+                                }
+                                temp = temp + 1
+                            }
+
+
+
+                        }
+                    }
+
+
+
+                    //for 6 months calculation
+                    if (activeTab == "6M") {
+                        var array: any = []
+                        if (firstSixMonth.includes(params.month.toString())) {
+                            for (let index = 0; index < 6; index++) {
+                                const element = res.data.data.generationData[0].values[index];
+                                var obj = { hour: `${months[index]}`, home: 0, grid: element };
+                                array.push(obj)
+                            }
+                            // console.log('array1', data)
+                        }
+
+                        if (secondSixMonth.includes(params.month.toString())) {
+                            for (let index = 0; index < res.data.data.generationData[0].values.length; index++) {
+                                if (index > 5) {
+                                    const element = res.data.data.generationData[0].values[index];
+                                    var obj = { hour: `${months[index]}`, home: 0, grid: element };
+                                    array.push(obj)
+                                }
+
+                            }
+                        }
+
+                    }
+
+
+                    if (activeTab == "1Y") {
+                        var array: any = []
+
+                        for (let index = 0; index < res.data.data.generationData[0].values.length; index++) {
+
+                            const element = res.data.data.generationData[0].values[index];
+                            var obj = { hour: `${months[index]}`, home: 0, grid: element };
+                            array.push(obj)
+
+                        }
+
+                    }
+                    // console.log('array',array,res.data.data.pvPower)
+                    getTotalEnergy(array, res.data.data.pvPower)
+
+                    setEnergyData(array)
 
                 }
 
 
-              } else {
-                if (previousmonthdays == range.firstDate) {
-                  range.firstDate = 1;
+            })
+            .catch(err => {
+                console.log('err', err);
+            });
+    }
 
-                } else {
-                  range.firstDate = range.firstDate + 1;
+    const gridData = data.map((d: any, ind: any) => ({
+        x: d.hour,
+        y: d.grid,
+        // label: `₹${parseFloat(d.grid).toFixed(1)}`,
 
+    }));
 
-                }
-                temp = temp + 1
-              }
-
-
-
-            }
-          }
-
-
-
-          //for 6 months calculation
-          if (activeTab == "6M") {
-            var array: any = []
-            if (firstSixMonth.includes(params.month.toString())) {
-              for (let index = 0; index < 6; index++) {
-                const element = res.data.data.generationData[0].values[index];
-                var obj = { hour: `${months[index]}`, home: 0, grid: element };
-                array.push(obj)
-              }
-              // console.log('array1', data)
-            }
-
-            if (secondSixMonth.includes(params.month.toString())) {
-              for (let index = 0; index < res.data.data.generationData[0].values.length; index++) {
-                if (index > 5) {
-                  const element = res.data.data.generationData[0].values[index];
-                  var obj = { hour: `${months[index]}`, home: 0, grid: element };
-                  array.push(obj)
-                }
-
-              }
-            }
-
-          }
-
-
-          if (activeTab == "1Y") {
-            var array: any = []
-
-            for (let index = 0; index < res.data.data.generationData[0].values.length; index++) {
-
-              const element = res.data.data.generationData[0].values[index];
-              var obj = { hour: `${months[index]}`, home: 0, grid: element };
-              array.push(obj)
-
-            }
-
-          }
-          // console.log('array',array,res.data.data.pvPower)
-          getTotalEnergy(array, res.data.data.pvPower)
-
-          setEnergyData(array)
-
-        }
-
-
-      })
-      .catch(err => {
-        console.log('err', err);
-      });
-  }
-
-  // Config
-  const barsPerPage = 5;
+    const barsPerPage = 5;
   const barWidth = 60;
   const chartWidth = data.length * barWidth;
+    //============================================================
 
-  const homeData = data.map((d: any) => ({
-    x: d.hour,
-    y: d.home,
-    label: `Home: ${Math.round((d.home / (d.home + d.grid)) * 100)}%`,
-  }));
+    const GradientDefs = () => (
+        <Defs>
+            <LinearGradient id="greenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <Stop offset="0%" stopColor="#8BC34A" stopOpacity="1" />
+                <Stop offset="100%" stopColor="#8BC34A" stopOpacity="0.3" />
+            </LinearGradient>
+            <LinearGradient id="orangeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <Stop offset="0%" stopColor="#FF9800" stopOpacity="1" />
+                <Stop offset="100%" stopColor="#FFEB3B" stopOpacity="0.6" />
+            </LinearGradient>
+        </Defs>
+    );
 
-  const gridData = data.map((d: any, ind: any) => ({
-    x: d.hour,
-    y: d.grid,
-    // label: `Grid: ${Math.round(d.grid)}%`,
-    // label: ind === selectedBarIndex ? `${d.grid}` : ' ',
-    label: `${parseFloat(d.grid).toFixed(1)}`
-  }));
-  // Calculate dynamic values
-  const yValues = data.map((d: any) => d.grid);
-
-  // const maxY = Math.max(...yValues);
-  const avgY = yValues.reduce((sum: any, y: any) => sum + y, 0) / yValues.length;
-
-
-  const allYValues = data.map((d: any, i: any) => + gridData[i].y);
-  // console.log('allYValues',gridData)
-  const maxY = Math.ceil(Math.max(...allYValues));
-  // const tickStep = 0.5;
-
-
-  const desiredTicks = 5;
-  const roughStep = maxY / desiredTicks;
-  const magnitude = Math.pow(10, Math.floor(Math.log10(roughStep)));
-  const normalized = roughStep / magnitude;
-
-  let tickStep;
-  if (normalized < 1.5) tickStep = 1 * magnitude;
-  else if (normalized < 3) tickStep = 2 * magnitude;
-  else if (normalized < 7) tickStep = 5 * magnitude;
-  else tickStep = 10 * magnitude;
-
-
-  const tickValues = [];
-  for (let i = 0; i <= maxY; i += tickStep) {
-    tickValues.push(parseFloat(i.toFixed(1)));
-  }
-
-  return (
-    <View style={[styles.container, { marginRight: '10%' }]}>
-      {/* Sticky Y-axis */}
-      <View style={[styles.yAxisContainer, { width: '10%', marginRight: '0%' }]}>
-        <VictoryChart
-
-          height={300}
-          width={700} // Narrow chart just for Y-axis
-          padding={{ left: 30, top: 20, bottom: 50, right: 10 }}
-          domainPadding={{ y: 10 }}
-          key={activeTab}
+    return (
+        <ScrollView
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
         >
-          {/* <VictoryAxis dependentAxis style={{
-            axis: { stroke: 'transparent' },
-            tickLabels: { fill: color.labelgrey, fontSize: 10 }, // X-axis label color
-          }} /> */}
+            <VictoryChart
+                domainPadding={{ x: 15 }}
+                padding={{ top: 20, bottom: 40, left: 40, right: 20 }}
+                width={chartWidth}
+            >
+                <GradientDefs />
 
+                <VictoryAxis
+                    style={{
+                        tickLabels: { fill: '#777', fontSize: 12 },
+                        axis: { stroke: 'transparent' },
+                    }}
+                />
+                <VictoryAxis
+                    dependentAxis
+                    style={{
+                        grid: { stroke: '#ddd', strokeDasharray: '4' },
+                        tickLabels: { fill: '#aaa', fontSize: 10 },
+                        axis: { stroke: 'transparent' },
+                    }}
+                />
 
-          <VictoryAxis
-            dependentAxis
-            tickValues={tickValues}
-            style={{
-              axis: { stroke: 'transparent' },
-              tickLabels: { fill: '#B5B5B5', fontSize: 10 },
-              ticks: { stroke: 'transparent' },
-              grid: { stroke: '#E6E6E6', strokeWidth: 1 },
-            }}
-          // domain={[0, 1]}
-          />
+                <VictoryBar
+                    data={gridData}
+                    barWidth={10}
+                    cornerRadius={{ top: 5 }}
+                    labelComponent={<VictoryNative.VictoryLabel dy={-10} style={{color:color.labelgrey,fill:color.labelgrey}} />}
 
-
-        </VictoryChart>
-      </View>
-
-      {/* Scrollable chart */}
-      <ScrollView
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-      >
-        <VictoryChart
-
-          height={300}
-          width={chartWidth}
-          padding={{ left: 10, top: 20, bottom: 50, right: 20 }}
-          domainPadding={{ x: 20 }}
-          domain={{ y: [0, maxY] }}
-        >
-          <VictoryAxis style={{
-            tickLabels: { fill: color.labelgrey, fontSize: 10 }, // X-axis label color
-          }} />
-          <VictoryStack>
-            <VictoryBar
-
-              data={homeData}
-              style={{ data: { fill: 'linear-gradient(180deg, rgba(115, 190, 68, 0.80) 0%, rgba(39, 39, 39, 0.80) 100%)', fillOpacity: 0.5 } }}
-              labelComponent={<VictoryTooltip renderInPortal={false} />}
-              barWidth={barWidth * 0.3}
-
-
-            />
-            <VictoryGroup >
-              <VictoryBar
-
-                data={gridData}
-                // labels={({ datum }) => datum.label}
-                labelComponent={
-                  <VictoryTooltip
-                    flyoutStyle={{ fill: '#fff', stroke: '#ccc' }}
-                    style={{ fill: '#000', fontSize: 12 }}
-                    dy={-10}
-                    renderInPortal={false}
-
-                  />
-                }
-
-                style={{
-                  data: {
-                    fill: ({ index }) =>
-                      index === selectedBarIndex ? '#ff9800' : '#linear-gradient(180deg, rgba(115, 190, 68, 0.80) 0%, rgba(39, 39, 39, 0.80) 100%)', fillOpacity: 0.6
-                  }
-                }}
-
-                events={[
-                  {
-                    target: 'data',
-                    eventHandlers: {
-                      onPressIn: () => {
-                        return [
-                          {
+                    style={{
+                        data: {
+                            fill: ({ index }) =>
+                                index === selectedIndex ? 'url(#orangeGradient)' : 'url(#greenGradient)',
+                        },
+                    }}
+                    events={[
+                        {
                             target: 'data',
-                            mutation: (props) => {
-                              setSelectedBarIndex((prev) =>
-                                prev === props.index ? null : props.index
-                              );
-                              return []; // Don't mutate individual bar manually // Save the tapped bar index
+                            eventHandlers: {
+                                onPressIn: (_, props) => {
+                                    setSelectedIndex(props.index);
+                                },
                             },
-                          },
-                        ];
-                      },
-                    },
-                  },
-                ]}
-
-                barWidth={barWidth * 0.2}
-                cornerRadius={{ top: 10, bottom: 0 }}
-              />
-            </VictoryGroup>
-          </VictoryStack>
-        </VictoryChart>
-      </ScrollView>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    paddingTop: 40,
-
-  },
-  yAxisContainer: {
-    width: '20%',
-  },
-});
+                        },
+                    ]}
+                />
+            </VictoryChart>
+        </ScrollView>
+    );
+}
 
 export default EnergyGeneration;
-
 

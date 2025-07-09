@@ -102,6 +102,7 @@ const [pvPower,sePvPower] = useState<any>(0.0)
         label: isDark ? '#ddd' : '#000',
         labelgrey: isDark ? '#ddd' : '#848484',
         boxBackground: isDark ? '#1A1A1A' : '#FFF',
+        grphHorizontalLine: isDark ? '#848484' : '#B1B1B1',
 
     };
     const setActiveTabFunction = (tab: any) => {
@@ -223,10 +224,11 @@ const [pvPower,sePvPower] = useState<any>(0.0)
                             onPress={() => setActiveTabFunction(tab)}
                             style={{
                                 paddingVertical: 6,
-                                paddingHorizontal: 16,
-                                backgroundColor: activeTab === tab ? colors.activeTab : colors.tabBg,
+                                marginVertical:2,
+                                paddingHorizontal: 15,
+                                backgroundColor: activeTab === tab ? colors.activeTab : 'rgba(230, 230, 230, 0.0)',
                                 borderRadius: 20,
-                                marginHorizontal: 6,
+                                marginHorizontal: 5,
                             }}
                         >
                             <Text style={{ fontFamily: 'Avenir-Medium', color: colors.text, fontSize: 14 }}>

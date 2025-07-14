@@ -52,7 +52,7 @@ const daysOfWeek = [
 
 
 
-const EnergyGeneration = ({ color, activeTab, getTotalEnergy, refreshing }: any) => {
+const EnergyGeneration = ({ color, activeTab, getTotalEnergy, refreshing,customerData }: any) => {
     const [selectedIndex, setSelectedIndex] = useState(null);
 
 
@@ -99,11 +99,11 @@ const EnergyGeneration = ({ color, activeTab, getTotalEnergy, refreshing }: any)
     }, [activeTab, refreshing])
 
     const getUserInfo = async () => {
-        const getInfo: any = await AsyncStorage.getItem('solar_customer_data');
-        console.log('sachin', getInfo)
-        setUserInfo(JSON.parse(getInfo))
+        // const getInfo: any = await AsyncStorage.getItem('solar_customer_data');
+        console.log('sachin', customerData)
+        // setUserInfo(JSON.parse(getInfo))
 
-        await getData(JSON.parse(getInfo))
+        await getData(customerData)
     }
 
     function getWeekRange(date = new Date()) {

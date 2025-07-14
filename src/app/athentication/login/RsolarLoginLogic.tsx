@@ -1,6 +1,5 @@
 import {View, Text} from 'react-native';
 import React from 'react';
-import LoginRender from './LoginRender';
 import {CommonStyle} from '../../../asset/style/commonStyle';
 import {
   errorFormate,

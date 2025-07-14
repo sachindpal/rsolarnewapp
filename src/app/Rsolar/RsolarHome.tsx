@@ -34,6 +34,9 @@ import { useData } from '../Service/DataContext';
 import moment from 'moment';
 import { useIsFocused } from '@react-navigation/native';
 import { RefreshControl } from 'react-native-gesture-handler';
+import { getUnAuthReqest, postUnAuthReq } from '../Service/APIServices/axoisService';
+import EnergyGenerationDisabled from './EnergyGenerationDisabled';
+import FinancialDisabled from './FInancialDisabled';
 
 const screenWidth = Dimensions.get('window').width;
 const fullYear = new Date().getFullYear();
@@ -80,6 +83,8 @@ const HomeScreen = () => {
     const [startTime,setstartTime] = useState(new Date()); // capture time when screen is loaded
     const [diffMinutes, setDiffMinutes] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
+  const [customerData, setcustomerData] = useState<any>({});
+  const [deviceData, setdeviceData] = useState({});
 
     const isFocused = useIsFocused()
 const [pvPower,sePvPower] = useState<any>(0.0)
@@ -113,6 +118,7 @@ const [pvPower,sePvPower] = useState<any>(0.0)
   
 
     const onRefresh = useCallback(() => {
+        getUserInfo()
         setRefreshing(true);
         setstartTime(new Date())
         const now = new Date();
@@ -146,6 +152,40 @@ const [pvPower,sePvPower] = useState<any>(0.0)
         }
 
     }
+
+    useEffect(()=>{
+        getUserInfo()
+    },[])
+
+    const getUserInfo = async () => {
+        const getInfo: any = await AsyncStorage.getItem('solar_customer_data');
+        
+    
+        getLiveUserData(JSON.parse(getInfo))
+      }
+
+    const getLiveUserData = (customerData: any) => {
+        
+        getUnAuthReqest(`/rsolar/customer-data?customerid=${customerData.customerid}`)
+          .then((res: any) => {
+    
+            console.log('res home page:------------', res.data.data)
+            if (res?.data?.data?.customerData) {
+                setcustomerData(res.data.data.customerData)
+    
+            }
+
+            if (res?.data?.data?.deviceData) {
+                setdeviceData(res.data.deviceData)
+    
+            }
+    
+    
+          })
+          .catch(err => {
+            console.log('err', err);
+          });
+      }
 
 
 
@@ -205,8 +245,10 @@ const [pvPower,sePvPower] = useState<any>(0.0)
             {/* Energy Generation Section */}
             <View style={{ borderWidth: 1, borderColor: 'rgba(177, 177, 177, 0.20)', borderStyle: 'solid', borderRadius: 8, paddingTop: 24, alignItems: 'center', paddingRight: '2%', paddingLeft: '2%',backgroundColor:colors.boxBackground }}>
                 <Text style={{ fontSize: 12,  color: colors.labelgrey, fontWeight: '400', left: '30%' }}>Today: {new Date().getDate() + ' ' + monthsArray[new Date().getMonth()]}</Text>
-               
-                <EnergyGeneration color={colors} activeTab={activeTab} getTotalEnergy={getTotalEnergy} refreshing={refreshing} />
+               {!customerData?.solar_device_id?
+                    <EnergyGeneration color={colors} activeTab={activeTab} getTotalEnergy={getTotalEnergy} refreshing={refreshing} customerData={customerData} />:<EnergyGenerationDisabled color={colors} activeTab={activeTab} getTotalEnergy={getTotalEnergy} refreshing={refreshing} customerData={customerData} />   
+            }
+                {/* <EnergyGeneration color={colors} activeTab={activeTab} getTotalEnergy={getTotalEnergy} refreshing={refreshing} customerData={customerData} /> */}
 
 
                 {/* Tabs */}
@@ -260,10 +302,10 @@ const [pvPower,sePvPower] = useState<any>(0.0)
                 </View>
             </View>
             {/* Saving Report */}
-            <View style={{ borderWidth: 1, borderStyle: 'solid', borderColor: 'rgba(177, 177, 177, 0.20)', borderRadius: 8, marginTop: 16, padding: 8, marginBottom: '7%',backgroundColor:colors.boxBackground }}>
+            <View style={{ borderWidth: 1, borderStyle: 'solid', borderColor: 'rgba(177, 177, 177, 0.20)', borderRadius: 8, marginTop: 16,  marginBottom: '7%',backgroundColor:colors.boxBackground }}>
                 <View style={{ marginTop: 24, flexDirection: 'row', gap: 70 }}>
                     <View style={{ flexDirection: 'row' }}>
-                        {isDark ? <TotalSavingDark style={{ marginRight: 10, marginTop: 4 }} /> : <TotalSaving style={{ marginRight: 10, marginTop: 4 }} />}
+                        {isDark ? <TotalSavingDark style={{ marginRight: 10, marginTop: 4 ,marginLeft:10}} /> : <TotalSaving style={{ marginRight: 10, marginTop: 4,marginLeft:10 }} />}
                         <Text style={{ fontSize: 16, marginBottom: 8, color: colors.label, fontWeight: '400' }}>Saving report</Text>
                     </View>
                     <View style={{
@@ -288,8 +330,11 @@ const [pvPower,sePvPower] = useState<any>(0.0)
                         {/* <DropdownUpArrow style={{ position: 'absolute', top: 18 }} /> */}
                     </View>
                 </View>
-
-                <Financial color={colors} selectedValue={selectedValue} refreshing={refreshing} />
+{!customerData?.solar_device_id?
+    <Financial color={colors} selectedValue={selectedValue} refreshing={refreshing} customerData={customerData}/>
+    :<FinancialDisabled color={colors} selectedValue={selectedValue} refreshing={refreshing} customerData={customerData}/>
+}
+                
             </View>
         </ScrollView>
     );

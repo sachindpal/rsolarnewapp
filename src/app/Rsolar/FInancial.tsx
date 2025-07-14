@@ -44,7 +44,7 @@ const months = [
 ]
 
 
-const Financial = ({color,selectedValue,refreshing}:any) => {
+const Financial = ({color,selectedValue,refreshing,customerData}:any) => {
 
     const [selectedIndex, setSelectedIndex] = useState(null);
 
@@ -81,11 +81,11 @@ const Financial = ({color,selectedValue,refreshing}:any) => {
     }, [selectedValue,refreshing])
   
     const getUserInfo = async () => {
-      const getInfo: any = await AsyncStorage.getItem('solar_customer_data');
+    //   const getInfo: any = await AsyncStorage.getItem('solar_customer_data');
       
-      setUserInfo(JSON.parse(getInfo))
+    //   setUserInfo(JSON.parse(getInfo))
   
-      getData(JSON.parse(getInfo))
+      getData(customerData)
     }
   
     const getData = (customerData: any) => {
@@ -120,7 +120,7 @@ const Financial = ({color,selectedValue,refreshing}:any) => {
     const gridData = data.map((d: any, ind: any) => ({
         x: d.hour,
         y: d.grid,
-        label: `₹${d.grid*10}`,
+        label: `₹${parseInt(d.grid)*10}`,
 
     }));
 
@@ -150,8 +150,9 @@ const Financial = ({color,selectedValue,refreshing}:any) => {
         >
             <VictoryChart
                 domainPadding={{ x: 15 }}
-                padding={{ top: 150, bottom: 40, left: 40, right: 20 }}
+                padding={{ top: 50, bottom: 40, left: 40, right: 20 }}
                 width={chartWidth}
+                height={210}
             >
                 <GradientDefs />
 

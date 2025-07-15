@@ -10,7 +10,7 @@ import {
     Switch
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import {
     BlackRight,
     CallSupport,
@@ -52,6 +52,7 @@ const MoreDrawerRsolar = () => {
     const { t } = useTranslation();
 
     const [modalVisible, setModalVisible] = useState(false);
+    const isFocused =useIsFocused()
     const [isLoggedInStatus, setisLoggedInStatus] = useState<any>(false);
     const [selectedLang, setSelectedLang] = useState<any>();
     const [currentLang, setcurrentLang] = useState<any>('en');
@@ -79,7 +80,8 @@ const MoreDrawerRsolar = () => {
     }
     useEffect(() => {
         getUserInfo()
-    }, [])
+
+    }, [isFocused])
 
     // handle go back
     const goBack = () => {
@@ -100,7 +102,7 @@ const MoreDrawerRsolar = () => {
 
     const getUserInfo = async () => {
         const getInfo: any = await AsyncStorage.getItem('solar_customer_data');
-
+// console.log('ssssssssssssssssssssssssssssssssssss')
         setUserInfo(JSON.parse(getInfo))
     }
 

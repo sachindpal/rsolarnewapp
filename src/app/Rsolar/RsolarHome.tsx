@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     StyleSheet,
     Switch,
+    Pressable,
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Rive, { RiveRef } from 'rive-react-native';
@@ -32,13 +33,15 @@ import Financial from './FInancial';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useData } from '../Service/DataContext';
 import moment from 'moment';
-import { useIsFocused } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { RefreshControl } from 'react-native-gesture-handler';
 import { getUnAuthReqest, postUnAuthReq } from '../Service/APIServices/axoisService';
 import EnergyGenerationDisabled from './EnergyGenerationDisabled';
 import FinancialDisabled from './FInancialDisabled';
+import Snackbar from 'react-native-snackbar';
 
 const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
 const fullYear = new Date().getFullYear();
 
 const monthsArray = [
@@ -71,6 +74,8 @@ const getYearsDropdown = () => {
 }
 
 const HomeScreen = () => {
+    const navigation = useNavigation<any>();
+
     const [yearDropDown, setYearDropDown] = useState<any>(getYearsDropdown());
 
     const [activeTab, setActiveTab] = useState('Today');
@@ -84,7 +89,7 @@ const HomeScreen = () => {
     const [diffMinutes, setDiffMinutes] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
   const [customerData, setcustomerData] = useState<any>({});
-  const [deviceData, setdeviceData] = useState({});
+  const [deviceData, setdeviceData] = useState<any>({});
 
     const isFocused = useIsFocused()
 const [pvPower,sePvPower] = useState<any>(0.0)
@@ -115,10 +120,27 @@ const [pvPower,sePvPower] = useState<any>(0.0)
         setActiveTab(tab)
     }
 
+    // const ShowSnackBar:any = () => {
+    //     return Snackbar.show({
+    //       text: 'This is a Snackbar!',
+    //       duration: Snackbar.LENGTH_LONG, // or Snackbar.LENGTH_LONG
+    //       marginBottom:screenHeight-100,
+    //       action: {
+    //         text: 'UNDO',
+    //         textColor: 'yellow',
+    //         onPress: () => {
+    //           console.log('Undo pressed');
+    //         },
+    //       },
+    //     });
+    //   };
+
   
 
     const onRefresh = useCallback(() => {
         getUserInfo()
+        // showSnackBar()
+
         setRefreshing(true);
         setstartTime(new Date())
         const now = new Date();
@@ -199,7 +221,20 @@ const [pvPower,sePvPower] = useState<any>(0.0)
             {/* Header */}
             <View>
                 <Text style={{ fontSize: 24, fontFamily: 'Avenir-Medium', color: colors.text, fontWeight: '800' }}>Home</Text>
-                <Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir-Medium' }}><Text style={{ color: '#74C043' }}>●</Text> R-Solar is up and running.</Text>
+
+                {!customerData?.solar_device_id?<View style={{flexDirection:'row',gap:4}}>{deviceData?.status==2?
+                <Text style={{ color: 'red' }}>●</Text>
+                :deviceData?.status==3?
+                <Text style={{ color: colors.subText }}>●</Text>
+                :<Text style={{ color: '#74C043' }}>●</Text>
+                }<Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir-Medium' }}> R-Solar is up and running.</Text></View>:
+                <View style={{flexDirection:'row',gap:4}}>
+                <Text style={{ color: colors.subText }}>●</Text>
+            
+                 <Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir-Medium' }}>Your system is offline</Text>
+                 <Pressable onPress={() => navigation.navigate('CallPopUp', { mobile: 9407059000 })}>
+                 <Text style={{ fontSize: 12, color: '#73BE44', fontFamily: 'Avenir-Medium',textDecorationLine:'underline',fontWeight:'500',textDecorationStyle:'solid' }}> Get support</Text></Pressable></View>}
+                
             </View>
 
             {/* Rive Animation */}
@@ -213,7 +248,10 @@ const [pvPower,sePvPower] = useState<any>(0.0)
                         <Text style={{color:colors.labelgrey,fontWeight:'500',fontSize:8,fontFamily:'Avenir',marginTop:5}}>kWh</Text>
                         </View>
                     </View>
-                {isDark ? <Rive ref={riveRef} resourceName="housedark" animationName='Intro' stateMachineName='Slate Machine 1' autoplay={true} onPlay={() => console.log("Intro started")}
+                    {customerData?.solar_device_id? <View>
+
+
+                        { isDark ? <Rive ref={riveRef} resourceName="housedark" animationName='Intro' stateMachineName='Slate Machine 1' autoplay={true} onPlay={() => console.log("Intro started")}
                     onStop={() => {
                         console.log("Intro finished");
                         riveRef.current?.play('Loop'); // Play the loop animation after intro ends
@@ -224,6 +262,14 @@ const [pvPower,sePvPower] = useState<any>(0.0)
                             riveRef.current?.play('Loop'); // Play the loop animation after intro ends
                         }} style={{ width: screenWidth-10, height: 400 }} />
                 }
+                    </View>:null
+                //     <View>
+                //     { isDark ? <Rive ref={riveRef} resourceName="offlinedark" animationName='Layer 1' stateMachineName='State Machine 1' autoplay={true}  style={{ width: screenWidth-10, height: 400 }} />
+                //     : <Rive ref={riveRef} resourceName="offlinelight" animationName='Layer 1' stateMachineName='State Machine 1' autoplay={true}  style={{ width: screenWidth-10, height: 400 }} />
+                // }
+                //     </View> 
+                }
+                
                 </View>
                 <View style={{ flexDirection: 'row', gap: -15 }}>
                     {isDark ? <UpDownDark style={{ marginTop: 18 }} /> : <UpDown style={{ marginTop: 18 }} />}
@@ -284,8 +330,8 @@ const [pvPower,sePvPower] = useState<any>(0.0)
                 <View style={{ paddingBottom: 16, paddingTop: 16, width: '90%' }}>
                     {[
                         { icon: isDark ? <ThunderDark style={{ marginRight: 12 }} /> : <Thunder color={colors.text} style={{ marginRight: 12 }} />, label: 'Total Energy', value: `${totalPower} kWh` },
-                        { icon: isDark ? <CottageDark style={{ marginRight: 12 }} /> : <Cottage color={colors.text} style={{ marginRight: 12 }} />, label: 'Home consumption', value: '0 kWh' },
-                        { icon: isDark ? <CellTowerDark style={{ marginRight: 12 }} /> : <CellTower color={colors.text} style={{ marginRight: 12 }} />, label: 'Grid export', value: '0 kWh' },
+                        // { icon: isDark ? <CottageDark style={{ marginRight: 12 }} /> : <Cottage color={colors.text} style={{ marginRight: 12 }} />, label: 'Home consumption', value: '0 kWh' },
+                        // { icon: isDark ? <CellTowerDark style={{ marginRight: 12 }} /> : <CellTower color={colors.text} style={{ marginRight: 12 }} />, label: 'Grid export', value: '0 kWh' },
                         { icon: isDark ? <CurrencyRupeeDark style={{ marginRight: 12 }} /> : <CurrencyRupee color={colors.text} style={{ marginRight: 12 }} />, label: 'Savings', value: `₹${totalPowerSavings}` },
                     ].map((item, index, array) => (
                         <View key={index}>

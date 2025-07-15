@@ -78,7 +78,7 @@ const EnergyGenerationDisabled = ({ color, activeTab, getTotalEnergy, refreshing
         { hour: '12', home: 0.5, grid: 2.5 },
         { hour: '1', home: 1.8, grid: 1.2 },
         { hour: '2', home: 0.6, grid: 2.4 },
-        { hour: '3', home: 2.0, grid: 1.0 },
+        { hour: '3', home: 2.0, grid: 10.0 },
     ])
     const [userInfo, setUserInfo] = useState<any>({})
     const isFocused = useIsFocused()
@@ -283,16 +283,21 @@ const EnergyGenerationDisabled = ({ color, activeTab, getTotalEnergy, refreshing
     );
 
     return (
-        <ScrollView
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
+        <View
+            
         >
             <VictoryChart
                 domainPadding={{ x: 15 }}
-                padding={{ top: 20, bottom: 40, left: 40, right: 20 }}
-                width={chartWidth}
+                padding={{ top: 20, bottom: 40, left: 50, right: 20 }}
+                // width={chartWidth}
             >
+                <VictoryNative.VictoryLabel
+    text="No Data"
+    x={175}         // adjust X to center based on chart width
+    y={120}         // adjust Y to vertically position
+    textAnchor="middle"
+    style={{ fontSize: 14, fill: '#888', fontWeight: '400',fontFamily:'Avenir', }}
+  />
                 <GradientDefs />
 
                 <VictoryAxis
@@ -337,7 +342,7 @@ const EnergyGenerationDisabled = ({ color, activeTab, getTotalEnergy, refreshing
                     // ]}
                 />
             </VictoryChart>
-        </ScrollView>
+        </View>
     );
 }
 

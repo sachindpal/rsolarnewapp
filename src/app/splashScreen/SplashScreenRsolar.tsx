@@ -17,32 +17,34 @@ console.log(currentYear);
     
 
     let version = DeviceInfo.getVersion();
-    // getUnAuthReqest('/app/settings')
-    //   .then(async(res: any) => {
-    //     if (version >= res.data.data.android_version) {
-    //       console.log("res.data.data.android_version============>",res.data.data.android_version)
-    //       const issolarlogged = await isSolarLoggedIn()
-    //       if(issolarlogged){
-    //         navigation.replace('RsolarHome');
+    getUnAuthReqest('/rsolar/settings-for-rsolar')
+      .then(async(res: any) => {
+        console.log("res.data.data.android_version============>",res.data.data.settings.value)
+        console.log("res.data.data.android_version============>",version)
 
-    //       }else{
-    //       console.log('jhdfsjkhf')
+        if (version >= res?.data?.data?.settings?.value) {
+          const issolarlogged = await isSolarLoggedIn()
+          if(issolarlogged){
+            navigation.navigate('Main')
+
+          }else{
+          // console.log('jhdfsjkhf')
           
-    //         navigation.navigate('AuthStack', {
-    //             screen: 'RsolarLogin',
-    //           })
+          navigation.navigate('AuthStack', {
+            screen: 'RsolarLogin',
+          })
 
-    //           // navigation.navigate('RsolarHome')
-    //       }
-    //     } else {
-    //       navigation.replace('updateScreen');
-    //     }
-    //   })
-    //   .catch((res: any) => {
-    //     console.log('=========version check api error=====', res);
-    //     navigation.replace('home');
-    //   });
-    redirection()
+              // navigation.navigate('RsolarHome')
+          }
+        } else {
+          navigation.navigate('updateScreen');
+        }
+      })
+      .catch((res: any) => {
+        console.log('=========version check api error=====', res);
+        // navigation.replace('home');
+      });
+    // redirection()
   }, []);
 
 

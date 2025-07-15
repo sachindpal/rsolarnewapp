@@ -60,11 +60,7 @@ const App = () => {
     notificationListener();
     let version = DeviceInfo.getVersion()
     console.log("+=======version=======",version)
-    getUnAuthReqest("/app/settings").then((res:any)=>{
-      console.log("=========version check api=====",res.data)
-    }).catch((res:any)=>{
-      console.log("=========version check api error=====",res)
-    })
+   
     SplashScreen.hide();
   }, []);
 

@@ -65,7 +65,7 @@ const FinancialDisabled = ({color,selectedValue,refreshing,customerData}:any) =>
       { hour: '12', home: 0.5, grid: 2.5 },
       { hour: '1', home: 1.8, grid: 1.2 },
       { hour: '2', home: 0.6, grid: 2.4 },
-      { hour: '3', home: 2.0, grid: 1.0 },
+      { hour: '3', home: 2.0, grid: 10.0 },
     ])
     const [userInfo, setUserInfo] = useState<any>({})
     const [params, setParams] = useState({
@@ -116,10 +116,9 @@ const FinancialDisabled = ({color,selectedValue,refreshing,customerData}:any) =>
     );
 
     return (
-        <ScrollView
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
+        <View
+            
+            
         >
             <VictoryChart
                 domainPadding={{ x: 15 }}
@@ -127,6 +126,14 @@ const FinancialDisabled = ({color,selectedValue,refreshing,customerData}:any) =>
                 width={chartWidth}
                 height={210}
             >
+
+<VictoryNative.VictoryLabel
+    text="No Data"
+    x={175}         // adjust X to center based on chart width
+    y={50}         // adjust Y to vertically position
+    textAnchor="middle"
+    style={{ fontSize: 14, fill: '#888', fontWeight: '400',fontFamily:'Avenir', }}
+  />
                 <GradientDefs />
 
                 <VictoryAxis
@@ -150,19 +157,19 @@ const FinancialDisabled = ({color,selectedValue,refreshing,customerData}:any) =>
                                 index === selectedIndex ? 'url(#orangeGradient)' : 'url(#greenGradient)',
                         },
                     }}
-                    events={[
-                        {
-                            target: 'data',
-                            eventHandlers: {
-                                onPressIn: (_, props) => {
-                                    setSelectedIndex(props.index);
-                                },
-                            },
-                        },
-                    ]}
+                    // events={[
+                    //     {
+                    //         target: 'data',
+                    //         eventHandlers: {
+                    //             onPressIn: (_, props) => {
+                    //                 setSelectedIndex(props.index);
+                    //             },
+                    //         },
+                    //     },
+                    // ]}
                 />
             </VictoryChart>
-        </ScrollView>
+        </View>
     );
 }
 

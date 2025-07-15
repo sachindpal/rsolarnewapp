@@ -100,7 +100,7 @@ const BottomTabbar = () => {
 };
   return (
     <Tab.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="Status"
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,

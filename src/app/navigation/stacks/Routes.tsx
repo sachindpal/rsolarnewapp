@@ -3,9 +3,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { NavigationContainer} from '@react-navigation/native';
 import AuthenticationStack from './AuthStack';
 
-// import UpdateScreen from '../../Home/component/UpdateScreen';
 import SplashScreenRsolar from '../../splashScreen/SplashScreenRsolar';
 import RsolarHome from '../../Rsolar/RsolarHome';
+import UpdateScreen from '../../Rsolar/UpdateScreen';
 import MoreDrawerRsolar from '../../More/MoreDrawerRsolar';
 import CallModel from '../../CallModel/CallModel';
 import PrivacyPolicyRsolar from '../../PrivacyPolicy/PrivacyPolicyRsolar';
@@ -31,7 +31,6 @@ const Routes = () => {
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="splashRsolar" component={SplashScreenRsolar} />
         
-        {/* <Stack.Screen name="updateScreen" component={UpdateScreen} /> */}
         {/* {userStatus ? (
           <Stack.Group>
             <Stack.Screen name="home" component={HomeStack} />
@@ -39,6 +38,8 @@ const Routes = () => {
         ) : ( */}
         <Stack.Group>
           <Stack.Screen name="AuthStack" component={AuthenticationStack} />
+        <Stack.Screen name="updateScreen" component={UpdateScreen} />
+
           {/* <Stack.Screen name="RsolarHome" component={RsolarHome} /> */}
           {/* <Stack.Screen name="MoreContent" component={MoreDrawerRsolar} /> */}
           <Stack.Screen name="Main" component={BottomTabbar} />

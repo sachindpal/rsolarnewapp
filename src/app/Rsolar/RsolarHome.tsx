@@ -248,7 +248,7 @@ const [pvPower,sePvPower] = useState<any>(0.0)
                         <Text style={{color:colors.labelgrey,fontWeight:'500',fontSize:8,fontFamily:'Avenir',marginTop:5}}>kWh</Text>
                         </View>
                     </View>
-                    {customerData?.solar_device_id? <View>
+                    {!customerData?.solar_device_id? <View>
 
 
                         { isDark ? <Rive ref={riveRef} resourceName="housedark" animationName='Intro' stateMachineName='Slate Machine 1' autoplay={true} onPlay={() => console.log("Intro started")}
@@ -262,12 +262,12 @@ const [pvPower,sePvPower] = useState<any>(0.0)
                             riveRef.current?.play('Loop'); // Play the loop animation after intro ends
                         }} style={{ width: screenWidth-10, height: 400 }} />
                 }
-                    </View>:null
-                //     <View>
-                //     { isDark ? <Rive ref={riveRef} resourceName="offlinedark" animationName='Layer 1' stateMachineName='State Machine 1' autoplay={true}  style={{ width: screenWidth-10, height: 400 }} />
-                //     : <Rive ref={riveRef} resourceName="offlinelight" animationName='Layer 1' stateMachineName='State Machine 1' autoplay={true}  style={{ width: screenWidth-10, height: 400 }} />
-                // }
-                //     </View> 
+                    </View>:
+                    <View>
+                    { isDark ? <Rive ref={riveRef} resourceName="offlinedark" animationName='State Machine 1' stateMachineName='State Machine 1' autoplay={true}  style={{ width: screenWidth-10, height: 400 }} />
+                    : <Rive ref={riveRef} resourceName="offlinelight" animationName='State Machine 1' stateMachineName='State Machine 1' autoplay={true}  style={{ width: screenWidth-10, height: 400 }} />
+                }
+                    </View> 
                 }
                 
                 </View>

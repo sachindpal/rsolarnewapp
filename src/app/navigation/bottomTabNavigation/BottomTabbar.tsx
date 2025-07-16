@@ -62,7 +62,13 @@ const CommonTab = ({focused, IconActive, IconInActive, title, route}: any) => {
       <Pressable
         // android_ripple={{color: '#f8f8f8'}}
         onPress={() => {
+          if(route=='Home'){
+            navigation.navigate(route,{animation:true});
+
+          }else{
           navigation.navigate(route);
+
+          }
         }}>
           <View style={{alignItems:'center',justifyContent:'center',gap:5}}>
         <View>{focused ? IconActive : IconInActive}</View>

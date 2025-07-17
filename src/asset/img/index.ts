@@ -102,10 +102,12 @@ import UpDown from './upanddown.svg'
 import UpDownDark from './updowndark.svg'
 import Watch from './watch.svg'
 import WatchDark from './watchDark.svg'
+import VersionUpdate from './versionUpdate.svg'
 
 
 
 export {
+  VersionUpdate,
   WatchDark,
   Watch,
   UpDownDark,

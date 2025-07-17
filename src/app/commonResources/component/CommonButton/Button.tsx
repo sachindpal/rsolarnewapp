@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         paddingTop: 11, paddingBottom: 11,
         paddingHorizontal: 16,
         height: 54,
-        borderRadius: commanRadius.radi6
+        borderRadius: 50
     },
 
 

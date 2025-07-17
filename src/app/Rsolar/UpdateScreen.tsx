@@ -13,6 +13,7 @@ import {CommonStyle} from '../../asset/style/commonStyle';
 import {FontStyle} from '../../asset/style/FontsStyle';
 // import Button from '../../commonResources/component/CommonButton/Button';
 import Button from '../../app/commonResources/component/CommonButton/Button';
+import { VersionUpdate } from '../../asset/img';
 
 const UpdateScreen = () => {
   const rateApp = () => {
@@ -31,11 +32,12 @@ const UpdateScreen = () => {
           {padding: 20, justifyContent: 'space-between'},
         ]}>
         <View style={{alignItems: 'center'}}>
-          <Image
+          {/* <Image
             source={require('../../asset/img/updatedImg/Update.png')}
             style={{width: 350, height: 350, marginTop: 100}}
-          />
-          <View style={{alignItems: 'center', width: '80%',justifyContent:'center'}}>
+          /> */}
+          <VersionUpdate  style={{width: 350, height: 350, marginTop: 100}}/>
+          <View style={{alignItems: 'center', width: '80%',justifyContent:'center',marginTop:60}}>
             <Text style={[FontStyle.fontHeavy24, {marginTop: 24}]}>
               New update available!
             </Text>

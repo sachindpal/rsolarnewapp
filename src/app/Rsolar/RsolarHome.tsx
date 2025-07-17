@@ -91,7 +91,8 @@ const HomeScreen = (props:any) => {
     const [diffMinutes, setDiffMinutes] = useState(0);
     const [refreshing, setRefreshing] = useState(false);
     const [customerData, setcustomerData] = useState<any>({});
-    const [deviceData, setdeviceData] = useState<any>({});
+    const [deviceData, setdeviceData] = useState<any>(null);
+    const [statusLogs, setstatusLogs] = useState<any>(null);
 
     const isFocused = useIsFocused()
     const [pvPower, sePvPower] = useState<any>(0.0)
@@ -194,27 +195,32 @@ const HomeScreen = (props:any) => {
             .then((res: any) => {
 
                 console.log('res home page:------------', res.data.data)
-                if (res?.data?.data?.customerData) {
-                    setcustomerData(res.data.data.customerData)
+                // if (res?.data?.data?.customerData) {
+                    setcustomerData(res?.data?.data?.customerData)
 
-                }
+                // }
 
-                if (res?.data?.data?.deviceData) {
-                    setdeviceData(res.data.deviceData)
+                // if (res?.data?.data?.deviceData) {
+                    setdeviceData(res?.data?.data?.deviceData)
 
-                }
+                // }
+
+                // if (res?.data?.data?.statusLogsData) {
+                    setstatusLogs(res?.data?.data?.statusLogsData)
+
+                // }
 
 
             })
             .catch(err => {
-                console.log('err', err);
+                console.log('err api of customer data', err);
             });
     }
     const fadeAnim = useRef(new Animated.Value(0)).current;
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    console.log('snack bar',props?.route?.params?.animation)
+    console.log('snack bar',props?.route?.params?.animation,)
     // Step 1: Fade In
     Animated.timing(fadeAnim, {
       toValue: 1,
@@ -222,15 +228,15 @@ const HomeScreen = (props:any) => {
       useNativeDriver: true,
     }).start(() => {
       // Step 2: Wait 3 seconds, then fade out
-      setTimeout(() => {
-        Animated.timing(fadeAnim, {
-          toValue: 0,
-          duration: 1000,
-          useNativeDriver: true,
-        }).start(() => {
-          setVisible(false); // Hide from DOM after fade out
-        });
-      }, 3000);
+    //   setTimeout(() => {
+    //     Animated.timing(fadeAnim, {
+    //       toValue: 0,
+    //       duration: 1000,
+    //       useNativeDriver: true,
+    //     }).start(() => {
+    //       setVisible(false); // Hide from DOM after fade out
+    //     });
+    //   }, 3000);
     });
   }, [isFocused]);
 
@@ -244,7 +250,23 @@ const HomeScreen = (props:any) => {
     return (
         <ScrollView style={{ flex: 1, backgroundColor: colors.background, padding: 16 }} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
             {/* Dark Mode Switch */}
-{props?.route?.params?.animation && isFocused==true && !customerData?.solar_device_id?
+{props?.route?.params?.animation && isFocused==true && !customerData?.solar_device_id && (statusLogs == null || statusLogs == undefined)?
+            <Animated.View style={[ { opacity: fadeAnim,zIndex: 1 }]}>
+          <View style={{ flexDirection: 'row', position: 'absolute', backgroundColor: '#262626', borderRadius: 4, width: '100%', justifyContent: 'center', alignContent: 'center', paddingVertical: 14, zIndex: 1, gap: 4 }}>
+                        <Text style={{ color: '#FFF', width: '70%', fontFamily: 'Avenir', fontSize: 14, fontWeight: '400' }}>
+                        Your system hasn’t been installed yet.
+                        </Text>
+                        <Pressable style={{marginTop: '2%'}} onPress={() => navigation.navigate('CallPopUp', { mobile: 9407059000 })}>
+                        <Text style={{ color: '#73BE44',  fontFamily: 'Avenir', fontSize: 14, fontWeight: '400' }}>
+                            Get Support
+                        </Text>
+                        </Pressable>
+                    </View>
+        </Animated.View>:null
+}
+
+
+{props?.route?.params?.animation && isFocused==true && !customerData?.solar_device_id && (statusLogs!=undefined || statusLogs!=null)?
             <Animated.View style={[ { opacity: fadeAnim,zIndex: 1 }]}>
           <View style={{ flexDirection: 'row', position: 'absolute', backgroundColor: '#262626', borderRadius: 4, width: '100%', justifyContent: 'center', alignContent: 'center', paddingVertical: 14, zIndex: 1, gap: 4 }}>
                         <Text style={{ color: '#FFF', width: '70%', fontFamily: 'Avenir', fontSize: 14, fontWeight: '400' }}>
@@ -274,8 +296,9 @@ const HomeScreen = (props:any) => {
                         <Text style={{ color: colors.subText }}>●</Text>
 
                         <Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir-Medium' }}>Your system is offline</Text>
-                        <Pressable onPress={() => navigation.navigate('CallPopUp', { mobile: 9407059000 })}>
-                            <Text style={{ fontSize: 12, color: '#73BE44', fontFamily: 'Avenir-Medium', textDecorationLine: 'underline', fontWeight: '500', textDecorationStyle: 'solid' }}> Get support</Text></Pressable></View>}
+                        {/* <Pressable onPress={() => navigation.navigate('CallPopUp', { mobile: 9407059000 })}>
+                            <Text style={{ fontSize: 12, color: '#73BE44', fontFamily: 'Avenir-Medium', textDecorationLine: 'underline', fontWeight: '500', textDecorationStyle: 'solid' }}> Get support</Text></Pressable> */}
+                            </View>}
 
             </View>
 

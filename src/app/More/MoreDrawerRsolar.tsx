@@ -144,14 +144,21 @@ const MoreDrawerRsolar = () => {
         }
     }
     const checkLoginStatus = async () => {
-        const isLogged = await isSolarLoggedIn();
-        setisLoggedInStatus(isLogged);
+        // const isLogged = await isSolarLoggedIn();
+        const authToken = await AsyncStorage.getItem('solar_auth_Token');
+        if(authToken){
+            setisLoggedInStatus(true);
+
+        }else{
+        setisLoggedInStatus(false);
+
+        }
     };
 
     useEffect(() => {
         checkLoginStatus();
         getCurrentLangauge();
-    }, []);
+    }, [isFocused]);
 
     const modelClose = () => {
         setModalVisible(!modalVisible);

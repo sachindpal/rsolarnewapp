@@ -8,7 +8,8 @@ import {
     StyleSheet,
     Switch,
     Pressable,
-    Animated
+    Animated,
+    Image
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Rive, { RiveRef } from 'rive-react-native';
@@ -73,9 +74,9 @@ const getYearsDropdown = () => {
     return yearDropDowns
 }
 
-const HomeScreen = (props:any) => {
+const HomeScreen = (props: any) => {
     // console.log('props',props)
-    
+
     const navigation = useNavigation<any>();
 
     const [yearDropDown, setYearDropDown] = useState<any>(getYearsDropdown());
@@ -196,17 +197,17 @@ const HomeScreen = (props:any) => {
 
                 console.log('res home page:------------', res.data.data)
                 // if (res?.data?.data?.customerData) {
-                    setcustomerData(res?.data?.data?.customerData)
+                setcustomerData(res?.data?.data?.customerData)
 
                 // }
 
                 // if (res?.data?.data?.deviceData) {
-                    setdeviceData(res?.data?.data?.deviceData)
+                setdeviceData(res?.data?.data?.deviceData)
 
                 // }
 
                 // if (res?.data?.data?.statusLogsData) {
-                    setstatusLogs(res?.data?.data?.statusLogsData)
+                setstatusLogs(res?.data?.data?.statusLogsData)
 
                 // }
 
@@ -217,69 +218,69 @@ const HomeScreen = (props:any) => {
             });
     }
     const fadeAnim = useRef(new Animated.Value(0)).current;
-  const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState(true);
 
-  useEffect(() => {
-    console.log('snack bar',props?.route?.params?.animation,)
-    // Step 1: Fade In
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 1000,
-      useNativeDriver: true,
-    }).start(() => {
-      // Step 2: Wait 3 seconds, then fade out
-    //   setTimeout(() => {
-    //     Animated.timing(fadeAnim, {
-    //       toValue: 0,
-    //       duration: 1000,
-    //       useNativeDriver: true,
-    //     }).start(() => {
-    //       setVisible(false); // Hide from DOM after fade out
-    //     });
-    //   }, 3000);
-    });
-  }, [isFocused]);
+    useEffect(() => {
+        console.log('snack bar', props?.route?.params?.animation,)
+        // Step 1: Fade In
+        Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 1000,
+            useNativeDriver: true,
+        }).start(() => {
+            // Step 2: Wait 3 seconds, then fade out
+            //   setTimeout(() => {
+            //     Animated.timing(fadeAnim, {
+            //       toValue: 0,
+            //       duration: 1000,
+            //       useNativeDriver: true,
+            //     }).start(() => {
+            //       setVisible(false); // Hide from DOM after fade out
+            //     });
+            //   }, 3000);
+        });
+    }, [isFocused]);
 
-  
 
-  
- 
+
+
+
 
 
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: colors.background, padding: 16 }} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
             {/* Dark Mode Switch */}
-{props?.route?.params?.animation && isFocused==true && !customerData?.solar_device_id && (statusLogs == null || statusLogs == undefined)?
-            <Animated.View style={[ { opacity: fadeAnim,zIndex: 1 }]}>
-          <View style={{ flexDirection: 'row', position: 'absolute', backgroundColor: '#262626', borderRadius: 4, width: '100%', justifyContent: 'center', alignContent: 'center', paddingVertical: 14, zIndex: 1, gap: 4 }}>
+            {props?.route?.params?.animation && isFocused == true && !customerData?.solar_device_id && (statusLogs == null || statusLogs == undefined) ?
+                <Animated.View style={[{ opacity: fadeAnim, zIndex: 1 }]}>
+                    <View style={{ flexDirection: 'row', position: 'absolute', backgroundColor: '#262626', borderRadius: 4, width: '100%', justifyContent: 'center', alignContent: 'center', paddingVertical: 14, zIndex: 1, gap: 4 }}>
                         <Text style={{ color: '#FFF', width: '70%', fontFamily: 'Avenir', fontSize: 14, fontWeight: '400' }}>
-                        Your system hasn’t been installed yet.
+                            Your system hasn’t been installed yet.
                         </Text>
-                        <Pressable style={{marginTop: '2%'}} onPress={() => navigation.navigate('CallPopUp', { mobile: 9407059000 })}>
-                        <Text style={{ color: '#73BE44',  fontFamily: 'Avenir', fontSize: 14, fontWeight: '400' }}>
-                            Get Support
-                        </Text>
+                        <Pressable style={{ marginTop: '2%' }} onPress={() => navigation.navigate('CallPopUp', { mobile: 9407059000 })}>
+                            <Text style={{ color: '#73BE44', fontFamily: 'Avenir', fontSize: 14, fontWeight: '400' }}>
+                                Get Support
+                            </Text>
                         </Pressable>
                     </View>
-        </Animated.View>:null
-}
+                </Animated.View> : null
+            }
 
 
-{props?.route?.params?.animation && isFocused==true && !customerData?.solar_device_id && (statusLogs!=undefined || statusLogs!=null)?
-            <Animated.View style={[ { opacity: fadeAnim,zIndex: 1 }]}>
-          <View style={{ flexDirection: 'row', position: 'absolute', backgroundColor: '#262626', borderRadius: 4, width: '100%', justifyContent: 'center', alignContent: 'center', paddingVertical: 14, zIndex: 1, gap: 4 }}>
+            {props?.route?.params?.animation && isFocused == true && !customerData?.solar_device_id && (statusLogs != undefined || statusLogs != null) ?
+                <Animated.View style={[{ opacity: fadeAnim, zIndex: 1 }]}>
+                    <View style={{ flexDirection: 'row', position: 'absolute', backgroundColor: '#262626', borderRadius: 4, width: '100%', justifyContent: 'center', alignContent: 'center', paddingVertical: 14, zIndex: 1, gap: 4 }}>
                         <Text style={{ color: '#FFF', width: '70%', fontFamily: 'Avenir', fontSize: 14, fontWeight: '400' }}>
                             Your system is offline. Connect to Wi-Fi to get live energy data
                         </Text>
-                        <Pressable style={{marginTop: '2%'}} onPress={() => navigation.navigate('CallPopUp', { mobile: 9407059000 })}>
-                        <Text style={{ color: '#73BE44',  fontFamily: 'Avenir', fontSize: 14, fontWeight: '400' }}>
-                            Get Support
-                        </Text>
+                        <Pressable style={{ marginTop: '2%' }} onPress={() => navigation.navigate('CallPopUp', { mobile: 9407059000 })}>
+                            <Text style={{ color: '#73BE44', fontFamily: 'Avenir', fontSize: 14, fontWeight: '400' }}>
+                                Get Support
+                            </Text>
                         </Pressable>
                     </View>
-        </Animated.View>:null
-}
+                </Animated.View> : null
+            }
 
 
             {/* Header */}
@@ -287,18 +288,27 @@ const HomeScreen = (props:any) => {
                 <Text style={{ fontSize: 24, fontFamily: 'Avenir-Medium', color: colors.text, fontWeight: '800' }}>Home</Text>
 
                 {customerData?.solar_device_id ? <View style={{ flexDirection: 'row', gap: 4 }}>{deviceData?.status == 2 ?
-                    <Text style={{ color: 'red' }}>●</Text>
+                    <>
+                        <Text style={{ color: '#DC2626' }}>●</Text>
+                        <Text style={{ fontSize: 12, color: '#DC2626', fontFamily: 'Avenir-Medium' }}> Electricity or Device failure</Text>
+                    </>
                     : deviceData?.status == 3 ?
-                        <Text style={{ color: colors.subText }}>●</Text>
-                        : <Text style={{ color: '#74C043' }}>●</Text>
-                }<Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir-Medium' }}> R-Solar is up and running.</Text></View> :
+                        <>
+                            <Text style={{ color: '#F8BE1A' }}>●</Text>
+                            <Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir-Medium' }}>Your system is offline.</Text>
+                        </>
+                        : <><Text style={{ color: '#74C043' }}>●</Text>
+
+                            <Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir-Medium' }}>Your system is up and running.</Text>
+                        </>
+                }</View> :
                     <View style={{ flexDirection: 'row', gap: 4 }}>
                         <Text style={{ color: colors.subText }}>●</Text>
 
                         <Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir-Medium' }}>Your system is offline</Text>
                         {/* <Pressable onPress={() => navigation.navigate('CallPopUp', { mobile: 9407059000 })}>
                             <Text style={{ fontSize: 12, color: '#73BE44', fontFamily: 'Avenir-Medium', textDecorationLine: 'underline', fontWeight: '500', textDecorationStyle: 'solid' }}> Get support</Text></Pressable> */}
-                            </View>}
+                    </View>}
 
             </View>
 
@@ -306,48 +316,71 @@ const HomeScreen = (props:any) => {
             <View >
                 <View style={{ position: 'relative' }}>
 
-                {customerData?.solar_device_id ?
-                    <View style={{ position: 'absolute', backgroundColor: 'linear-gradient(0deg, rgba(115, 190, 68, 0.10) 0%, rgba(115, 190, 68, 0.10) 100%), rgba(255, 255, 255, 0.80)', borderRadius: 8, borderWidth: 0.5, borderColor: 'rgba(115, 190, 68, 0.60)', padding: 8, alignItems: 'flex-start', marginLeft: '80%', marginTop: '20%', zIndex: 1 }}>
+                    {customerData?.solar_device_id ?
+                        <View style={{ position: 'absolute', backgroundColor: 'linear-gradient(0deg, rgba(115, 190, 68, 0.10) 0%, rgba(115, 190, 68, 0.10) 100%), rgba(255, 255, 255, 0.80)', borderRadius: 8, borderWidth: 0.5, borderColor: 'rgba(115, 190, 68, 0.60)', padding: 8, alignItems: 'flex-start', marginLeft: '80%', marginTop: '15%', zIndex: 1 }}>
 
-                        <Text style={{ color: '#74C043' }}>● Panel</Text>
-                        <View style={{ flexDirection: 'row', gap: 5 }}>
-                            <Text style={{ color: colors.text, fontWeight: '500', fontSize: 12, fontFamily: 'Avenir' }}>{parseFloat(pvPower).toFixed(2)}</Text>
-                            <Text style={{ color: colors.labelgrey, fontWeight: '500', fontSize: 8, fontFamily: 'Avenir', marginTop: 5 }}>kWh</Text>
+                            <Text style={{ color: '#74C043' }}>● Panel</Text>
+                            <View style={{ flexDirection: 'row', gap: 5 }}>
+                                <Text style={{ color: colors.text, fontWeight: '500', fontSize: 12, fontFamily: 'Avenir' }}>{parseFloat(pvPower).toFixed(2)}</Text>
+                                <Text style={{ color: colors.labelgrey, fontWeight: '500', fontSize: 8, fontFamily: 'Avenir', marginTop: 5 }}>kWh</Text>
+                            </View>
                         </View>
-                    </View>
-                    :
-                    <View style={{ position: 'absolute', backgroundColor: 'linear-gradient(0deg, rgba(36, 36, 36, 0.10) 0%, rgba(36, 36, 36, 0.10) 100%), rgba(255, 255, 255, 0.80)', borderRadius: 8, borderWidth: 0.5, borderColor: '0.5px solid rgba(86, 86, 86, 0.60)', padding: 8, alignItems: 'flex-start', marginLeft: '12%', marginTop: '20%', zIndex: 1,height:'4%',width:'15%' }}>
+                        :
+                        <View style={{ position: 'absolute', backgroundColor: 'linear-gradient(0deg, rgba(36, 36, 36, 0.10) 0%, rgba(36, 36, 36, 0.10) 100%), rgba(255, 255, 255, 0.80)', borderRadius: 8, borderWidth: 0.5, borderColor: '0.5px solid rgba(86, 86, 86, 0.60)', padding: 8, alignItems: 'flex-start', marginLeft: '12%', marginTop: '15%', zIndex: 1, height: '4%', width: '15%' }}>
 
-                        <Text style={{ color: '#696969' }}>● Panel</Text>
-                        <View style={{ flexDirection: 'row', gap: 5 }}>
-                            <Text style={{ color: colors.text, fontWeight: '500', fontSize: 12, fontFamily: 'Avenir' }}>0</Text>
-                            <Text style={{ color: colors.labelgrey, fontWeight: '500', fontSize: 8, fontFamily: 'Avenir', marginTop: 5 }}>kWh</Text>
+                            <Text style={{ color: '#696969' }}>● Panel</Text>
+                            <View style={{ flexDirection: 'row', gap: 5 }}>
+                                <Text style={{ color: colors.text, fontWeight: '500', fontSize: 12, fontFamily: 'Avenir' }}>0</Text>
+                                <Text style={{ color: colors.labelgrey, fontWeight: '500', fontSize: 8, fontFamily: 'Avenir', marginTop: 5 }}>kWh</Text>
+                            </View>
                         </View>
-                    </View>
                     }
 
 
                     {customerData?.solar_device_id ? <View>
+                        {deviceData?.status == 2 ? <View style={{justifyContent:'center'}}>
+                            <Image
+                                    source={require('../../asset/img/homeinactivelight.png')}
+                                    style={{marginHorizontal:'1%', width: '95%', height: 400 }}
+                                />
+                        </View> :
 
-
-                        {isDark ? <Rive ref={riveRef} resourceName="housedark" animationName='Intro' stateMachineName='Slate Machine 1' autoplay={true} onPlay={() => console.log("Intro started")}
-                            onStop={() => {
-                                console.log("Intro finished");
-                                riveRef.current?.play('Loop'); // Play the loop animation after intro ends
-                            }} style={{ width: screenWidth - 10, height: 400 }} />
-                            : <Rive ref={riveRef} resourceName="houselight" animationName='Intro' stateMachineName='Slate Machine 1' autoplay={true} onPlay={() => console.log("Intro started")}
-                                onStop={() => {
-                                    console.log("Intro finished");
-                                    riveRef.current?.play('Loop'); // Play the loop animation after intro ends
-                                }} style={{ width: screenWidth - 10, height: 400 }} />
+                            <View>
+                                {isDark ? <Rive ref={riveRef} resourceName="housedark" animationName='Intro' stateMachineName='Slate Machine 1' autoplay={true} onPlay={() => console.log("Intro started")}
+                                    onStop={() => {
+                                        console.log("Intro finished");
+                                        riveRef.current?.play('Loop'); // Play the loop animation after intro ends
+                                    }} style={{ width: screenWidth - 10, marginLeft: -10, height: 400 }} />
+                                    : <Rive ref={riveRef} resourceName="houselight" animationName='Intro' stateMachineName='Slate Machine 1' autoplay={true} onPlay={() => console.log("Intro started")}
+                                        onStop={() => {
+                                            console.log("Intro finished");
+                                            riveRef.current?.play('Loop'); // Play the loop animation after intro ends
+                                        }} style={{ width: screenWidth - 10, marginLeft: -10, height: 400 }} />
+                                }
+                            </View>
                         }
-                    </View> :
+                    </View> : <View>{statusLogs != undefined || statusLogs != null ?
                         <View>
-                            {isDark ? <Rive ref={riveRef} resourceName="offlinedark" animationName='State Machine 1' stateMachineName='State Machine 1' autoplay={true} style={{ width: screenWidth - 10, height: 400 }} />
-                                : <Rive ref={riveRef} resourceName="offlinelight" animationName='State Machine 1' stateMachineName='State Machine 1' autoplay={true} style={{ width: screenWidth - 10, height: 400 }} />
+                            {isDark ? <Rive ref={riveRef} resourceName="offlinedark" animationName='State Machine 1' stateMachineName='State Machine 1' autoplay={true} style={{ width: screenWidth - 10, marginLeft: -10, height: 400 }} />
+                                : <Rive ref={riveRef} resourceName="offlinelight" animationName='State Machine 1' stateMachineName='State Machine 1' autoplay={true} style={{ width: screenWidth - 10, marginLeft: -10, height: 400 }} />
+                            }
+                        </View>
+                        :
+                        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                            {isDark ? <Image
+                                source={require('../../asset/img/homeinactivedark.png')}
+                                style={{ width: screenWidth - 30, marginLeft: -10, height: 400 }}
+                            />
+                                : <Image
+                                    source={require('../../asset/img/homeinactivelight.png')}
+                                    style={{ width: '100%', height: 400 }}
+                                />
                             }
                         </View>
                     }
+                    </View>
+                    }
+
 
                 </View>
                 <View style={{ flexDirection: 'row', gap: -15 }}>
@@ -408,10 +441,10 @@ const HomeScreen = (props:any) => {
                 {/* Stats Section */}
                 <View style={{ paddingBottom: 16, paddingTop: 16, width: '90%' }}>
                     {[
-                        { icon: isDark ? <ThunderDark style={{ marginRight: 12 }} /> : <Thunder color={colors.text} style={{ marginRight: 12 }} />, label: 'Total Energy', value: customerData.solar_device_id? `${totalPower} kWh`:'0 kWh' },
+                        { icon: isDark ? <ThunderDark style={{ marginRight: 12 }} /> : <Thunder color={colors.text} style={{ marginRight: 12 }} />, label: 'Total Energy', value: customerData.solar_device_id ? `${totalPower} kWh` : '0 kWh' },
                         // { icon: isDark ? <CottageDark style={{ marginRight: 12 }} /> : <Cottage color={colors.text} style={{ marginRight: 12 }} />, label: 'Home consumption', value: '0 kWh' },
                         // { icon: isDark ? <CellTowerDark style={{ marginRight: 12 }} /> : <CellTower color={colors.text} style={{ marginRight: 12 }} />, label: 'Grid export', value: '0 kWh' },
-                        { icon: isDark ? <CurrencyRupeeDark style={{ marginRight: 12 }} /> : <CurrencyRupee color={colors.text} style={{ marginRight: 12 }} />, label: 'Savings', value:customerData.solar_device_id? `₹${totalPowerSavings}`:'₹0' },
+                        { icon: isDark ? <CurrencyRupeeDark style={{ marginRight: 12 }} /> : <CurrencyRupee color={colors.text} style={{ marginRight: 12 }} />, label: 'Savings', value: customerData.solar_device_id ? `₹${totalPowerSavings}` : '₹0' },
                     ].map((item, index, array) => (
                         <View key={index}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 12 }}>

@@ -55,7 +55,7 @@ const PrivacyPolicyRsolar = (props: any) => {
                 style={[
                     { backgroundColor: colors.background }
                 ]}>
-                <View style={{ backgroundColor: colors.background, flexDirection: 'row', marginTop: 24, marginLeft: 16, gap: 16, alignItems: 'center' }}>
+                <View style={{ backgroundColor: colors.background, flexDirection: 'row', marginTop: 24, marginLeft: 16, gap: 16, alignItems:'flex-start',justifyContent:'flex-start' }}>
                     <Pressable onPress={() => goBack()}>
                         <LeftBackIcon color={colors.text} width={24} height={24} />
                     </Pressable>
@@ -67,7 +67,7 @@ const PrivacyPolicyRsolar = (props: any) => {
                         ]}
                     >Privacy policy</Text>
                 </View>
-                <View style={{ height:'90%',marginBottom:10}} >
+                <View style={{ height:'90%',marginBottom:10,marginTop:32}} >
                     {isDark ? <WebView
                 style={{backgroundColor:colors.background}}
                     viewportContent={'width=device-width, user-scalable=no, initial-scale=1.0'}

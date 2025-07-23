@@ -19,6 +19,8 @@
 		E7E4F63355D3484FB70537B1 /* Avenir Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91DAE75901E64AF4ACB9E509 /* Avenir Heavy.ttf */; };
 		CCF3B3B88BF84B9A97977667 /* Avenir Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEB8094A95B949A3B26061CB /* Avenir Light.ttf */; };
 		B1F3D51076384FCAA32604A0 /* Avenir Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E8CA6E345BD4330A3745DB4 /* Avenir Regular.ttf */; };
+		9164D1F0887849B280EFB8C2 /* Avenir Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B602B101D1384C84A0E8F9A8 /* Avenir Medium.ttf */; };
+		2F7D5A6929F74F739659EDEE /* Avenir-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F83F0F892A0B4FEC8930460B /* Avenir-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		91DAE75901E64AF4ACB9E509 /* Avenir Heavy.ttf */ = {isa = PBXFileReference; name = "Avenir Heavy.ttf"; path = "../src/asset/fonts/Avenir Heavy.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		FEB8094A95B949A3B26061CB /* Avenir Light.ttf */ = {isa = PBXFileReference; name = "Avenir Light.ttf"; path = "../src/asset/fonts/Avenir Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		3E8CA6E345BD4330A3745DB4 /* Avenir Regular.ttf */ = {isa = PBXFileReference; name = "Avenir Regular.ttf"; path = "../src/asset/fonts/Avenir Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B602B101D1384C84A0E8F9A8 /* Avenir Medium.ttf */ = {isa = PBXFileReference; name = "Avenir Medium.ttf"; path = "../src/asset/fonts/Avenir Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F83F0F892A0B4FEC8930460B /* Avenir-Bold.ttf */ = {isa = PBXFileReference; name = "Avenir-Bold.ttf"; path = "../src/asset/fonts/Avenir-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +171,8 @@
 				91DAE75901E64AF4ACB9E509 /* Avenir Heavy.ttf */,
 				FEB8094A95B949A3B26061CB /* Avenir Light.ttf */,
 				3E8CA6E345BD4330A3745DB4 /* Avenir Regular.ttf */,
+				B602B101D1384C84A0E8F9A8 /* Avenir Medium.ttf */,
+				F83F0F892A0B4FEC8930460B /* Avenir-Bold.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -272,6 +278,8 @@
 				E7E4F63355D3484FB70537B1 /* Avenir Heavy.ttf in Resources */,
 				CCF3B3B88BF84B9A97977667 /* Avenir Light.ttf in Resources */,
 				B1F3D51076384FCAA32604A0 /* Avenir Regular.ttf in Resources */,
+				9164D1F0887849B280EFB8C2 /* Avenir Medium.ttf in Resources */,
+				2F7D5A6929F74F739659EDEE /* Avenir-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

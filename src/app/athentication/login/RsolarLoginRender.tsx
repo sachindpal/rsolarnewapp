@@ -49,7 +49,7 @@ const RsolarLoginRender = (props: dataType) => {
           <View style={{ paddingTop: 24, paddingBottom: 16,alignItems:'center' ,justifyContent:'center'}}>
                         <TextTranslation style={{
                             "color": "#242734",
-                            "fontFamily": "Avenir",
+                            "fontFamily": "Avenir Medium",
                             "fontSize": 16,
                             "fontStyle": "normal",
                             "fontWeight": "500",
@@ -93,7 +93,7 @@ const RsolarLoginRender = (props: dataType) => {
             {/* Chose Paswword */}
 
             <View style={{ marginTop: 24 }}>
-              <Button title='CONTINUE'  bgGreen onPress={props.submitForm} fontSize={16} />
+              <Button title='Continue'  bgGreen onPress={props.submitForm} fontSize={16} />
             </View>
             {/* already account */}
             <View style={{ marginTop: 8, marginBottom: 8, alignItems: "center" }} >
@@ -104,7 +104,8 @@ const RsolarLoginRender = (props: dataType) => {
 <View >
             <Pressable
                 style={({ pressed }) => [styles.buttonWrap, {
-                    backgroundColor: '#242734'
+                    backgroundColor: '#242734',
+                    borderRadius: 50
                 }]}
                 onPress={() => navigation.navigate('CallPopUp',{mobile:9407059000})}
                 >

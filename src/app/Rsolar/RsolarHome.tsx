@@ -219,6 +219,7 @@ const HomeScreen = (props: any) => {
     }
     const fadeAnim = useRef(new Animated.Value(0)).current;
     const [visible, setVisible] = useState(true);
+    const [unitValues, setUnitValues] = useState('kWh');
 
     useEffect(() => {
         console.log('snack bar', props?.route?.params?.animation,)
@@ -242,7 +243,14 @@ const HomeScreen = (props: any) => {
     }, [isFocused]);
 
 
-
+const setRadioValues = (value:any)=>{
+    if(value=='kilowatts'){
+        setUnitValues('kWh')
+    }else{
+        setUnitValues('units')
+    }
+    setRadioValue(value)
+}
 
 
 
@@ -254,11 +262,11 @@ const HomeScreen = (props: any) => {
             {props?.route?.params?.animation && isFocused == true && !customerData?.solar_device_id && (statusLogs == null || statusLogs == undefined) ?
                 <Animated.View style={[{ opacity: fadeAnim, zIndex: 1 }]}>
                     <View style={{ flexDirection: 'row', position: 'absolute', backgroundColor: '#262626', borderRadius: 4, width: '100%', justifyContent: 'center', alignContent: 'center', paddingVertical: 14, zIndex: 1, gap: 4 }}>
-                        <Text style={{ color: '#FFF', width: '70%', fontFamily: 'Avenir', fontSize: 14, fontWeight: '400' }}>
+                        <Text style={{ color: '#FFF', width: '70%', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '400' }}>
                             Your system hasn’t been installed yet.
                         </Text>
                         <Pressable style={{ marginTop: '2%' }} onPress={() => navigation.navigate('CallPopUp', { mobile: 9407059000 })}>
-                            <Text style={{ color: '#73BE44', fontFamily: 'Avenir', fontSize: 14, fontWeight: '400' }}>
+                            <Text style={{ color: '#73BE44', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '400' }}>
                                 Get Support
                             </Text>
                         </Pressable>
@@ -270,11 +278,11 @@ const HomeScreen = (props: any) => {
             {props?.route?.params?.animation && isFocused == true && !customerData?.solar_device_id && (statusLogs != undefined || statusLogs != null) ?
                 <Animated.View style={[{ opacity: fadeAnim, zIndex: 1 }]}>
                     <View style={{ flexDirection: 'row', position: 'absolute', backgroundColor: '#262626', borderRadius: 4, width: '100%', justifyContent: 'center', alignContent: 'center', paddingVertical: 14, zIndex: 1, gap: 4 }}>
-                        <Text style={{ color: '#FFF', width: '70%', fontFamily: 'Avenir', fontSize: 14, fontWeight: '400' }}>
+                        <Text style={{ color: '#FFF', width: '70%', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '400' }}>
                             Your system is offline. Connect to Wi-Fi to get live energy data
                         </Text>
                         <Pressable style={{ marginTop: '2%' }} onPress={() => navigation.navigate('CallPopUp', { mobile: 9407059000 })}>
-                            <Text style={{ color: '#73BE44', fontFamily: 'Avenir', fontSize: 14, fontWeight: '400' }}>
+                            <Text style={{ color: '#73BE44', fontFamily: 'Avenir Medium', fontSize: 14, fontWeight: '400' }}>
                                 Get Support
                             </Text>
                         </Pressable>
@@ -285,29 +293,29 @@ const HomeScreen = (props: any) => {
 
             {/* Header */}
             <View>
-                <Text style={{ fontSize: 24, fontFamily: 'Avenir-Medium', color: colors.text, fontWeight: '800' }}>Home</Text>
+                <Text style={{ fontSize: 24, fontFamily: 'Avenir Heavy', color: colors.text }}>Home</Text>
 
                 {customerData?.solar_device_id ? <View style={{ flexDirection: 'row', gap: 4 }}>{deviceData?.status == 2 ?
                     <>
                         <Text style={{ color: '#DC2626' }}>●</Text>
-                        <Text style={{ fontSize: 12, color: '#DC2626', fontFamily: 'Avenir-Medium' }}> Electricity or Device failure</Text>
+                        <Text style={{ fontSize: 12, color: '#DC2626', fontFamily: 'Avenir Medium' }}> Electricity or Device failure</Text>
                     </>
                     : deviceData?.status == 3 ?
                         <>
                             <Text style={{ color: '#F8BE1A' }}>●</Text>
-                            <Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir-Medium' }}>Your system is offline.</Text>
+                            <Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir Medium' }}>Your system is offline.</Text>
                         </>
                         : <><Text style={{ color: '#74C043' }}>●</Text>
 
-                            <Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir-Medium' }}>Your system is up and running.</Text>
+                            <Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir Medium' }}>Your system is up and running.</Text>
                         </>
                 }</View> :
                     <View style={{ flexDirection: 'row', gap: 4 }}>
                         <Text style={{ color: colors.subText }}>●</Text>
 
-                        <Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir-Medium' }}>Your system is offline</Text>
+                        <Text style={{ fontSize: 12, color: colors.subText, fontFamily: 'Avenir Medium' }}>Your system is offline</Text>
                         {/* <Pressable onPress={() => navigation.navigate('CallPopUp', { mobile: 9407059000 })}>
-                            <Text style={{ fontSize: 12, color: '#73BE44', fontFamily: 'Avenir-Medium', textDecorationLine: 'underline', fontWeight: '500', textDecorationStyle: 'solid' }}> Get support</Text></Pressable> */}
+                            <Text style={{ fontSize: 12, color: '#73BE44', fontFamily: 'Avenir Medium', textDecorationLine: 'underline', fontWeight: '500', textDecorationStyle: 'solid' }}> Get support</Text></Pressable> */}
                     </View>}
 
             </View>
@@ -317,12 +325,12 @@ const HomeScreen = (props: any) => {
                 <View style={{ position: 'relative' }}>
 
                     {customerData?.solar_device_id ?
-                        <View style={{ position: 'absolute', backgroundColor: 'linear-gradient(0deg, rgba(115, 190, 68, 0.10) 0%, rgba(115, 190, 68, 0.10) 100%), rgba(255, 255, 255, 0.80)', borderRadius: 8, borderWidth: 0.5, borderColor: 'rgba(115, 190, 68, 0.60)', padding: 8, alignItems: 'flex-start', marginLeft: '80%', marginTop: '15%', zIndex: 1 }}>
+                        <View style={{ position: 'absolute', backgroundColor: 'linear-gradient(0deg, rgba(115, 190, 68, 0.10) 0%, rgba(115, 190, 68, 0.10) 100%), rgba(255, 255, 255, 0.80)', borderRadius: 8, borderWidth: 0.5, borderColor: 'rgba(115, 190, 68, 0.60)', padding: 8, alignItems: 'flex-start', marginLeft: '12%', marginTop: '15%', zIndex: 1,height: '4%', width: '12%' }}>
 
                             <Text style={{ color: '#74C043' }}>● Panel</Text>
                             <View style={{ flexDirection: 'row', gap: 5 }}>
-                                <Text style={{ color: colors.text, fontWeight: '500', fontSize: 12, fontFamily: 'Avenir' }}>{parseFloat(pvPower).toFixed(2)}</Text>
-                                <Text style={{ color: colors.labelgrey, fontWeight: '500', fontSize: 8, fontFamily: 'Avenir', marginTop: 5 }}>kWh</Text>
+                                <Text style={{ color: colors.text, fontWeight: '500', fontSize: 12, fontFamily: 'Avenir Medium' }}>{parseFloat(pvPower).toFixed(2)}</Text>
+                                <Text style={{ color: colors.labelgrey, fontWeight: '500', fontSize: 8, fontFamily: 'Avenir Medium', marginTop: 5 }}>{unitValues}</Text>
                             </View>
                         </View>
                         :
@@ -330,19 +338,25 @@ const HomeScreen = (props: any) => {
 
                             <Text style={{ color: '#696969' }}>● Panel</Text>
                             <View style={{ flexDirection: 'row', gap: 5 }}>
-                                <Text style={{ color: colors.text, fontWeight: '500', fontSize: 12, fontFamily: 'Avenir' }}>0</Text>
-                                <Text style={{ color: colors.labelgrey, fontWeight: '500', fontSize: 8, fontFamily: 'Avenir', marginTop: 5 }}>kWh</Text>
+                                <Text style={{ color: colors.text, fontWeight: '500', fontSize: 12, fontFamily: 'Avenir Medium' }}>0</Text>
+                                <Text style={{ color: colors.labelgrey, fontWeight: '500', fontSize: 8, fontFamily: 'Avenir Medium', marginTop: 5 }}>{unitValues}</Text>
                             </View>
                         </View>
                     }
 
 
                     {customerData?.solar_device_id ? <View>
-                        {deviceData?.status == 2 ? <View style={{justifyContent:'center'}}>
-                            <Image
-                                    source={require('../../asset/img/homeinactivelight.png')}
-                                    style={{marginHorizontal:'1%', width: '95%', height: 400 }}
+                        {deviceData?.status == 2 ? <View style={{ padding: '2%', paddingTop: '5%' }}>
+                            {isDark ? <Image
+                                source={require('../../asset/img/home_alert_dark.png')}
+                                style={{ width: '100%', height: 350 }}
+                            /> :
+                                <Image
+                                    source={require('../../asset/img/home_alert_light.png')}
+                                    style={{ width: '100%', height: 350 }}
                                 />
+                            }
+
                         </View> :
 
                             <View>
@@ -366,14 +380,14 @@ const HomeScreen = (props: any) => {
                             }
                         </View>
                         :
-                        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={{ padding: '2%', paddingTop: '5%' }}>
                             {isDark ? <Image
                                 source={require('../../asset/img/homeinactivedark.png')}
-                                style={{ width: screenWidth - 30, marginLeft: -10, height: 400 }}
+                                style={{ width: '100%',height: 350 }}
                             />
                                 : <Image
                                     source={require('../../asset/img/homeinactivelight.png')}
-                                    style={{ width: '100%', height: 400 }}
+                                    style={{ width: '100%', height: 350 }}
                                 />
                             }
                         </View>
@@ -387,11 +401,11 @@ const HomeScreen = (props: any) => {
                     {isDark ? <UpDownDark style={{ marginTop: 18 }} /> : <UpDown style={{ marginTop: 18 }} />}
                     <Picker
                         selectedValue={radioValue}
-                        onValueChange={(itemValue) => setRadioValue(itemValue)}
-                        style={{ color: colors.text, width: 150 }}
+                        onValueChange={(itemValue) => setRadioValues(itemValue)}
+                        style={{ color: colors.text, width: 150,fontFamily:'Avenir Medium' }}
                     >
-                        <Picker.Item label="kilowatts" value="kilowatts" />
-                        {/* <Picker.Item label="watt" value="watt" /> */}
+                        <Picker.Item style={{fontFamily:'Avenir Medium'}} label="kilowatts" value="kilowatts" />
+                        <Picker.Item style={{fontFamily:'Avenir Medium'}} label="units" value="units" />
                     </Picker>
                     <View style={{ flexDirection: 'row', marginLeft: '20%' }}>
                         {isDark ? <WatchDark style={{ marginTop: 18, marginRight: 4 }} /> : <Watch style={{ marginTop: 18, marginRight: 4 }} />}
@@ -431,7 +445,7 @@ const HomeScreen = (props: any) => {
                                 marginHorizontal: 5,
                             }}
                         >
-                            <Text style={{ fontFamily: 'Avenir-Medium', color: colors.text, fontSize: 14 }}>
+                            <Text style={{ fontFamily: 'Avenir Medium', color: colors.text, fontSize: 14 }}>
                                 {tab}
                             </Text>
                         </TouchableOpacity>
@@ -441,16 +455,16 @@ const HomeScreen = (props: any) => {
                 {/* Stats Section */}
                 <View style={{ paddingBottom: 16, paddingTop: 16, width: '90%' }}>
                     {[
-                        { icon: isDark ? <ThunderDark style={{ marginRight: 12 }} /> : <Thunder color={colors.text} style={{ marginRight: 12 }} />, label: 'Total Energy', value: customerData.solar_device_id ? `${totalPower} kWh` : '0 kWh' },
+                        { icon: isDark ? <ThunderDark style={{ marginRight: 12 }} /> : <Thunder color={colors.text} style={{ marginRight: 12 }} />, label: 'Total Energy', value: customerData.solar_device_id ? `${totalPower} ${unitValues}` : `0 ${unitValues}` },
                         // { icon: isDark ? <CottageDark style={{ marginRight: 12 }} /> : <Cottage color={colors.text} style={{ marginRight: 12 }} />, label: 'Home consumption', value: '0 kWh' },
                         // { icon: isDark ? <CellTowerDark style={{ marginRight: 12 }} /> : <CellTower color={colors.text} style={{ marginRight: 12 }} />, label: 'Grid export', value: '0 kWh' },
-                        { icon: isDark ? <CurrencyRupeeDark style={{ marginRight: 12 }} /> : <CurrencyRupee color={colors.text} style={{ marginRight: 12 }} />, label: 'Savings', value: customerData.solar_device_id ? `₹${totalPowerSavings}` : '₹0' },
+                        { icon: isDark ? <CurrencyRupeeDark style={{ marginRight: 12 }} /> : <CurrencyRupee color={colors.text} style={{ marginRight: 12 }} />, label: 'Savings', value: customerData.solar_device_id ? `₹${parseInt(totalPowerSavings)}` : '₹0' },
                     ].map((item, index, array) => (
                         <View key={index}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 12 }}>
                                 {item.icon}
-                                <Text style={{ flex: 1, fontFamily: 'Avenir-Medium', color: colors.text }}>{item.label}</Text>
-                                <Text style={{ fontFamily: 'Avenir-Medium', color: colors.text }}>{item.value}</Text>
+                                <Text style={{ flex: 1, fontFamily: 'Avenir Medium', color: colors.text }}>{item.label}</Text>
+                                <Text style={{ fontFamily: 'Avenir Medium', color: colors.text }}>{item.value}</Text>
                             </View>
                             {index !== array.length - 1 ?
                                 <View style={{ height: 0, alignSelf: 'stretch', borderWidth: 0.5, borderColor: 'rgba(177, 177, 177, 0.30)', opacity: 0.5 }}></View> : null
@@ -464,7 +478,7 @@ const HomeScreen = (props: any) => {
                 <View style={{ marginTop: 24, flexDirection: 'row', gap: 70 }}>
                     <View style={{ flexDirection: 'row' }}>
                         {isDark ? <TotalSavingDark style={{ marginRight: 10, marginTop: 4, marginLeft: 10 }} /> : <TotalSaving style={{ marginRight: 10, marginTop: 4, marginLeft: 10 }} />}
-                        <Text style={{ fontSize: 16, marginBottom: 8, color: colors.label, fontWeight: '400' }}>Saving report</Text>
+                        <Text style={{ fontSize: 16, marginBottom: 8, color: colors.label, fontWeight: '400',fontFamily:'Avenir Medium' }}>Saving report</Text>
                     </View>
                     <View style={{
                         position: 'relative',

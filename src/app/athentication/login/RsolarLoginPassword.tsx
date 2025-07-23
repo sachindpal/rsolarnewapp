@@ -58,7 +58,7 @@ const RsolarLoginPasswordRender = (props: any) => {
                     <View style={{ paddingTop: 24, paddingBottom: 16, alignItems: 'center', justifyContent: 'center' }}>
                         <TextTranslation style={{
                             "color": "#242734",
-                            "fontFamily": "Avenir",
+                            "fontFamily": "Avenir Medium",
                             "fontSize": 16,
                             "fontStyle": "normal",
                             "fontWeight": "500",

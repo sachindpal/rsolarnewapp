@@ -58,7 +58,7 @@ const RsolarHome = () => {
   const { isDark, setIsDark } = useData();
 
   const colors = {
-    background: isDark ? '#121212' : '#F7F6FB',
+    background: isDark ? '#121212' : '#FBFBFB',
     backgroundApposit: isDark ? '#E0E0E0' : '#232734',
     text: isDark ? '#fff' : '#242734',
     subText: isDark ? '#bbb' : 'rgba(36, 39, 52, 0.50)',
@@ -128,7 +128,7 @@ const RsolarHome = () => {
         <View style={{ flex: 1 }}>
           <Text style={[styles(colors).header, { color: colors.text }]}>Hi, {userInfo.fullname}</Text>
           <Text style={[styles(colors).subHeader, { color: colors.subText }]}>1,000+ people have joined the R-Solar mission.</Text>
-          <Text style={[styles(colors).sectionTitle, { color: colors.text }]}>Your R-Solar Updates</Text>
+          <Text style={[styles(colors).sectionTitle, { color: colors.text }]}>Your installation updates</Text>
         </View>
         {/* <View>
           <TouchableOpacity onPress={() => navigation.navigate('MoreContent')}>
@@ -394,9 +394,9 @@ const styles = (colors:any)=> StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    fontWeight: "800",
+    // fontWeight: "800",
     color: "#222",
-    fontFamily: 'Avenir Medium'
+    fontFamily: 'Avenir Heavy'
   },
   subHeader: {
     fontSize: 12,
@@ -475,9 +475,9 @@ const styles = (colors:any)=> StyleSheet.create({
   },
   stepTitle: {
     fontSize: 16,
-    fontWeight: "800",
+    // fontWeight: "800",
     color: colors.text,
-    fontFamily: 'Avenir Medium'
+    fontFamily: 'Avenir Heavy'
   },
   estimatedDate: {
     fontSize: 12,

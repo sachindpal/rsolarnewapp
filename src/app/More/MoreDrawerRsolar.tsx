@@ -217,7 +217,7 @@ const MoreDrawerRsolar = () => {
     const CommanView = ({ text, Icon, mobile = '', secondIcon }: any) => {
 
         return (
-            <View style={{ borderRadius: 8, backgroundColor: colors.boxBackground, marginHorizontal: 16, marginVertical: 8 }}>
+            <View style={{ borderRadius: 8, backgroundColor: text!='Log out'?colors.boxBackground:'', marginHorizontal: 16, marginVertical: 8 }}>
                 <View style={[CommonStyle.flex_dirRow_alignCenter]}>
                     <View style={{ paddingHorizontal: 16, paddingVertical: 16 }}>{Icon}</View>
                     {mobile ?
@@ -225,24 +225,24 @@ const MoreDrawerRsolar = () => {
                             {mobile != 'something' ?
                                 <View style={{ width: '75%' }}>
 
-                                    <Text style={{ fontFamily: 'Avenir Medium', fontSize: 16, color: colors.text, fontWeight: '800' }}>{text}</Text>
+                                    <Text style={{ fontFamily: 'Avenir Heavy', fontSize: 16, color: colors.text }}>{text}</Text>
 
                                     <Text style={{ color: colors.labelgreyMobile }}>{mobile}</Text>
                                 </View>
                                 :
                                 <View style={{ width: '70%' }}>
 
-                                    <Text style={{ fontFamily: 'Avenir Medium', fontSize: 16, color: colors.text, fontWeight: '400' }}>{text}</Text>
+                                    <Text style={{ fontFamily: 'Avenir Medium', fontSize: 16, color: colors.text, fontWeight: '400',marginTop:5 }}>{text}</Text>
 
                                 </View>}
 
 
-                            <View style={{ paddingTop: '3%' }}>
+                            <View style={{ paddingTop: mobile != 'something'? '3%':'1%' }}>
                                 {secondIcon}
                             </View>
                         </View>
                         : <View>
-                            <Text style={{ fontFamily: 'Avenir Medium', fontSize: 16, color: colors.text, fontWeight: '400' }} >{text}</Text>
+                            <Text style={{ fontFamily: 'Avenir Medium', fontSize: 16, color: colors.text, fontWeight: '400',opacity:text!='Log out'?1:0.5 }} >{text}</Text>
                         </View>
                     }
                 </View>
@@ -274,7 +274,7 @@ const MoreDrawerRsolar = () => {
                                     navigation.navigate('RsolarProfile')
                                 }>
                                 <CommanView
-                                    Icon={<ProfileIcon width={40} height={40} color={colors.labelgrey} />}
+                                    Icon={<ProfileIcon width={24} height={24} color={colors.labelgrey} />}
                                     text={userInfo.fullname}
                                     mobile={userInfo.mobileno}
                                     secondIcon={<RightArrow width={24} height={24} color={colors.text} />}

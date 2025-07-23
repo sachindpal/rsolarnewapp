@@ -45,7 +45,7 @@ const ProfileSolarRender = () => {
       {/* name */}
       <View style={[styles.contentView,{backgroundColor:colors.backgroungBoxColor}]}>
         <View style={{flexDirection:'row',alignItems:'center',gap:16}}>
-        <ProfileIcon color={colors.text} width={24} height={24}  />
+        <ProfileIcon color={colors.text} width={24} height={24} opacity={0.5} />
 
           {/* <Text style={[styles.textHeadingProp,{color:colors.text}]}>Name</Text> */}
           <Text style={[styles.textProp,{color:colors.text}]}>
@@ -60,7 +60,7 @@ const ProfileSolarRender = () => {
           CommonStyle.flex_dirRow_alignCenter_justifySpbtw,{backgroundColor:colors.backgroungBoxColor}
         ]}>
         <View style={{flexDirection:'row',alignItems:'center',gap:16}}>
-        <Call color={colors.text} width={24} height={24}  />
+        <Call color={colors.text} width={24} height={24} opacity={0.5} />
           <Text style={[styles.textHeadingProp,{color:colors.text}]}>
             {userInfo.mobileno}
           </Text>
@@ -78,7 +78,7 @@ const ProfileSolarRender = () => {
           CommonStyle.flex_dirRow_alignCenter_justifySpbtw,{backgroundColor:colors.backgroungBoxColor}
         ]}>
         <View style={{flexDirection:'row',alignItems:'center',gap:16,paddingRight:'10%'}}>
-        <BlackCloud color={colors.text} width={24} height={24}  />
+        <BlackCloud color={colors.text} width={24} height={24} opacity={0.5}  />
           <Text style={[styles.textHeadingProp,{color:colors.text,marginRight:10}]}>
 
           {userInfo.address}, {userInfo.village_name}, {userInfo.district_name}, {userInfo.tehsil_name}, {userInfo.state_name}, {userInfo.pincode}
@@ -115,8 +115,8 @@ const styles = StyleSheet.create({
   },
   textProp:{
     fontSize:16,
-    fontFamily:'Avenir Medium',
-    fontWeight:'700',
+    fontFamily:'Avenir Heavy',
+    // fontWeight:'700',
     lineHeight:22
   }
 });

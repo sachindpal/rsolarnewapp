@@ -132,7 +132,7 @@ const FinancialDisabled = ({color,selectedValue,refreshing,customerData}:any) =>
     x={175}         // adjust X to center based on chart width
     y={50}         // adjust Y to vertically position
     textAnchor="middle"
-    style={{ fontSize: 14, fill: '#888', fontWeight: '400',fontFamily:'Avenir', }}
+    style={{ fontSize: 14, fill: '#888', fontWeight: '400',fontFamily:'Avenir Medium', }}
   />
                 <GradientDefs />
 

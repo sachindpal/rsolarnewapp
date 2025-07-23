@@ -37,8 +37,8 @@ const HomeScreen = () => {
     <ScrollView style={{ flex: 1, backgroundColor: '#fff', padding: 16 }}>
       {/* Header */}
       <View style={{ flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-        <Text style={{ fontSize: 24, fontFamily: 'Avenir-Medium', color: '#242734', fontWeight: '800' }}>Home</Text>
-        <Text style={{ fontSize: 12, color: 'rgba(36, 39, 52, 0.50)', fontFamily: 'Avenir-Medium', fontWeight: '400' }}>● R-Solar is up and running.</Text>
+        <Text style={{ fontSize: 24, fontFamily: 'Avenir Medium', color: '#242734', fontWeight: '800' }}>Home</Text>
+        <Text style={{ fontSize: 12, color: 'rgba(36, 39, 52, 0.50)', fontFamily: 'Avenir Medium', fontWeight: '400' }}>● R-Solar is up and running.</Text>
       </View>
 
       {/* House Image and Stats */}
@@ -50,18 +50,18 @@ const HomeScreen = () => {
           autoplay={true}
           style={{ width: screenWidth, height: 400 }}
         />
-        <Text style={{ fontSize: 12, color: '#888', marginTop: 8, fontFamily: 'Avenir-Medium' }}>Power unit</Text>
-        <Text style={{ fontSize: 16, fontFamily: 'Avenir-Medium', color: 'red' }}>0 kWh</Text>
+        <Text style={{ fontSize: 12, color: '#888', marginTop: 8, fontFamily: 'Avenir Medium' }}>Power unit</Text>
+        <Text style={{ fontSize: 16, fontFamily: 'Avenir Medium', color: 'red' }}>0 kWh</Text>
       </View>
 
 
 
       {/* Bar Graph */}
       <View>
-        <Text style={{ fontSize: 16, marginBottom: 8, fontFamily: 'Avenir-Medium', color: '#000' }}>Today: 21 May</Text>
+        <Text style={{ fontSize: 16, marginBottom: 8, fontFamily: 'Avenir Medium', color: '#000' }}>Today: 21 May</Text>
         <View style={{ flexDirection: 'row', marginBottom: 8 }}>
-          <Text style={{ fontFamily: 'Avenir-Medium', color: '#F48C06' }}>Home 30%</Text>
-          <Text style={{ marginLeft: 16, fontFamily: 'Avenir-Medium', color: '#F9D57E' }}>Grid 70%</Text>
+          <Text style={{ fontFamily: 'Avenir Medium', color: '#F48C06' }}>Home 30%</Text>
+          <Text style={{ marginLeft: 16, fontFamily: 'Avenir Medium', color: '#F9D57E' }}>Grid 70%</Text>
         </View>
 
         {/* <BarChart
@@ -103,7 +103,7 @@ const HomeScreen = () => {
           >
             <Text
               style={{
-                fontFamily: 'Avenir-Medium',
+                fontFamily: 'Avenir Medium',
                 color: '#232734',
                 fontSize: 14,
               }}
@@ -123,8 +123,8 @@ const HomeScreen = () => {
         ].map((item, index) => (
           <View key={index} style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 12 }}>
             {item.icon}
-            <Text style={{ flex: 1, fontFamily: 'Avenir-Medium', color: '#000' }}>{item.label}</Text>
-            <Text style={{ fontFamily: 'Avenir-Medium', color: '#000' }}>{item.value}</Text>
+            <Text style={{ flex: 1, fontFamily: 'Avenir Medium', color: '#000' }}>{item.label}</Text>
+            <Text style={{ fontFamily: 'Avenir Medium', color: '#000' }}>{item.value}</Text>
           </View>
 
         ))}
@@ -132,7 +132,7 @@ const HomeScreen = () => {
 
       {/* Saving Report */}
       <View style={{ marginTop: 24, flexDirection: 'row',gap:110 }}>
-        <Text style={{ fontSize: 16, marginBottom: 8, fontFamily: 'Avenir-Medium', color: '#232734', fontWeight: '400' }}>Saving report</Text>
+        <Text style={{ fontSize: 16, marginBottom: 8, fontFamily: 'Avenir Medium', color: '#232734', fontWeight: '400' }}>Saving report</Text>
         <View style={{ position:'relative',borderColor:'rgba(177, 177, 177, 0.20)',backgroundColor:'#FFF',borderWidth:1,borderRadius:50 }}>
           <Picker
             selectedValue={selectedValue}

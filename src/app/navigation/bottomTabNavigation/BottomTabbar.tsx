@@ -79,7 +79,8 @@ const CommonTab = ({focused, IconActive, IconInActive, title, route}: any) => {
           adjustsFontSizeToFit
           style={[
             focused ? FontStyle.fontHeavy12 : FontStyle.fontMedium12Gray,
-            {color:colors.text},
+            {color:colors.text,opacity:focused?1:0.5},
+
 
           ]}>
           {translate(title)}

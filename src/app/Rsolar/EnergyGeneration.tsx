@@ -134,6 +134,7 @@ const EnergyGeneration = ({ color, activeTab, getTotalEnergy, refreshing,custome
     const getData = (customerData: any) => {
         params.deviceid = customerData.solar_device_id
         params.activeTab = activeTab
+        let passingFilterRanges:any = []
         postUnAuthReq(`/rsolar/solar-data`, params)
             .then(async (res: any) => {
 
@@ -158,6 +159,7 @@ const EnergyGeneration = ({ color, activeTab, getTotalEnergy, refreshing,custome
 
                         const range = await getWeekRange()
                         //  console.log('range',range)
+                         passingFilterRanges.push(range)
                         var arrays: any = [
                             { hour: `Mon`, home: 0, grid: 0.00001 },
                             { hour: `Tue`, home: 0, grid: 2 },
@@ -212,20 +214,29 @@ const EnergyGeneration = ({ color, activeTab, getTotalEnergy, refreshing,custome
                             for (let index = 0; index < 6; index++) {
                                 const element = res.data.data.generationData[0].values[index];
                                 var obj = { hour: `${months[index]}`, home: 0, grid: element };
+
                                 array.push(obj)
+                              passingFilterRanges.push(months[index])
+
                             }
+
                             // console.log('array1', data)
                         }
 
                         if (secondSixMonth.includes(params.month.toString())) {
+                            
+
                             for (let index = 0; index < res.data.data.generationData[0].values.length; index++) {
                                 if (index > 5) {
                                     const element = res.data.data.generationData[0].values[index];
                                     var obj = { hour: `${months[index]}`, home: 0, grid: element };
                                     array.push(obj)
+                              passingFilterRanges.push(months[index])
+
                                 }
 
                             }
+
                         }
 
                     }
@@ -239,12 +250,14 @@ const EnergyGeneration = ({ color, activeTab, getTotalEnergy, refreshing,custome
                             const element = res.data.data.generationData[0].values[index];
                             var obj = { hour: `${months[index]}`, home: 0, grid: element };
                             array.push(obj)
+                            passingFilterRanges.push(months[index])
+
 
                         }
 
                     }
                     // console.log('array',array,res.data.data.pvPower)
-                    getTotalEnergy(array, res.data.data.pvPower)
+                    getTotalEnergy(array, res.data.data.pvPower,passingFilterRanges)
 
                     setEnergyData(array)
 
@@ -282,10 +295,56 @@ const EnergyGeneration = ({ color, activeTab, getTotalEnergy, refreshing,custome
         </Defs>
     );
 
+
+    
+
     return (
+        <View style={{flexDirection:'row',justifyContent:'flex-start',alignItems:'flex-start'}}>
+            <View style={{width:'5%'}}>
+            <VictoryChart
+                domainPadding={{ x: 15 }}
+                padding={{ top: 20, bottom: 40, left: 40, right: 20 }}
+                width={chartWidth}
+            >
+                <VictoryAxis
+                    dependentAxis
+                    style={{
+                        grid: { stroke: 'transparent'},
+                        tickLabels: { fill: '#aaa', fontSize: 10 },
+                        axis: { stroke: 'transparent' },
+                        
+                    }}
+                />
+                 <VictoryBar
+                    data={gridData}
+                    barWidth={10}
+                    cornerRadius={{ top: 5 }}
+                    labelComponent={<VictoryNative.VictoryLabel dy={-10} style={{color:color.labelgrey,fill:color.labelgrey}} />}
+
+                    style={{
+                        data: {
+                            fill:'transparent'
+                        },
+                    }}
+                    events={[
+                        {
+                            target: 'data',
+                            eventHandlers: {
+                                onPressIn: (_, props) => {
+                                    setSelectedIndex(props.index);
+                                },
+                            },
+                        },
+                    ]}
+                />
+                
+            </VictoryChart>
+
+            </View>
+
         <ScrollView
+        style={{marginLeft:'5%'}}
             horizontal
-            pagingEnabled
             showsHorizontalScrollIndicator={false}
         >
             <VictoryChart
@@ -307,7 +366,7 @@ const EnergyGeneration = ({ color, activeTab, getTotalEnergy, refreshing,custome
                     dependentAxis
                     style={{
                         grid: { stroke: color.grphHorizontalLine,opacity:0.5,strokeWidth:0.5},
-                        tickLabels: { fill: '#aaa', fontSize: 10 },
+                        tickLabels: { stroke:'transparent',fontSize:0 },
                         axis: { stroke: 'transparent' },
                         
                     }}
@@ -338,6 +397,7 @@ const EnergyGeneration = ({ color, activeTab, getTotalEnergy, refreshing,custome
                 />
             </VictoryChart>
         </ScrollView>
+        </View>
     );
 }
 

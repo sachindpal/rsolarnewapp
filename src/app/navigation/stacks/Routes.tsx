@@ -43,7 +43,7 @@ const Routes = () => {
           {/* <Stack.Screen name="RsolarHome" component={RsolarHome} /> */}
           {/* <Stack.Screen name="MoreContent" component={MoreDrawerRsolar} /> */}
           <Stack.Screen name="Main" component={BottomTabbar} />
-          <Stack.Screen name="CallPopUp" component={CallModel} />
+          <Stack.Screen name="CallPopUp" component={CallModel}  options={{ presentation: 'transparentModal', headerShown: false }}/>
           <Stack.Screen name="PrivacyPolicyRsolar" component={PrivacyPolicyRsolar} />
           <Stack.Screen name="RsolarProfile" component={ProfileSolar} />
         </Stack.Group>

@@ -103,10 +103,14 @@ import UpDownDark from './updowndark.svg'
 import Watch from './watch.svg'
 import WatchDark from './watchDark.svg'
 import VersionUpdate from './versionUpdate.svg'
+import AccountActive from './accountActive.svg'
+import AccountInactive from './accountInactive.svg'
 
 
 
 export {
+  AccountActive,
+  AccountInactive,
   VersionUpdate,
   WatchDark,
   Watch,

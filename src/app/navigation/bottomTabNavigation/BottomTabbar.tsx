@@ -29,7 +29,9 @@ import {
   MyShopActive,
   MyAccountActive,
   MyAccount,
-  ProfileIcon
+  ProfileIcon,
+  AccountActive,
+  AccountInactive
 } from '../../../asset/img';
 import {FontStyle} from '../../../asset/style/FontsStyle';
 import {useTranslation} from 'react-i18next';
@@ -125,7 +127,7 @@ const BottomTabbar = () => {
             <CommonTab
               focused={focused}
               IconActive={<MoreActive color={colors.ActiveIconColr}  />}
-              IconInActive={<MoreInactive color={colors.inActiveIconColr} width={20} height={20} />}
+              IconInActive={<MoreInactive color={colors.inActiveIconColr} opacity={0.5}/>}
               title={'Status'}
               route={'Status'}
 
@@ -161,8 +163,8 @@ const BottomTabbar = () => {
           tabBarIcon: ({focused}) => (
             <CommonTab
               focused={focused}
-              IconActive={<ProfileIcon  color={colors.ActiveIconColr} />}
-              IconInActive={<ProfileIcon color={colors.inActiveIconColr}  />}
+              IconActive={<AccountActive  color={colors.ActiveIconColr} />}
+              IconInActive={<AccountInactive color={colors.inActiveIconColr}  />}
               title={'Account'}
               route={'Account'}
             />

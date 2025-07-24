@@ -60,9 +60,9 @@ const monthsArray = [
     'Nov',
     'Dec',
 ]
-const getYearsDropdown = () => {
+const getYearsDropdown = (initialYear:any=2024) => {
     const yearDropDowns = []
-    let initialYear = 2021;
+    // let initialYear = 2021;
     let tempFullYear = fullYear
     let difference = fullYear - initialYear
     for (let index = 0; index <= difference; index++) {
@@ -157,11 +157,12 @@ const HomeScreen = (props: any) => {
         }, 1500); // Simulate API call or data fetch
     }, []);
 
+const [rangesDate,setrangesDate] = useState<any>([])
 
-
-    const getTotalEnergy = (energy: any, pvPower: any) => {
+    const getTotalEnergy = (energy: any, pvPower: any,rangesDate:any) => {
         sePvPower(pvPower)
-        console.log('pvPower', pvPower)
+        // console.log('rangesDate', rangesDate)
+        setrangesDate(rangesDate)
         if (energy.length > 0) {
             let totalPowers: any = 0
             for (let index = 0; index < energy.length; index++) {
@@ -171,7 +172,7 @@ const HomeScreen = (props: any) => {
             }
             totalPowers = parseFloat(totalPowers)
             setTotalPower(totalPowers.toFixed(2))
-            let totalSaving = (totalPowers * 10).toFixed(2)
+            let totalSaving = (totalPowers * (customerData.perUnitValue || 10)).toFixed(2)
             setTotalPowerSavings(totalSaving)
             // console.log('energy', totalPowers)
 
@@ -208,7 +209,16 @@ const HomeScreen = (props: any) => {
 
                 // if (res?.data?.data?.statusLogsData) {
                 setstatusLogs(res?.data?.data?.statusLogsData)
+                if(res?.data?.data?.statusLogsData?.created_at){
+                    let fullY = new Date(res?.data?.data?.statusLogsData?.created_at).getFullYear();
+                    // let fullY = 2020;
+                    console.log('fulllllllllllllllll',fullY)
+                    setYearDropDown(getYearsDropdown(fullY))
+                }else{
+                    setYearDropDown(getYearsDropdown())
 
+                }
+                // console.log('res?.data?.data?.statusLogsData',res?.data?.data?.statusLogsData)
                 // }
 
 
@@ -397,7 +407,9 @@ const setRadioValues = (value:any)=>{
 
 
                 </View>
-                <View style={{ flexDirection: 'row', gap: -15 }}>
+                <View style={{ flexDirection: 'row',justifyContent:'space-between' }}>
+                    
+                    <View style={{flexDirection:'row',gap:-10}}>
                     {isDark ? <UpDownDark style={{ marginTop: 18 }} /> : <UpDown style={{ marginTop: 18 }} />}
                     <Picker
                         selectedValue={radioValue}
@@ -407,7 +419,8 @@ const setRadioValues = (value:any)=>{
                         <Picker.Item style={{fontFamily:'Avenir Medium'}} label="kilowatts" value="kilowatts" />
                         <Picker.Item style={{fontFamily:'Avenir Medium'}} label="units" value="units" />
                     </Picker>
-                    <View style={{ flexDirection: 'row', marginLeft: '20%' }}>
+                    </View>
+                    <View style={{ flexDirection: 'row',justifyContent:'flex-end' }}>
                         {isDark ? <WatchDark style={{ marginTop: 18, marginRight: 4 }} /> : <Watch style={{ marginTop: 18, marginRight: 4 }} />}
                         <Text style={{ fontSize: 12, color: colors.label, fontWeight: '400', marginTop: 18 }}>Update: {diffMinutes} min ago</Text>
                     </View>
@@ -415,8 +428,38 @@ const setRadioValues = (value:any)=>{
             </View>
 
             {/* Energy Generation Section */}
-            <View style={{ borderWidth: 1, borderColor: 'rgba(177, 177, 177, 0.20)', borderStyle: 'solid', borderRadius: 8, paddingTop: 24, alignItems: 'center', paddingRight: '2%', paddingLeft: '2%', backgroundColor: colors.boxBackground }}>
-                <Text style={{ fontSize: 12, color: colors.labelgrey, fontWeight: '400', left: '30%' }}>Today: {new Date().getDate() + ' ' + monthsArray[new Date().getMonth()]}</Text>
+            <View style={{ borderWidth: 1, borderColor: 'rgba(177, 177, 177, 0.20)', borderStyle: 'solid', borderRadius: 8, paddingTop: 24, alignItems:'flex-end', paddingRight: '2%',  backgroundColor: colors.boxBackground }}>
+
+                    {/* for today date */}
+                {activeTab == 'Today' ?
+                <Text style={{ fontSize: 12, color: colors.labelgrey, fontWeight: '400' }}>Today : {new Date().getDate() + ' ' + monthsArray[new Date().getMonth()]}</Text>:null
+                }
+
+
+                    {/* for week date */}
+                    {activeTab == '1W' && rangesDate.length > 0 ?
+                <Text style={{ fontSize: 12, color: colors.labelgrey, fontWeight: '400', left: '30%' }}>Week : {new Date(rangesDate[0]?.startDate).getDate() + ' ' + monthsArray[new Date(rangesDate[0]?.startDate).getMonth()]} - {new Date(rangesDate[0]?.endDate).getDate() + ' ' + monthsArray[new Date(rangesDate[0]?.endDate).getMonth()]}</Text>:null
+                }
+
+
+                {/* for month date */}
+                {activeTab == '1M' && rangesDate.length > 0 ?
+                <Text style={{ fontSize: 12, color: colors.labelgrey, fontWeight: '400', left: '30%' }}>Month: {monthsArray[new Date().getMonth()]}</Text>:null
+                }
+
+
+                {/* for 6 month date */}
+                {activeTab == '6M' && rangesDate.length > 0 ?
+                <Text style={{ fontSize: 12, color: colors.labelgrey, fontWeight: '400', left: '30%' }}>Year : {rangesDate[0] + ' - ' + rangesDate[rangesDate.length-1]}</Text>:null
+                }
+
+
+                {/* for year date */}
+                {activeTab == '1Y' && rangesDate.length > 0 ?
+                <Text style={{ fontSize: 12, color: colors.labelgrey, fontWeight: '400', left: '30%' }}>Year : {rangesDate[0] + ' - ' + rangesDate[rangesDate.length-1]}</Text>:null
+                }
+
+
                 {customerData?.solar_device_id ?
                     <EnergyGeneration color={colors} activeTab={activeTab} getTotalEnergy={getTotalEnergy} refreshing={refreshing} customerData={customerData} /> : <EnergyGenerationDisabled color={colors} activeTab={activeTab} getTotalEnergy={getTotalEnergy} refreshing={refreshing} customerData={customerData} />
                 }
@@ -455,10 +498,10 @@ const setRadioValues = (value:any)=>{
                 {/* Stats Section */}
                 <View style={{ paddingBottom: 16, paddingTop: 16, width: '90%' }}>
                     {[
-                        { icon: isDark ? <ThunderDark style={{ marginRight: 12 }} /> : <Thunder color={colors.text} style={{ marginRight: 12 }} />, label: 'Total Energy', value: customerData.solar_device_id ? `${totalPower} ${unitValues}` : `0 ${unitValues}` },
+                        { icon: isDark ? <ThunderDark style={{ marginRight: 12 }} opacity={0.5}/> : <Thunder color={colors.text} style={{ marginRight: 12 }} opacity={0.5}/>, label: 'Total Energy', value: customerData.solar_device_id ? `${totalPower} ${unitValues}` : `0 ${unitValues}` },
                         // { icon: isDark ? <CottageDark style={{ marginRight: 12 }} /> : <Cottage color={colors.text} style={{ marginRight: 12 }} />, label: 'Home consumption', value: '0 kWh' },
                         // { icon: isDark ? <CellTowerDark style={{ marginRight: 12 }} /> : <CellTower color={colors.text} style={{ marginRight: 12 }} />, label: 'Grid export', value: '0 kWh' },
-                        { icon: isDark ? <CurrencyRupeeDark style={{ marginRight: 12 }} /> : <CurrencyRupee color={colors.text} style={{ marginRight: 12 }} />, label: 'Savings', value: customerData.solar_device_id ? `₹${parseInt(totalPowerSavings)}` : '₹0' },
+                        { icon: isDark ? <CurrencyRupeeDark style={{ marginRight: 12 }} opacity={0.5}/> : <CurrencyRupee color={colors.text} style={{ marginRight: 12 }}opacity={0.5} />, label: 'Savings', value: customerData.solar_device_id ? `₹${parseInt(totalPowerSavings)}` : '₹0' },
                     ].map((item, index, array) => (
                         <View key={index}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 12 }}>
@@ -477,7 +520,7 @@ const setRadioValues = (value:any)=>{
             <View style={{ borderWidth: 1, borderStyle: 'solid', borderColor: 'rgba(177, 177, 177, 0.20)', borderRadius: 8, marginTop: 16, marginBottom: '7%', backgroundColor: colors.boxBackground }}>
                 <View style={{ marginTop: 24, flexDirection: 'row', gap: 70 }}>
                     <View style={{ flexDirection: 'row' }}>
-                        {isDark ? <TotalSavingDark style={{ marginRight: 10, marginTop: 4, marginLeft: 10 }} /> : <TotalSaving style={{ marginRight: 10, marginTop: 4, marginLeft: 10 }} />}
+                        {isDark ? <TotalSavingDark style={{ marginRight: 10, marginTop: 4, marginLeft: 10 }} opacity={0.5}/> : <TotalSaving style={{ marginRight: 10, marginTop: 4, marginLeft: 10 }} opacity={0.5}/>}
                         <Text style={{ fontSize: 16, marginBottom: 8, color: colors.label, fontWeight: '400',fontFamily:'Avenir Medium' }}>Saving report</Text>
                     </View>
                     <View style={{

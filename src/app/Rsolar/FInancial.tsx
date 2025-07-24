@@ -120,7 +120,7 @@ const Financial = ({color,selectedValue,refreshing,customerData}:any) => {
     const gridData = data.map((d: any, ind: any) => ({
         x: d.hour,
         y: d.grid,
-        label: `₹${parseInt(d.grid)*10}`,
+        label: `₹${parseInt(d.grid)*(customerData.perUnitValue || 10 )}`,
 
     }));
 
@@ -145,7 +145,7 @@ const Financial = ({color,selectedValue,refreshing,customerData}:any) => {
     return (
         <ScrollView
             horizontal
-            pagingEnabled
+            
             showsHorizontalScrollIndicator={false}
         >
             <VictoryChart

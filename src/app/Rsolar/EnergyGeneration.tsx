@@ -349,7 +349,7 @@ const EnergyGeneration = ({ color, activeTab, getTotalEnergy, refreshing,custome
         >
             <VictoryChart
                 domainPadding={{ x: 15 }}
-                padding={{ top: 20, bottom: 40, left: 40, right: 20 }}
+                padding={{ top: 20, bottom: 40, left: 5, right: 20 }}
                 width={chartWidth}
             >
                 <GradientDefs />

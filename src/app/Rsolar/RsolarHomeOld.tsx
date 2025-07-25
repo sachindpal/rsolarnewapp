@@ -148,8 +148,10 @@ const RsolarHome = () => {
               <View style={[styles(colors).progressLine, step.subTasks.length > 0 ? styles(colors).activeLine : {}]} />
               
               <View>
-                {step.subTasks.length > 0 ? <CheckCircle style={{ zIndex: 1, marginTop: 14, marginRight: 10 }} /> : <View style={[styles(colors).stepIndicator, { marginTop: 15 }]}>
-                </View>}
+                {step.subTasks.length > 0 ? <CheckCircle style={{ zIndex: 1, marginTop: 14, marginRight: 10 }} /> 
+                : 
+                <View style={[styles(colors).stepIndicator, { marginTop: 15 }]}></View>
+                }
 
               </View>
               {/* Step Content */}

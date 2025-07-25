@@ -105,10 +105,12 @@ import WatchDark from './watchDark.svg'
 import VersionUpdate from './versionUpdate.svg'
 import AccountActive from './accountActive.svg'
 import AccountInactive from './accountInactive.svg'
+import EmptyCircle from './emptyCircle.svg'
 
 
 
 export {
+  EmptyCircle,
   AccountActive,
   AccountInactive,
   VersionUpdate,
